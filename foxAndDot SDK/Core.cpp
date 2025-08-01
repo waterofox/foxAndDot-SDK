@@ -1,0 +1,127 @@
+#include "Core.h"
+Core::Core() {}
+Core::~Core(){}
+
+const sf::Time& Core::get_delta_time() { return this->delta_time; }
+
+void Core::set_process_events_function(const process_events_function& function) { this->process_events = function; }
+
+void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,const sf::State& state)
+{
+	sf::Clock clock;
+	clock.start();
+	this->create(sf::VideoMode({ window_width,window_height }), window_title,state);
+	while (this->isOpen())
+	{
+		this->delta_time = clock.restart();
+		try{
+			process_events == nullptr ? throw std::runtime_error(ERROR(ECORE, "process events function does not exist")) : process_events(this);
+		}
+		catch (std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
+
+		update();
+		render();
+	}
+}
+
+void Core::connect(const int& signal_id, const std::variant<slot_type, dual_slot_type>& slot)
+{
+	connections[signal_id] = slot;
+}
+
+void Core::emit_signal(const int& signal_id, Drawable_Entity*& sender)
+{
+	auto connection = connections.find(signal_id);
+	try {
+		if (connection == connections.end()) { throw std::runtime_error(ERROR(ECORE, "connection does not exist")); }
+		else 
+		{
+			signals_container new_container;
+			new_container.first = (*connection).second;
+			new_container.second = std::pair<Drawable_Entity*, Drawable_Entity*>(sender, sender);
+			signals_queue.push(new_container);
+		}
+	}
+	catch (std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
+}
+void Core::emit_signal(const int& signal_id, Drawable_Entity*& sender_A, Drawable_Entity*& sender_B) 
+{
+	auto connection = connections.find(signal_id);
+	try {
+		if (connection == connections.end()) { throw std::runtime_error(ERROR(ECORE, "connection does not exist")); }
+		else
+		{
+			signals_container new_container;
+			new_container.first = (*connection).second;
+			new_container.second = std::pair<Drawable_Entity*, Drawable_Entity*>(sender_A, sender_B);
+			signals_queue.push(new_container);
+		}
+	}
+	catch (std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
+}
+
+void Core::process_signals() 
+{
+	while (!signals_queue.empty())
+	{
+		signals_container& front_container = signals_queue.front();
+		switch (front_container.first.index())
+		{
+		case 0: 
+		{
+			slot_type slot = std::get<slot_type>(front_container.first);
+			slot(this,front_container.second.first);
+		}break;
+		case 1:
+		{
+			dual_slot_type slot = std::get<dual_slot_type>(front_container.first);
+			slot(this, front_container.second.first, front_container.second.second);
+		}break;
+		default:
+			break;
+		}
+	}
+}
+
+void Core::update()
+{
+	process_signals();
+
+	for (int i = 0; i < scene.size(); ++i)
+	{
+		lay_type& lay = scene[i];
+		if (!lay.empty())
+		{
+			for (auto& element : lay)
+			{
+				Drawable_Entity*& entity = element.second;
+				if (entity->is_updateble()){entity->update(this);}
+			}
+		}
+	}
+}
+
+void Core::render()
+{
+	this->clear();
+	
+	for (int i = 0; i < scene.size(); ++i)
+	{
+		lay_type& lay = scene[i];
+		if (!lay.empty())
+		{
+			for (auto& element : lay)
+			{
+				Drawable_Entity*& entity = element.second;
+				if (entity->is_visible())
+				{
+					sf::Drawable* drawable_entity = entity->asDrawable();
+					this->draw(*drawable_entity);
+				}
+			}
+		}
+	}
+
+
+	this->display();
+}

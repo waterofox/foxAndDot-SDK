@@ -4,7 +4,48 @@ Core::~Core(){}
 
 const sf::Time& Core::get_delta_time() { return this->delta_time; }
 
+sf::View& Core::get_camera()
+{
+	return this->camera;
+}
+
+void Core::set_camera_mod(const camera_settings& mod)
+{
+	camera_mod = mod;
+}
+
+void Core::set_camera_target(const std::string& name_of_target)
+{
+	camera_target = name_of_target;
+}
+
 void Core::set_process_events_function(const process_events_function& function) { this->process_events = function; }
+
+Drawable_Entity* Core::get_entity(const std::string& name)
+{
+	try
+	{
+		for (int i = 0; i < scene.size(); ++i)
+		{
+			lay_type& lay = scene[i];
+			auto entity = lay.find(name);
+			if (entity != lay.end()) { return (*entity).second; }
+		}
+		throw std::runtime_error (ERROR(ECORE,"target <" + "> does not exist"));
+	}
+	catch (const std::exception& err){ std::cout << err.what() << std::endl; this->close();}
+}
+Drawable_Entity* Core::get_entity(const std::string& name, const int& lay)
+{
+	try
+	{
+		lay_type& our_lay = scene[lay];
+		auto entity = our_lay.find(name);
+		if (entity != our_lay.end()) { return (*entity).second; }
+		else { throw std::runtime_error(ERROR(ECORE, "target <" + "> does not exist")); }
+	}
+	catch (const std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
+}
 
 void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,const sf::State& state)
 {
@@ -80,6 +121,33 @@ void Core::process_signals()
 		default:
 			break;
 		}
+	}
+}
+
+void Core::update_camera() 
+{
+	switch (camera_mod)
+	{
+	case Core::dynamic_camera: 
+	{
+		try
+		{
+			
+		}
+		catch (const std::exception&)
+		{
+
+		}
+		
+
+
+	}break;
+	case Core::static_camera: 
+	{
+		this->setView(camera);
+	}break;
+	default:
+		break;
 	}
 }
 

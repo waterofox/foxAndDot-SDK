@@ -44,8 +44,15 @@ public:
 class Core : public sf::RenderWindow 
 {
 
-//some types
+//some types & enums
 public:
+
+	enum camera_settings
+	{
+		dynamic_camera = 0,
+		static_camera = 1
+	};
+
 	using process_events_function = void(*)(Core*);
 	using slot_type = void(*)(Core*, Drawable_Entity*);
 	using dual_slot_type = void(*)(Core*, Drawable_Entity*, Drawable_Entity*);
@@ -57,6 +64,9 @@ public:
 private:
 	//window
 	sf::Time delta_time = sf::Time::Zero;
+	sf::View camera;
+	camera_settings camera_mod = camera_settings::static_camera;
+	std::string camera_target = "";
 
 	//signals & slots
 	std::queue<signals_container> signals_queue;
@@ -70,10 +80,18 @@ public:
 	Core();
 	~Core();
 
+	//window
+	const sf::Time& get_delta_time();
+	sf::View& get_camera();
+	void set_camera_mod(const camera_settings& mod);
+	void set_camera_target(const std::string& name_of_target);
+
 	//game
 	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title, const sf::State& state);
 	void set_process_events_function(const process_events_function& function);
-	const sf::Time& get_delta_time();
+
+	Drawable_Entity* get_entity(const std::string& name);
+	Drawable_Entity* get_entity(const std::string& name, const int& lay);
 	
 	//signals & slots
 	void emit_signal(const int& signal_id, Drawable_Entity*&);
@@ -86,6 +104,7 @@ public:
 private:
 	process_events_function process_events = nullptr;
 	void update();
+	void update_camera();
 	void process_signals();
 
 	void render();
@@ -94,7 +113,7 @@ private:
 
 class Entity : public Drawable_Entity, public sf::Sprite
 {
-	friend class Core; //чтоб ядро могло спокойно вызывать скрипт 
+	friend class Core; 
 public:
 	using script = void(*)(Core*,Entity*);
 	using property_type = std::variant<int, float, bool, std::string, const char*>;

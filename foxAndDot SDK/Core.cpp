@@ -129,17 +129,21 @@ void Core::update_camera()
 	switch (camera_mod)
 	{
 	case Core::dynamic_camera: 
-	{
+	{ 
+		
+		Drawable_Entity* target = this->get_entity(this->camera_target);
+		sf::Drawable* casted_target = target->asDrawable();
 		try
 		{
-			
+			sf::Sprite* entity = dynamic_cast<sf::Sprite*>(casted_target);
+			this->camera.setCenter(entity->getPosition());
 		}
-		catch (const std::exception&)
+		catch (const std::bad_cast& err)
 		{
-
+			std::cout << err.what() << std::endl; 
+			std::cout << ERROR(ECORE, "failed cast from your custom object");
+			this->close();
 		}
-		
-
 
 	}break;
 	case Core::static_camera: 

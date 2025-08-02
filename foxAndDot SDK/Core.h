@@ -1,6 +1,7 @@
 #pragma once
 //sfml includes
 #include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 //std inlcludes
 #include <iostream>

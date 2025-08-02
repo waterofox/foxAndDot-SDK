@@ -137,6 +137,7 @@ void Core::update_camera()
 		{
 			sf::Sprite* entity = dynamic_cast<sf::Sprite*>(casted_target);
 			this->camera.setCenter(entity->getPosition());
+			this->setView(camera);
 		}
 		catch (const std::bad_cast& err)
 		{
@@ -158,6 +159,7 @@ void Core::update_camera()
 void Core::update()
 {
 	process_signals();
+	update_camera();
 
 	for (int i = 0; i < scene.size(); ++i)
 	{

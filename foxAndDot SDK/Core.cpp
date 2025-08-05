@@ -105,7 +105,8 @@ void Core::process_signals()
 {
 	while (!signals_queue.empty())
 	{
-		signals_container& front_container = signals_queue.front();
+		signals_container front_container = signals_queue.front();
+		signals_queue.pop();
 		switch (front_container.first.index())
 		{
 		case 0: 
@@ -120,6 +121,31 @@ void Core::process_signals()
 		}break;
 		default:
 			break;
+		}
+	}
+}
+void Core::process_intersections_and_collisions()
+{
+	for (int i = 0; i <  scene.size(); ++i)
+	{
+		Core::lay_type& actual_lay = scene[i];
+		for (auto& elementA : actual_lay)
+		{
+			for (auto& elementB : actual_lay)
+			{
+				if (&elementA == &elementB) { continue; }
+				if (elementA.second->get_entity_local_bounds().findIntersection(elementB.second->get_entity_local_bounds()))
+				{
+					if (elementA.second->on_intersection != nullptr)
+					{
+						Core::signals_container container;
+						container.first = elementA.second->on_intersection;
+						container.second = std::pair<Drawable_Entity*, Drawable_Entity*>(elementA.second, elementB.second);
+
+						signals_queue.push(container);
+					}
+				}
+			}
 		}
 	}
 }
@@ -173,6 +199,7 @@ void Core::update()
 			}
 		}
 	}
+	process_intersections_and_collisions();
 }
 
 void Core::render()

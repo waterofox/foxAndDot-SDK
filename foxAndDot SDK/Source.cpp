@@ -15,6 +15,8 @@ public:
 		std::string message = "player position: <x: " + std::to_string(player.getPosition().x) + " y: " + std::to_string(player.getPosition().y) + ">";
 		this->setString(message);
 	}
+	sf::FloatRect get_entity_local_bounds() { return this->getLocalBounds(); }
+	sf::FloatRect get_entity_global_bounds() { return this->getGlobalBounds(); }
 };
 
 
@@ -81,6 +83,16 @@ void test_script(Core* the_core,Entity* ent)
 
 	player.move(movement);
 }
+void stiker_script(Core* the_core, Entity* ent)
+{
+	Entity* player = static_cast<Entity*>(the_core->get_entity("player"));
+	ent->setPosition(player->get_collision_bounds().position);
+	int w = player->get_collision_bounds().size.x;
+	int h = player->get_collision_bounds().size.y;
+	ent->setTextureRect(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(w, h)));
+
+}
+
 
 int main()
 {
@@ -101,14 +113,39 @@ int main()
 	player.add_property("move_D", false);
 	player.add_property("move_S", false);
 	player.add_property("move_A", false);
+	
+	player.set_colliding(true);
+	player.get_collision_bounds() = sf::FloatRect(sf::Vector2f(0,0),sf::Vector2f(64,64));
+	player.set_collision_padding(sf::Vector2f(32, 32));
 
 	player.set_script(test_script);
 
+	sf::Texture col;
+	col.loadFromFile("C:\\Users\\Пользователь\\Downloads\\redHouse11.png");
+
+	Entity col_e(col, sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(0, 0)));
+
+	col_e.set_script(stiker_script);
+
+	sf::Texture box;
+	box.setRepeated(true);
+	box.loadFromFile("C:\\Users\\Пользователь\\Downloads\\roadHV.png");
+
+	Entity box_e(box, sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(128,128)));
+	box_e.set_colliding(true);
+	box_e.get_collision_bounds() = sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(128, 128));
+
+	box_e.setPosition(sf::Vector2f(300,200));
+
+
+
 	Core::scene_type scene;
 	scene.push_back(Core::lay_type());
-	scene[0]["player"] = &player;
-
 	scene.push_back(Core::lay_type());
+	scene[0]["player"] = &player;
+	scene[0]["box"] = &box_e;
+	scene[1]["stiker"] = &col_e;
+
 	scene[0]["player_info"] = &text;
 	
 	Core the_core;

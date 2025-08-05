@@ -108,11 +108,8 @@ class Drawable_Entity
 
 protected:
 	Core::dual_slot_type on_intersection = nullptr;
-	sf::Vector2f last_valid_position;
 
 public:
-
-	sf::Vector2f& get_last_valid_position() { return last_valid_position; }
 
 	void set_visble(const bool& arg) { visible = arg; }
 	const bool& is_visible() { return visible; };
@@ -161,6 +158,8 @@ private:
 	script entity_script = nullptr;
 	Core::dual_slot_type intersection_slot = nullptr;
 
+	sf::Vector2f last_valid_position;
+
 	std::map<std::string, property_type> properties;
 	bool colliding;
 	sf::FloatRect collision_bounds = sf::FloatRect(sf::Vector2f(0,0),sf::Vector2f(0,0));
@@ -185,6 +184,8 @@ public:
 
 	sf::FloatRect& get_collision_bounds();
 	void set_collision_padding(sf::Vector2f padding);
+
+	sf::Vector2f& get_last_valid_position() { return last_valid_position; }
 
 
 	void add_property(const std::string& name, const property_type& data);

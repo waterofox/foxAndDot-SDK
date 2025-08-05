@@ -216,8 +216,18 @@ void Core::render()
 				Drawable_Entity*& entity = element.second;
 				if (entity->is_visible())
 				{
-					sf::Drawable* drawable_entity = entity->asDrawable();
-					this->draw(*drawable_entity);
+					sf::Vector2f camera_position = camera.getCenter();
+					sf::Vector2f camera_size = camera.getSize();
+
+					camera_position -= sf::Vector2f(camera_size.x / 2, camera_size.y / 2);
+
+					sf::FloatRect camera_bounds(camera_position, camera_size);
+
+					if (camera_bounds.findIntersection(entity->get_entity_global_bounds()))
+					{
+						sf::Drawable* drawable_entity = entity->asDrawable();
+						this->draw(*drawable_entity);
+					}
 				}
 			}
 		}

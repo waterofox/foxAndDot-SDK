@@ -21,7 +21,7 @@ void Core::set_camera_target(const std::string& name_of_target)
 
 void Core::set_process_events_function(const process_events_function& function) { this->process_events = function; }
 
-Drawable_Entity* Core::get_entity(const std::string& name)
+Scene_Component* Core::get_component(const std::string& name)
 {
 	try
 	{
@@ -31,18 +31,18 @@ Drawable_Entity* Core::get_entity(const std::string& name)
 			auto entity = lay.find(name);
 			if (entity != lay.end()) { return (*entity).second; }
 		}
-		throw std::runtime_error (ERROR(ECORE,"target <" + "> does not exist"));
+		throw std::runtime_error (ERROR(ECORE,"component <" + name + "> does not exist"));
 	}
 	catch (const std::exception& err){ std::cout << err.what() << std::endl; this->close();}
 }
-Drawable_Entity* Core::get_entity(const std::string& name, const int& lay)
+Scene_Component* Core::get_component(const std::string& name, const int& lay)
 {
 	try
 	{
 		lay_type& our_lay = scene[lay];
 		auto entity = our_lay.find(name);
 		if (entity != our_lay.end()) { return (*entity).second; }
-		else { throw std::runtime_error(ERROR(ECORE, "target <" + "> does not exist")); }
+		else { throw std::runtime_error(ERROR(ECORE, "component <" + name + "> does not exist")); }
 	}
 	catch (const std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
 }
@@ -70,7 +70,7 @@ void Core::connect(const int& signal_id, const std::variant<slot_type, dual_slot
 	connections[signal_id] = slot;
 }
 
-void Core::emit_signal(const int& signal_id, Drawable_Entity*& sender)
+void Core::emit_signal(const int& signal_id, Scene_Component*& sender)
 {
 	auto connection = connections.find(signal_id);
 	try {
@@ -79,13 +79,13 @@ void Core::emit_signal(const int& signal_id, Drawable_Entity*& sender)
 		{
 			signals_container new_container;
 			new_container.first = (*connection).second;
-			new_container.second = std::pair<Drawable_Entity*, Drawable_Entity*>(sender, sender);
+			new_container.second = std::pair<Scene_Component*, Scene_Component*>(sender, sender);
 			signals_queue.push(new_container);
 		}
 	}
 	catch (std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
 }
-void Core::emit_signal(const int& signal_id, Drawable_Entity*& sender_A, Drawable_Entity*& sender_B) 
+void Core::emit_signal(const int& signal_id, Scene_Component*& sender_A, Scene_Component*& sender_B) 
 {
 	auto connection = connections.find(signal_id);
 	try {
@@ -94,7 +94,7 @@ void Core::emit_signal(const int& signal_id, Drawable_Entity*& sender_A, Drawabl
 		{
 			signals_container new_container;
 			new_container.first = (*connection).second;
-			new_container.second = std::pair<Drawable_Entity*, Drawable_Entity*>(sender_A, sender_B);
+			new_container.second = std::pair<Scene_Component*, Scene_Component*>(sender_A, sender_B);
 			signals_queue.push(new_container);
 		}
 	}
@@ -140,7 +140,7 @@ void Core::process_intersections_and_collisions()
 					{
 						Core::signals_container container;
 						container.first = elementA.second->on_intersection;
-						container.second = std::pair<Drawable_Entity*, Drawable_Entity*>(elementA.second, elementB.second);
+						container.second = std::pair<Scene_Component*, Scene_Component*>(elementA.second, elementB.second);
 
 						signals_queue.push(container);
 					}
@@ -157,7 +157,7 @@ void Core::update_camera()
 	case Core::dynamic_camera: 
 	{ 
 		
-		Drawable_Entity* target = this->get_entity(this->camera_target);
+		Scene_Component* target = this->get_component(this->camera_target);
 		sf::Drawable* casted_target = target->asDrawable();
 		try
 		{
@@ -194,7 +194,7 @@ void Core::update()
 		{
 			for (auto& element : lay)
 			{
-				Drawable_Entity*& entity = element.second;
+				Scene_Component*& entity = element.second;
 				if (entity->is_updateble()){entity->update(this);}
 			}
 		}
@@ -213,7 +213,7 @@ void Core::render()
 		{
 			for (auto& element : lay)
 			{
-				Drawable_Entity*& entity = element.second;
+				Scene_Component*& entity = element.second;
 				if (entity->is_visible())
 				{
 					sf::Vector2f camera_position = camera.getCenter();
@@ -225,8 +225,8 @@ void Core::render()
 
 					if (camera_bounds.findIntersection(entity->get_entity_global_bounds()))
 					{
-						sf::Drawable* drawable_entity = entity->asDrawable();
-						this->draw(*drawable_entity);
+						sf::Drawable* drawable_component = entity->asDrawable();
+						this->draw(*drawable_component);
 					}
 				}
 			}

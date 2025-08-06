@@ -1,31 +1,13 @@
 #include "Core.h"
 #define speed 150
 
-class myText : public Drawable_Entity, public sf::Text
-{	
-public:
-	myText(const sf::Font& font, std::string mes) : sf::Text(font, mes) {}
-
-	sf::Drawable* asDrawable() override { return this; }
-	void update(Core* the_core) override 
-	{
-		Entity* target_entity = static_cast<Entity*>(the_core->get_entity("player"));
-		Entity& player = (*target_entity);
-
-		std::string message = "player position: <x: " + std::to_string(player.getPosition().x) + " y: " + std::to_string(player.getPosition().y) + ">";
-		this->setString(message);
-	}
-	sf::FloatRect get_entity_local_bounds() { return this->getLocalBounds(); }
-	sf::FloatRect get_entity_global_bounds() { return this->getGlobalBounds(); }
-};
-
 
 void process_event(Core* the_core)
 {
 	const auto onClose = [the_core](const sf::Event::Closed&){
 		(*the_core).close();};
 	const auto onKeyPressed = [the_core](const sf::Event::KeyPressed& keyPressed) {
-		Entity* entity = static_cast<Entity*>(the_core->get_entity("player"));
+		Entity* entity = static_cast<Entity*>(the_core->get_component("player"));
 		Entity& player = (*entity);
 		
 		switch (keyPressed.scancode)
@@ -40,7 +22,7 @@ void process_event(Core* the_core)
 
 		};
 	const auto onKeyReleased = [the_core](const sf::Event::KeyReleased& keyReleased) {
-		Entity* entity = static_cast<Entity*>(the_core->get_entity("player"));
+		Entity* entity = static_cast<Entity*>(the_core->get_component("player"));
 		Entity& player = (*entity);
 
 		switch (keyReleased.scancode)
@@ -85,7 +67,7 @@ void test_script(Core* the_core,Entity* ent)
 }
 void stiker_script(Core* the_core, Entity* ent)
 {
-	Entity* player = static_cast<Entity*>(the_core->get_entity("player"));
+	Entity* player = static_cast<Entity*>(the_core->get_component("player"));
 	ent->setPosition(player->get_collision_bounds().position);
 	int w = player->get_collision_bounds().size.x;
 	int h = player->get_collision_bounds().size.y;
@@ -96,12 +78,6 @@ void stiker_script(Core* the_core, Entity* ent)
 
 int main()
 {
-
-	sf::Font font;
-	font.openFromFile("C:\\Users\\Пользователь\\Desktop\\TDAText\\TDAText.ttf");
-	myText text(font, "text");
-	text.setFillColor(sf::Color::White);
-	text.setCharacterSize(24);
 
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("C:\\Users\\Пользователь\\Downloads\\d1e68f5909522180.png");
@@ -145,8 +121,6 @@ int main()
 	scene[0]["player"] = &player;
 	scene[0]["box"] = &box_e;
 	scene[1]["stiker"] = &col_e;
-
-	scene[0]["player_info"] = &text;
 	
 	Core the_core;
 	the_core.scene = scene;

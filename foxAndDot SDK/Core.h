@@ -1,8 +1,10 @@
 #pragma once
+
 //sfml includes
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
 //std inlcludes
 #include <iostream>
 #include <string>
@@ -10,8 +12,6 @@
 #include <vector>
 #include <variant>
 #include <queue>
-//C
-#include <cassert>
 
 //ERRORS
 #define ECORE std::string("CORE ERROR: ")
@@ -24,84 +24,111 @@
 #define Bool(bool_property) std::get<bool>(bool_property)
 #define String(string_property) std::get<std::string>(string_property)
 
-class Core;
-class Drawable_Entity;
+class Scene_Component;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//CORE
 
 class Core : public sf::RenderWindow 
 {
-
-//some types & enums
+//TYPES & ENUMS
 public:
-
+	
+	//ENUMS
 	enum camera_settings
 	{
 		dynamic_camera = 0,
 		static_camera = 1
 	};
-
+	
+	//FUNCTION TYPES
 	using process_events_function = void(*)(Core*);
-	using slot_type = void(*)(Core*, Drawable_Entity*);
-	using dual_slot_type = void(*)(Core*, Drawable_Entity*, Drawable_Entity*);
-	using signals_container = std::pair<std::variant<slot_type, dual_slot_type>, std::pair<Drawable_Entity*, Drawable_Entity*>>;
 
-	using lay_type = std::map<std::string, Drawable_Entity*>;
+	using slot_type = void(*)(Core*, Scene_Component*);
+
+	using dual_slot_type = void(*)(Core*, Scene_Component*, Scene_Component*);
+	
+	//CONTAINERS
+	using signals_container = std::pair<std::variant<slot_type, dual_slot_type>, std::pair<Scene_Component*, Scene_Component*>>;
+
+	using lay_type = std::map<std::string, Scene_Component*>;
+
 	using scene_type = std::vector<lay_type>;
-//core fields
+
+//FIELDS
 private:
-	//window
+
+	//WINDOW
 	sf::Time delta_time = sf::Time::Zero;
-	sf::View camera;
+
+	//CAMERA
+	sf::View	camera;
 	camera_settings camera_mod = camera_settings::static_camera;
 	std::string camera_target = "";
 
-	//signals & slots
+	//SIGNALS SYSTEM
 	std::queue<signals_container> signals_queue;
 	std::map<int, std::variant<slot_type, dual_slot_type>> connections;
+
 public:
-	//game
+	
+	//SCENE
 	std::string scene_name;
 	scene_type scene;
 	
-//core methods
+//METHODS
 	Core();
 	~Core();
 
-	//window
+	//WINDOW
 	const sf::Time& get_delta_time();
+
+	//CAMERA
 	sf::View& get_camera();
 	void set_camera_mod(const camera_settings& mod);
 	void set_camera_target(const std::string& name_of_target);
-
-	//game
+	
+	//SETTINGS & RUN
 	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title, const sf::State& state);
 	void set_process_events_function(const process_events_function& function);
 
-	Drawable_Entity* get_entity(const std::string& name);
-	Drawable_Entity* get_entity(const std::string& name, const int& lay);
+	//COMPONENTS
+	Scene_Component* get_component(const std::string& name);
+	Scene_Component* get_component(const std::string& name, const int& lay);
 	
-	//signals & slots
-	void emit_signal(const int& signal_id, Drawable_Entity*&);
-	void emit_signal(const int& signal_id, Drawable_Entity*&,Drawable_Entity*&);
+	//SIGNALS SYSTEM
+	void emit_signal(const int& signal_id, Scene_Component*&);
+	void emit_signal(const int& signal_id, Scene_Component*&,Scene_Component*&);
 	void connect(const int& signal_id, const std::variant<slot_type, dual_slot_type>& slot);
 
-
-
-//process methods
+//PROCESS METHODS
 private:
+
+	//PROCESS
 	process_events_function process_events = nullptr;
-	void update();
-	void update_camera();
 	void process_signals();
 	void process_intersections_and_collisions();
 
+	//UPDATE
+	void update();
+	void update_camera();
+
+	//RENDER
 	void render();
 	
 };
 
-class Drawable_Entity
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//SCENE COMPONENT
+
+class Scene_Component
 {
 	friend class Core;
+
+	std::string component_name;
 
 	bool visible = true;
 	bool updateble = true;
@@ -110,6 +137,8 @@ protected:
 	Core::dual_slot_type on_intersection = nullptr;
 
 public:
+
+	std::string& name() { return component_name; }
 
 	void set_visble(const bool& arg) { visible = arg; }
 	const bool& is_visible() { return visible; };
@@ -124,15 +153,22 @@ public:
 
 	virtual sf::FloatRect get_entity_global_bounds() = 0;
 	virtual sf::FloatRect get_entity_local_bounds() = 0;
-
+	virtual void set_resource(const std::variant<sf::Texture*,sf::Font*>& resource) = 0;
 };
 
-class Entity : public Drawable_Entity, public sf::Sprite
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//ENTITY
+
+class Entity : public Scene_Component, public sf::Sprite
 {
 
 	friend class Core;
 
-	static void entity_on_intersection(Core* the_core, Drawable_Entity* elementA, Drawable_Entity* elementB)
+	static void entity_on_intersection(Core* the_core, Scene_Component* elementA, Scene_Component* elementB)
 	{
 		Entity* entityA = static_cast<Entity*>(elementA);
 		Entity* entityB = static_cast<Entity*>(elementB);
@@ -169,8 +205,14 @@ public:
 
 	sf::Drawable* asDrawable() override;
 	void update(Core* the_core) override; 
-	virtual sf::FloatRect get_entity_global_bounds() override;
-	virtual sf::FloatRect get_entity_local_bounds() override;
+	sf::FloatRect get_entity_global_bounds() override;
+	sf::FloatRect get_entity_local_bounds() override;
+	void set_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override
+	{
+		this->setTexture(*std::get<sf::Texture*>(resource));
+
+	}
+
 
 	Entity(const sf::Texture& texture, const sf::IntRect& sprite_rectangle);
 	//Entity(const Entity& another_entity);

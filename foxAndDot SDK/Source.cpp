@@ -39,6 +39,9 @@ void process_event(Core* the_core)
 	the_core->handleEvents(onClose,onKeyPressed,onKeyReleased);
 }
 
+
+
+
 void test_script(Core* the_core,Entity* ent)
 {
 	

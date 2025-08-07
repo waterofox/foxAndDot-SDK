@@ -128,32 +128,45 @@ class Scene_Component
 {
 	friend class Core;
 
-	std::string component_name;
+//FIELDS
 
+	//WORK STAFF
+	std::string component_name;
 	bool visible = true;
 	bool updateble = true;
 
 protected:
+
+	//PROCESS INTERSECTIONS
 	Core::dual_slot_type on_intersection = nullptr;
 
+//METHODS
 public:
+	
+	//WORK STAFF
+	std::string& name() { return component_name; }											//retunr name   of component
 
-	std::string& name() { return component_name; }
+	void set_visble(const bool& arg) { visible = arg; }										//set visible   of component
+	const bool& is_visible() { return visible; };											//check visible
 
-	void set_visble(const bool& arg) { visible = arg; }
-	const bool& is_visible() { return visible; };
-
-	void set_updateble(const bool& arg) { updateble = arg; }
+	void set_updateble(const bool& arg) { updateble = arg; }								//set updatable of component
 	const bool& is_updateble() { return updateble; };
+	
+	//PROCESS INTERSECTIONS
+	void set_on_intersection(Core::dual_slot_type slot) { on_intersection = slot; }			//set slot on intersection
 
-	void set_on_intersection(Core::dual_slot_type slot) { on_intersection = slot; }
+//VIRTUAL METHODS
 
-	virtual sf::Drawable* asDrawable() { return nullptr; }
-	virtual void update(Core* the_core) = 0;
+	//WORK
+	virtual sf::Drawable* as_drawable() { return nullptr; }									//retunr component as sf::Drawable* for render
+	virtual void update(Core* the_core) = 0;												//method to update logic
+	
+	//BOUNDS
+	virtual sf::FloatRect get_entity_global_bounds() = 0;									//return global bounds (scaling)
+	virtual sf::FloatRect get_entity_local_bounds() = 0;									//return local  bounds (no scaling)
 
-	virtual sf::FloatRect get_entity_global_bounds() = 0;
-	virtual sf::FloatRect get_entity_local_bounds() = 0;
-	virtual void set_resource(const std::variant<sf::Texture*,sf::Font*>& resource) = 0;
+	//RESOURCES
+	virtual void set_resource(const std::variant<sf::Texture*,sf::Font*>& resource) = 0;	// set/update resource for component
 };
 
 
@@ -203,7 +216,7 @@ private:
 
 public:
 
-	sf::Drawable* asDrawable() override;
+	sf::Drawable* as_drawable() override;
 	void update(Core* the_core) override; 
 	sf::FloatRect get_entity_global_bounds() override;
 	sf::FloatRect get_entity_local_bounds() override;

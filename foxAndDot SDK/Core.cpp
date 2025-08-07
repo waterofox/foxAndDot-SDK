@@ -158,7 +158,7 @@ void Core::update_camera()
 	{ 
 		
 		Scene_Component* target = this->get_component(this->camera_target);
-		sf::Drawable* casted_target = target->asDrawable();
+		sf::Drawable* casted_target = target->as_drawable();
 		try
 		{
 			sf::Sprite* entity = dynamic_cast<sf::Sprite*>(casted_target);
@@ -225,7 +225,7 @@ void Core::render()
 
 					if (camera_bounds.findIntersection(entity->get_entity_global_bounds()))
 					{
-						sf::Drawable* drawable_component = entity->asDrawable();
+						sf::Drawable* drawable_component = entity->as_drawable();
 						this->draw(*drawable_component);
 					}
 				}

@@ -54,7 +54,7 @@ Entity::property_type& Entity::operator[](const std::string& name)
 	}
 	catch (std::exception& err) { std::cout << err.what() << std::endl; assert(false); }
 }
-sf::Drawable* Entity::asDrawable()
+sf::Drawable* Entity::as_drawable()
 {
 	return this;
 }

@@ -16,6 +16,7 @@
 //ERRORS
 #define ECORE std::string("CORE ERROR: ")
 #define EENTITY std::string("ENTITY ERROR: ")
+#define ERESMAN std::string("RESOURCE MANAGER ERROR: ")
 #define ERROR(error_location,error_message) error_location + error_message
 
 //PROPERTIES
@@ -27,6 +28,39 @@
 class Scene_Component;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//RESOURCE MANAGER
+class Resource_Manager
+{
+public:
+	enum class resource_type
+	{
+		texture = 0,
+		font = 1,
+		no_resource = 2
+	};
+private:
+	std::map<int, sf::Texture> texture_library;
+	std::map<int, sf::Font>	      font_library;
+public:
+
+	Resource_Manager();
+	~Resource_Manager();
+
+	void add_texture(const std::string& texture_url, const int& id);
+	void add_font(const std::string& font_url, const int& id);
+
+	void clear_libraries();
+
+	sf::Texture& texture(const int& id);
+	sf::Font& font(const int& id);
+
+	void update_resource(Scene_Component* component);
+};
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //CORE
 
@@ -57,6 +91,8 @@ public:
 	using scene_type = std::vector<lay_type>;
 
 //FIELDS
+public:
+	static inline Resource_Manager resource_manager{};
 private:
 
 	//WINDOW
@@ -120,20 +156,22 @@ private:
 };
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 //SCENE COMPONENT
 
 class Scene_Component
 {
 	friend class Core;
-
+	friend class Resource_Manager;
 //FIELDS
 
 	//WORK STAFF
 	std::string component_name;
 	bool visible = true;
 	bool updateble = true;
+
+	//RESOURCES
+	int resource;
+	Resource_Manager::resource_type type_of_resource;
 
 protected:
 
@@ -142,7 +180,6 @@ protected:
 
 //METHODS
 public:
-	
 	//WORK STAFF
 	std::string& name() { return component_name; }											//retunr name   of component
 
@@ -166,7 +203,11 @@ public:
 	virtual sf::FloatRect get_entity_local_bounds() = 0;									//return local  bounds (no scaling)
 
 	//RESOURCES
-	virtual void set_resource(const std::variant<sf::Texture*,sf::Font*>& resource) = 0;	// set/update resource for component
+	int& get_resource() { return resource; }
+	Resource_Manager::resource_type& get_type_of_resource() { return type_of_resource; }
+
+protected:
+	virtual void update_resource(const std::variant<sf::Texture*,sf::Font*>& resource) = 0;	// set/update resource for component
 };
 
 
@@ -199,42 +240,64 @@ class Entity : public Scene_Component, public sf::Sprite
 			entityA->intersection_slot(the_core, elementA, elementB);
 		}
 	}
+
+	static inline sf::Texture empty_entity_s_texture; // I don't like that sf::Sprite needs an sf::Texture. So... this is a field to supply a default constructor argument for sf::Sprite.
+
 public:
+//TYPES
+
+	//SCRIPT
 	using script = void(*)(Core*,Entity*);
+
+	//PROPERTY
 	using property_type = std::variant<int, float, bool, std::string, const char*>;
 
+//ENTITY'S FILEDS
 private:
+	//SCRIPTING & INTERSECTIONS
 	script entity_script = nullptr;
 	Core::dual_slot_type intersection_slot = nullptr;
 
+	//COLLISION
 	sf::Vector2f last_valid_position;
-
-	std::map<std::string, property_type> properties;
 	bool colliding;
-	sf::FloatRect collision_bounds = sf::FloatRect(sf::Vector2f(0,0),sf::Vector2f(0,0));
+	sf::FloatRect collision_bounds = sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
 	sf::Vector2f collision_padding = sf::Vector2f(0, 0);
+
+	//PROPERTIES
+	std::map<std::string, property_type> properties;
 
 public:
 
+//OVERRIDED METHODS
 	sf::Drawable* as_drawable() override;
 	void update(Core* the_core) override; 
+
 	sf::FloatRect get_entity_global_bounds() override;
 	sf::FloatRect get_entity_local_bounds() override;
-	void set_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override
+private:
+	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override
 	{
 		this->setTexture(*std::get<sf::Texture*>(resource));
-
 	}
+public:
 
-
-	Entity(const sf::Texture& texture, const sf::IntRect& sprite_rectangle);
-	//Entity(const Entity& another_entity);
+//ENTITY'S METHODS
+	Entity(const sf::IntRect& sprite_rectangle);
 	~Entity();
-	//Entity& operator=(const Entity& another_entity);
+
+	//UPDATE
+	void set_intersection_slot(Core::dual_slot_type slot);
+	void set_script(script ent_script);
+
+	//GET PROPERTIES
 	property_type& operator[](const std::string& name);
 	property_type& operator[](const char*& name);
+	void add_property(const std::string& name, const property_type& data);
 
+	//COLLISION
 	void set_colliding(const bool& arg);
+
 	const bool& is_colliding();
 
 	sf::FloatRect& get_collision_bounds();
@@ -242,8 +305,4 @@ public:
 
 	sf::Vector2f& get_last_valid_position() { return last_valid_position; }
 
-
-	void add_property(const std::string& name, const property_type& data);
-	void set_intersection_slot(Core::dual_slot_type slot);
-	void set_script(script ent_script);
 };

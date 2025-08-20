@@ -68,70 +68,37 @@ void test_script(Core* the_core,Entity* ent)
 
 	player.move(movement);
 }
-void stiker_script(Core* the_core, Entity* ent)
+
+enum textures
 {
-	Entity* player = static_cast<Entity*>(the_core->get_component("player"));
-	ent->setPosition(player->get_collision_bounds().position);
-	int w = player->get_collision_bounds().size.x;
-	int h = player->get_collision_bounds().size.y;
-	ent->setTextureRect(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(w, h)));
-
-}
-
+	player_texutre = 0,
+};
 
 int main()
 {
-
-	sf::Texture playerTexture;
-	playerTexture.loadFromFile("C:\\Users\\Пользователь\\Downloads\\d1e68f5909522180.png");
-	
-	Entity player(playerTexture, sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(128, 128)));
-	player.setPosition(sf::Vector2f(0, 0));
-
-	player.add_property("move_W", false);
-	player.add_property("move_D", false);
-	player.add_property("move_S", false);
-	player.add_property("move_A", false);
-	
-	player.set_colliding(true);
-	player.get_collision_bounds() = sf::FloatRect(sf::Vector2f(0,0),sf::Vector2f(64,64));
-	player.set_collision_padding(sf::Vector2f(32, 32));
-
-	player.set_script(test_script);
-
-	sf::Texture col;
-	col.loadFromFile("C:\\Users\\Пользователь\\Downloads\\redHouse11.png");
-
-	Entity col_e(col, sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(0, 0)));
-
-	col_e.set_script(stiker_script);
-
-	sf::Texture box;
-	box.setRepeated(true);
-	box.loadFromFile("C:\\Users\\Пользователь\\Downloads\\roadHV.png");
-
-	Entity box_e(box, sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(128,128)));
-	box_e.set_colliding(true);
-	box_e.get_collision_bounds() = sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(128, 128));
-
-	box_e.setPosition(sf::Vector2f(300,200));
-
-
-
-	Core::scene_type scene;
-	scene.push_back(Core::lay_type());
-	scene.push_back(Core::lay_type());
-	scene[0]["player"] = &player;
-	scene[0]["box"] = &box_e;
-	scene[1]["stiker"] = &col_e;
-	
 	Core the_core;
-	the_core.scene = scene;
 
+	Core::resource_manager.add_texture("D:\\Смешной контент\\c096462cff06c06b.png", player_texutre);
+
+	Entity player_entity(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(64, 64)));
+	player_entity.setPosition(sf::Vector2f(64, 64));
+
+	player_entity.get_type_of_resource() = Resource_Manager::resource_type::texture;
+	player_entity.get_resource() = player_texutre;
+
+	player_entity.set_script(test_script);
+
+	player_entity.add_property("move_W", false);
+	player_entity.add_property("move_A", false);
+	player_entity.add_property("move_S", false);
+	player_entity.add_property("move_D", false);
+
+	Core::lay_type lay; lay["player"] = &player_entity;
+	the_core.scene_name = "test";
+	the_core.scene.push_back(lay);
+	
 	the_core.set_process_events_function(process_event);
 
-	the_core.set_camera_mod(Core::camera_settings::static_camera);
-	//the_core.set_camera_target("player");
-
-	the_core.run(640,480,"test",sf::State::Windowed);
+	the_core.run(400,400,"resource manager test",sf::State::Windowed);
+	
 }

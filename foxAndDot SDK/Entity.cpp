@@ -1,6 +1,6 @@
 #include "Core.h"
-Entity::Entity(const sf::Texture& texture, const sf::IntRect& sprite_rectangle) : 
-		Sprite(texture,sprite_rectangle)
+Entity::Entity(const sf::IntRect& sprite_rectangle) :
+	Sprite(empty_entity_s_texture, sprite_rectangle)
 {
 	on_intersection = Entity::entity_on_intersection;
 	this->collision_bounds = this->getGlobalBounds();
@@ -11,37 +11,7 @@ Entity::Entity(const sf::Texture& texture, const sf::IntRect& sprite_rectangle) 
 
 Entity::~Entity() {}
 
-/*
-Entity::Entity(const Entity& another_entity) : Sprite(*this)
-{
 
-	//todo возможные проблемы с текстурами
-
-	this->collision_bounds = another_entity.collision_bounds;
-	this->colliding = another_entity.colliding;
-
-
-	this->entity_script = another_entity.entity_script;
-
-	this->properties = another_entity.properties;
-}
-
-Entity& Entity::operator=(const Entity& another_entity)
-{
-	if (this == &another_entity) { return *this; }
-	//todo возможные проблемы с текстурами
-
-	this->collision_bounds = another_entity.collision_bounds;
-	this->colliding = another_entity.colliding;
-
-
-	this->entity_script = another_entity.entity_script;
-
-	this->properties = another_entity.properties;
-
-	return *this;
-}
-*/
 Entity::property_type& Entity::operator[](const std::string& name)
 {
 	try

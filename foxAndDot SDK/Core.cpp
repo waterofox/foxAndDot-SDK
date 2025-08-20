@@ -1,5 +1,9 @@
 #include "Core.h"
-Core::Core() {}
+
+
+
+Core::Core() 
+{}
 Core::~Core(){}
 
 const sf::Time& Core::get_delta_time() { return this->delta_time; }
@@ -194,8 +198,9 @@ void Core::update()
 		{
 			for (auto& element : lay)
 			{
-				Scene_Component*& entity = element.second;
-				if (entity->is_updateble()){entity->update(this);}
+				Scene_Component*& comp = element.second;
+				if (comp->is_updateble()){comp->update(this);}
+				resource_manager.update_resource(comp);
 			}
 		}
 	}

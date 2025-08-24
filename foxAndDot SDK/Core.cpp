@@ -166,7 +166,8 @@ void Core::update_camera()
 		try
 		{
 			sf::Sprite* entity = dynamic_cast<sf::Sprite*>(casted_target);
-			this->camera.setCenter(entity->getPosition());
+			sf::Vector2f new_center(entity->getGlobalBounds().getCenter());
+			this->camera.setCenter(new_center);
 			this->setView(camera);
 		}
 		catch (const std::bad_cast& err)

@@ -196,8 +196,9 @@ public:
 
 	//WORK
 	virtual sf::Drawable* as_drawable() { return nullptr; }									//retunr component as sf::Drawable* for render
+protected:
 	virtual void update(Core* the_core) = 0;												//method to update logic
-	
+public:
 	//BOUNDS
 	virtual sf::FloatRect get_entity_global_bounds() = 0;									//return global bounds (scaling)
 	virtual sf::FloatRect get_entity_local_bounds() = 0;									//return local  bounds (no scaling)
@@ -219,8 +220,6 @@ protected:
 
 class Entity : public Scene_Component, public sf::Sprite
 {
-
-	friend class Core;
 
 	static void entity_on_intersection(Core* the_core, Scene_Component* elementA, Scene_Component* elementB)
 	{
@@ -271,8 +270,9 @@ public:
 
 //OVERRIDED METHODS
 	sf::Drawable* as_drawable() override;
+protected:
 	void update(Core* the_core) override; 
-
+public:
 	sf::FloatRect get_entity_global_bounds() override;
 	sf::FloatRect get_entity_local_bounds() override;
 private:
@@ -287,7 +287,7 @@ public:
 	~Entity();
 
 	//UPDATE
-	void set_intersection_slot(Core::dual_slot_type slot);
+	void set_entity_intersection_slot(Core::dual_slot_type slot);
 	void set_script(script ent_script);
 
 	//GET PROPERTIES
@@ -305,4 +305,26 @@ public:
 
 	sf::Vector2f& get_last_valid_position() { return last_valid_position; }
 
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//ANIMATED ENTITY
+class Animated_Entity : public Entity
+{
+public:
+	int frame_count = 1;
+	int frame_per_seconds = 24;
+	int current_frame = 0;
+private:
+	bool animation_enabled = false;
+	sf::Time animation_timer = sf::Time::Zero;
+
+public:
+	Animated_Entity(const sf::IntRect& sprite_rectangle);
+
+	void play_animation();
+	void pause_animation();
+
+protected:
+	void update(Core* the_core) override;
 };

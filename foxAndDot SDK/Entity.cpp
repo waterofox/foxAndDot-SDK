@@ -57,7 +57,7 @@ void Entity::set_collision_padding(sf::Vector2f padding)
 {
 	collision_padding = padding;
 }
-void Entity::set_intersection_slot(Core::dual_slot_type slot)
+void Entity::set_entity_intersection_slot(Core::dual_slot_type slot)
 {
 	this->intersection_slot = slot;
 }

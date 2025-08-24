@@ -134,10 +134,23 @@
     <ClInclude Include="Core.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animated_Entity.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Resource_Manager.cpp" />
     <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Game\ahIdle.png" />
+    <Image Include="Game\field.png" />
+    <Image Include="Game\fire.png" />
+    <Image Include="Game\playerBackWalk.png" />
+    <Image Include="Game\playerFrontWalk.png" />
+    <Image Include="Game\playerSideLeftWalk.png" />
+    <Image Include="Game\playerSideRightWalk.png" />
+    <Image Include="Game\roadH.png" />
+    <Image Include="Game\roadHV.png" />
+    <Image Include="Game\roadV.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

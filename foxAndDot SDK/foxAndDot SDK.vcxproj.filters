@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{5a893296-4d60-4b02-be98-3426331f13aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
@@ -32,5 +35,40 @@
     <ClCompile Include="Resource_Manager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Animated_Entity.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Game\ahIdle.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\field.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\fire.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\playerBackWalk.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\playerFrontWalk.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\playerSideLeftWalk.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\playerSideRightWalk.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\roadH.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\roadHV.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="Game\roadV.png">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

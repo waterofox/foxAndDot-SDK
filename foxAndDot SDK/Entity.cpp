@@ -2,7 +2,7 @@
 Entity::Entity(const sf::IntRect& sprite_rectangle) :
 	Sprite(empty_entity_s_texture, sprite_rectangle)
 {
-	on_intersection = Entity::entity_on_intersection;
+	//on_intersection = Entity::entity_on_intersection;
 	this->collision_bounds = this->getGlobalBounds();
 	this->colliding = false;
 	last_valid_position = sf::Vector2f(0, 0);
@@ -10,6 +10,23 @@ Entity::Entity(const sf::IntRect& sprite_rectangle) :
 }
 
 Entity::~Entity() {}
+
+void Entity::on_intersection(Core* the_core, Scene_Component* component)
+{
+	//collision
+	if (this->colliding and component->is_colliding())
+	{
+		this->setPosition(last_valid_position);
+
+		this->collision_bounds.position = this->getPosition();
+		this->collision_bounds.position += this->collision_padding;
+	}
+	//intersection
+	if (this->intersection_slot != nullptr)
+	{
+		this->intersection_slot(the_core, component);
+	}
+}
 
 
 Entity::property_type& Entity::operator[](const std::string& name)
@@ -33,11 +50,6 @@ Entity::property_type& Entity::operator[](const char*& name)
 	return (*this)[std::string(name)];
 }
 
-void Entity::set_colliding(const bool& arg) { this->colliding = arg;}
-const bool& Entity::is_colliding() { return this->colliding; }
-
-sf::FloatRect& Entity::get_collision_bounds() { return this->collision_bounds; }
-
 void Entity::update(Core* the_core)
 {
 	last_valid_position = this->getPosition();
@@ -53,14 +65,7 @@ sf::FloatRect Entity::get_entity_global_bounds()
 {
 	return this->getGlobalBounds();
 }
-void Entity::set_collision_padding(sf::Vector2f padding)
-{
-	collision_padding = padding;
-}
-void Entity::set_entity_intersection_slot(Core::dual_slot_type slot)
-{
-	this->intersection_slot = slot;
-}
+
 sf::FloatRect Entity::get_entity_local_bounds()
 {
 	return this->get_collision_bounds();

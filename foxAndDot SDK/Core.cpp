@@ -140,14 +140,7 @@ void Core::process_intersections_and_collisions()
 				if (&elementA == &elementB) { continue; }
 				if (elementA.second->get_entity_local_bounds().findIntersection(elementB.second->get_entity_local_bounds()))
 				{
-					if (elementA.second->on_intersection != nullptr)
-					{
-						Core::signals_container container;
-						container.first = elementA.second->on_intersection;
-						container.second = std::pair<Scene_Component*, Scene_Component*>(elementA.second, elementB.second);
-
-						signals_queue.push(container);
-					}
+					elementA.second->on_intersection(this, elementB.second);
 				}
 			}
 		}

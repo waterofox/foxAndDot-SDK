@@ -162,9 +162,9 @@ class Scene_Component
 {
 	friend class Core;
 	friend class Resource_Manager;
-//FIELDS
+	//FIELDS
 
-	//WORK STAFF
+		//WORK STAFF
 	std::string component_name;
 	bool visible = true;
 	bool updateble = true;
@@ -175,10 +175,17 @@ class Scene_Component
 
 protected:
 
-	//PROCESS INTERSECTIONS
-	Core::dual_slot_type on_intersection = nullptr;
+	//COLLISION
+	sf::Vector2f last_valid_position;
+	bool colliding;
+	sf::FloatRect collision_bounds = sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
+	sf::Vector2f collision_padding = sf::Vector2f(0, 0);
 
-//METHODS
+protected:
+
+	//PROCESS INTERSECTIONS
+	virtual void on_intersection(Core* the_core, Scene_Component* component) = 0;
+	//METHODS
 public:
 	//WORK STAFF
 	std::string& name() { return component_name; }											//retunr name   of component
@@ -188,13 +195,10 @@ public:
 
 	void set_updateble(const bool& arg) { updateble = arg; }								//set updatable of component
 	const bool& is_updateble() { return updateble; };
-	
-	//PROCESS INTERSECTIONS
-	void set_on_intersection(Core::dual_slot_type slot) { on_intersection = slot; }			//set slot on intersection
 
-//VIRTUAL METHODS
+	//VIRTUAL METHODS
 
-	//WORK
+		//WORK
 	virtual sf::Drawable* as_drawable() { return nullptr; }									//retunr component as sf::Drawable* for render
 protected:
 	virtual void update(Core* the_core) = 0;												//method to update logic
@@ -202,6 +206,13 @@ public:
 	//BOUNDS
 	virtual sf::FloatRect get_entity_global_bounds() = 0;									//return global bounds (scaling)
 	virtual sf::FloatRect get_entity_local_bounds() = 0;									//return local  bounds (no scaling)
+
+	//COLLISION
+	void set_colliding(const bool& arg) { colliding = arg; }
+	const bool& is_colliding() { return colliding; };
+	sf::FloatRect& get_collision_bounds() { return collision_bounds; };
+	void set_collision_padding(sf::Vector2f padding) { collision_padding = padding; }
+	sf::Vector2f& get_last_valid_position() { return last_valid_position; }
 
 	//RESOURCES
 	int& get_resource() { return resource; }
@@ -220,26 +231,6 @@ protected:
 
 class Entity : public Scene_Component, public sf::Sprite
 {
-
-	static void entity_on_intersection(Core* the_core, Scene_Component* elementA, Scene_Component* elementB)
-	{
-		Entity* entityA = static_cast<Entity*>(elementA);
-		Entity* entityB = static_cast<Entity*>(elementB);
-		//collision
-		if (entityA->colliding and entityB->colliding) 
-		{
-			entityA->setPosition(entityA->get_last_valid_position());
-
-			entityA->collision_bounds.position = entityA->getPosition();
-			entityA->collision_bounds.position += entityA->collision_padding;
-		}
-		//intersection
-		if (entityA->intersection_slot != nullptr)
-		{
-			entityA->intersection_slot(the_core, elementA, elementB);
-		}
-	}
-
 	static inline sf::Texture empty_entity_s_texture; // I don't like that sf::Sprite needs an sf::Texture. So... this is a field to supply a default constructor argument for sf::Sprite.
 
 public:
@@ -255,13 +246,8 @@ public:
 private:
 	//SCRIPTING & INTERSECTIONS
 	script entity_script = nullptr;
-	Core::dual_slot_type intersection_slot = nullptr;
+	Core::slot_type intersection_slot = nullptr;
 
-	//COLLISION
-	sf::Vector2f last_valid_position;
-	bool colliding;
-	sf::FloatRect collision_bounds = sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
-	sf::Vector2f collision_padding = sf::Vector2f(0, 0);
 
 	//PROPERTIES
 	std::map<std::string, property_type> properties;
@@ -272,6 +258,7 @@ public:
 	sf::Drawable* as_drawable() override;
 protected:
 	void update(Core* the_core) override; 
+	void on_intersection(Core* the_core,Scene_Component* component) override;
 public:
 	sf::FloatRect get_entity_global_bounds() override;
 	sf::FloatRect get_entity_local_bounds() override;
@@ -287,23 +274,13 @@ public:
 	~Entity();
 
 	//UPDATE
-	void set_entity_intersection_slot(Core::dual_slot_type slot);
+	void set_entity_intersection_slot(Core::slot_type slot);
 	void set_script(script ent_script);
 
 	//GET PROPERTIES
 	property_type& operator[](const std::string& name);
 	property_type& operator[](const char*& name);
 	void add_property(const std::string& name, const property_type& data);
-
-	//COLLISION
-	void set_colliding(const bool& arg);
-
-	const bool& is_colliding();
-
-	sf::FloatRect& get_collision_bounds();
-	void set_collision_padding(sf::Vector2f padding);
-
-	sf::Vector2f& get_last_valid_position() { return last_valid_position; }
 
 };
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -327,4 +304,22 @@ public:
 
 protected:
 	void update(Core* the_core) override;
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//COLLISION AREA
+
+class Collision_Area : public Scene_Component, public sf::RectangleShape
+{
+public:
+	Collision_Area(const sf::FloatRect& rect);
+	~Collision_Area();
+
+	void on_intersection(Core* the_core, Scene_Component* component) override;
+	sf::Drawable* as_drawable() override;
+	void update(Core* the_core) override;
+	sf::FloatRect get_entity_global_bounds() override;
+	sf::FloatRect get_entity_local_bounds() override;
+	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
 };

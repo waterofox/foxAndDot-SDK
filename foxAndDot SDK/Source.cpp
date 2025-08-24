@@ -125,6 +125,10 @@ int main()
 	player_entity.frame_count = 4;
 	
 	player_entity.pause_animation();
+	
+	player_entity.set_colliding(true);
+	player_entity.set_collision_padding(sf::Vector2f(96, 112));
+	player_entity.get_collision_bounds() = sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(64, 128));
 
 	//scripting
 	player_entity.set_script(controller_script);
@@ -166,13 +170,17 @@ int main()
 	Ash.frame_per_seconds = 12;
 	Ash.frame_count = 10;
 	Ash.play_animation();
+	//----------------------------------------------------------------------------------------
+	Collision_Area col(sf::FloatRect(sf::Vector2f(576, 412), sf::Vector2f(128, 200)));
+	col.set_visble(true);
 
 	//init scene
 	Core::lay_type lay0; lay0["field"] = &field;
 	Core::lay_type lay1; lay1["Ash"] = &Ash;
 	Core::lay_type lay2; lay2["fire"] = &fire;
-	Core::lay_type lay3; lay3["player"] = &player_entity;
-	the_core.scene_name = "test";
+	Core::lay_type lay3; lay3["player"] = &player_entity; lay3["col1"] = &col;
+
+	the_core.scene_name = "demo";
 
 	the_core.scene.push_back(lay0);
 	the_core.scene.push_back(lay1);

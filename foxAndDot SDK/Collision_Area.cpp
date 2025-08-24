@@ -1,0 +1,34 @@
+#include "Core.h"
+
+Collision_Area::Collision_Area(const sf::FloatRect& rect)
+{
+	
+	this->colliding = true;
+
+	this->setSize(rect.size);
+	this->setPosition(rect.position);
+
+	this->setFillColor(sf::Color(95, 234, 54, 127));
+	this->setOutlineColor(sf::Color(95, 234, 54, 255));
+
+	this->setOutlineThickness(5);
+}
+Collision_Area::~Collision_Area() {}
+
+void Collision_Area::on_intersection(Core* the_core, Scene_Component* component){}
+
+sf::Drawable* Collision_Area::as_drawable() { return this; }
+
+void Collision_Area::update(Core* the_core) {}
+
+sf::FloatRect Collision_Area::get_entity_global_bounds()
+{
+	return this->getGlobalBounds();
+}
+sf::FloatRect Collision_Area::get_entity_local_bounds()
+{
+	sf::FloatRect b; b.size = this->getSize();
+	b.position = this->getPosition();
+	return b;
+}
+void Collision_Area::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) {}

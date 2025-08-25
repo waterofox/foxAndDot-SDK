@@ -41,6 +41,9 @@
     <ClCompile Include="Collision_Area.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Intersection_Area.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Game\ahIdle.png">

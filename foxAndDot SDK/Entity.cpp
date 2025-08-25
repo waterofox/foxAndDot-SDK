@@ -61,14 +61,13 @@ void Entity::update(Core* the_core)
 	collision_bounds.position += collision_padding;
 }
 
-sf::FloatRect Entity::get_entity_global_bounds()
+sf::FloatRect Entity::get_component_bounds()
+{
+	return collision_bounds;
+}
+sf::FloatRect Entity::get_component_render_bounds()
 {
 	return this->getGlobalBounds();
-}
-
-sf::FloatRect Entity::get_entity_local_bounds()
-{
-	return this->get_collision_bounds();
 }
 
 void Entity::add_property(const std::string& name, const property_type& data)

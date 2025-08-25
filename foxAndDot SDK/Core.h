@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <set>
 #include <vector>
 #include <variant>
 #include <queue>
@@ -204,8 +205,8 @@ protected:
 	virtual void update(Core* the_core) = 0;												//method to update logic
 public:
 	//BOUNDS
-	virtual sf::FloatRect get_entity_global_bounds() = 0;									//return global bounds (scaling)
-	virtual sf::FloatRect get_entity_local_bounds() = 0;									//return local  bounds (no scaling)
+	virtual sf::FloatRect get_component_render_bounds() = 0;
+	virtual sf::FloatRect get_component_bounds() = 0;									
 
 	//COLLISION
 	void set_colliding(const bool& arg) { colliding = arg; }
@@ -260,8 +261,8 @@ protected:
 	void update(Core* the_core) override; 
 	void on_intersection(Core* the_core,Scene_Component* component) override;
 public:
-	sf::FloatRect get_entity_global_bounds() override;
-	sf::FloatRect get_entity_local_bounds() override;
+	sf::FloatRect get_component_bounds() override;
+	virtual sf::FloatRect get_component_render_bounds() override;
 private:
 	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override
 	{
@@ -319,7 +320,40 @@ public:
 	void on_intersection(Core* the_core, Scene_Component* component) override;
 	sf::Drawable* as_drawable() override;
 	void update(Core* the_core) override;
-	sf::FloatRect get_entity_global_bounds() override;
-	sf::FloatRect get_entity_local_bounds() override;
+	
+	sf::FloatRect get_component_bounds() override;
+	virtual sf::FloatRect get_component_render_bounds() override;
+
 	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//INTERSECTION AREA
+
+class Intersection_Area : public Scene_Component, public sf::RectangleShape
+{
+	std::set<Scene_Component*> components_inside_area;
+	std::vector<Scene_Component*> erase_buffer;
+
+	Core::slot_type on_enterence = nullptr;
+	Core::slot_type on_exit = nullptr;
+
+public:
+	void on_intersection(Core* the_core, Scene_Component* component) override;
+	sf::Drawable* as_drawable() override;
+	void update(Core* the_core) override;
+
+	sf::FloatRect get_component_bounds() override;
+	virtual sf::FloatRect get_component_render_bounds() override;
+
+	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
+
+
+	Intersection_Area(const sf::FloatRect& rect);
+	~Intersection_Area();
+
+	void set_slot_on_enterence(Core::slot_type slot);
+	void set_slot_on_exit(Core::slot_type slot);
+
 };

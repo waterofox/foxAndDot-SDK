@@ -21,14 +21,16 @@ sf::Drawable* Collision_Area::as_drawable() { return this; }
 
 void Collision_Area::update(Core* the_core) {}
 
-sf::FloatRect Collision_Area::get_entity_global_bounds()
-{
-	return this->getGlobalBounds();
-}
-sf::FloatRect Collision_Area::get_entity_local_bounds()
+sf::FloatRect Collision_Area::get_component_bounds()
 {
 	sf::FloatRect b; b.size = this->getSize();
 	b.position = this->getPosition();
 	return b;
 }
+
+sf::FloatRect Collision_Area::get_component_render_bounds()
+{
+	return get_component_bounds();
+}
+
 void Collision_Area::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) {}

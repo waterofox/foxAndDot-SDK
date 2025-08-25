@@ -138,6 +138,7 @@
     <ClCompile Include="Collision_Area.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Intersection_Area.cpp" />
     <ClCompile Include="Resource_Manager.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>

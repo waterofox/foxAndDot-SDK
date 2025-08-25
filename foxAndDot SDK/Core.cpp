@@ -138,7 +138,7 @@ void Core::process_intersections_and_collisions()
 			for (auto& elementB : actual_lay)
 			{
 				if (&elementA == &elementB) { continue; }
-				if (elementA.second->get_entity_local_bounds().findIntersection(elementB.second->get_entity_local_bounds()))
+				if (elementA.second->get_component_bounds().findIntersection(elementB.second->get_component_bounds()))
 				{
 					elementA.second->on_intersection(this, elementB.second);
 				}
@@ -222,7 +222,7 @@ void Core::render()
 
 					sf::FloatRect camera_bounds(camera_position, camera_size);
 
-					if (camera_bounds.findIntersection(entity->get_entity_global_bounds()))
+					if (camera_bounds.findIntersection(entity->get_component_render_bounds()))
 					{
 						sf::Drawable* drawable_component = entity->as_drawable();
 						this->draw(*drawable_component);

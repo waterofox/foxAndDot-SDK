@@ -94,6 +94,15 @@ void controller_script(Core* the_core,Entity* ent)
 	player.move(movement);
 }
 
+void enter_slot(Core* the_core, Scene_Component* component)
+{
+	std::cout << component->name() << " in Intersection_Area component\n";
+}
+void exit_slot(Core* the_core, Scene_Component* component)
+{
+	std::cout << component->name() << " out of Intersection_Area component\n";
+}
+
 int main()
 {
 	Core the_core;
@@ -102,6 +111,8 @@ int main()
 	//PLAYER
 	//init player
 	Animated_Entity player_entity(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(64, 64)));
+	player_entity.name() = "player";
+
 	player_entity.setPosition(sf::Vector2f(256, 256));
 	player_entity.setScale(sf::Vector2f(4, 4));
 
@@ -170,15 +181,21 @@ int main()
 	Ash.frame_per_seconds = 12;
 	Ash.frame_count = 10;
 	Ash.play_animation();
+
 	//----------------------------------------------------------------------------------------
 	Collision_Area col(sf::FloatRect(sf::Vector2f(576, 412), sf::Vector2f(128, 200)));
 	col.set_visble(true);
+
+	//----------------------------------------------------------------------------------------
+	Intersection_Area intr(sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(128, 200)));
+	intr.set_slot_on_enterence(enter_slot);
+	intr.set_slot_on_exit(exit_slot);
 
 	//init scene
 	Core::lay_type lay0; lay0["field"] = &field;
 	Core::lay_type lay1; lay1["Ash"] = &Ash;
 	Core::lay_type lay2; lay2["fire"] = &fire;
-	Core::lay_type lay3; lay3["player"] = &player_entity; lay3["col1"] = &col;
+	Core::lay_type lay3; lay3["player"] = &player_entity; lay3["col1"] = &col; lay3["intr1"] = &intr;
 
 	the_core.scene_name = "demo";
 

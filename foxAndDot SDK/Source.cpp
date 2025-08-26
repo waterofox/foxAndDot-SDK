@@ -197,7 +197,6 @@ int main()
 	Core::lay_type lay2; lay2["fire"] = &fire;
 	Core::lay_type lay3; lay3["player"] = &player_entity; lay3["col1"] = &col; lay3["intr1"] = &intr;
 
-	the_core.scene_name = "demo";
 
 	the_core.scene.push_back(lay0);
 	the_core.scene.push_back(lay1);

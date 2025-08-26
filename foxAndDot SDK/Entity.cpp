@@ -80,3 +80,8 @@ void Entity::set_script(script ent_script)
 {
 	entity_script = ent_script;
 }
+
+void Entity::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource)
+{
+	this->setTexture(*std::get<sf::Texture*>(resource));
+}

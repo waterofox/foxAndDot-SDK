@@ -49,6 +49,8 @@ enum textures
 	terrain_texture = 4,
 	fire_texture = 5,
 	ash_texture = 6,
+
+	gaster_texture = 7,
 };
 
 
@@ -93,19 +95,55 @@ void controller_script(Core* the_core,Entity* ent)
 
 	player.move(movement);
 }
+enum music
+{
+	hall_ost = 0,
+	gaster_theme = 1,
+};
+
+enum sound
+{
+	gaster_vanish = 0,
+};
 
 void enter_slot(Core* the_core, Scene_Component* component)
 {
-	std::cout << component->name() << " in Intersection_Area component\n";
+	Core::media_manager.get_music_player().stop();
+	Core::media_manager.play_music(gaster_theme);
+
+	Entity* casted_gaster = static_cast<Entity*>(the_core->get_component("gaster"));
+	Entity& gaster = *casted_gaster;
+
+	gaster.set_visble(true);
 }
 void exit_slot(Core* the_core, Scene_Component* component)
 {
-	std::cout << component->name() << " out of Intersection_Area component\n";
+	Core::media_manager.get_music_player().stop();
+
+	Core::media_manager.play_sound(gaster_vanish);
+
+	Core::media_manager.play_music(hall_ost);
+	
+
+	Entity* casted_gaster = static_cast<Entity*>(the_core->get_component("gaster"));
+	Entity& gaster = *casted_gaster;
+
+	gaster.set_visble(false);
 }
 
 int main()
 {
 	Core the_core;
+	//test music
+
+	Core::media_manager.add_music(hall_ost, "Game\\Untitled.wav");
+	Core::media_manager.add_music(gaster_theme, "gasters-theme_PgFVfMX.mp3");
+	Core::media_manager.add_sound(gaster_vanish, "gaster-vanish-noise.wav");
+
+	Core::media_manager.get_music_player().setLooping(true);
+	Core::media_manager.get_music_player().setVolume(25);
+	
+	Core::media_manager.play_music(hall_ost);
 
 
 	//PLAYER
@@ -181,6 +219,20 @@ int main()
 	Ash.frame_per_seconds = 12;
 	Ash.frame_count = 10;
 	Ash.play_animation();
+	//----------------------------------------------------------------------------------------
+	
+	Core::resource_manager.add_texture("gaster.png",gaster_texture);
+	Entity gaster(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(21, 48)));
+	gaster.setScale(sf::Vector2f(3,3));
+	gaster.setPosition(sf::Vector2f(180, 0));
+
+	gaster.set_visble(false);
+
+	gaster.get_resource() = gaster_texture;
+	gaster.get_type_of_resource() = Resource_Manager::resource_type::texture;
+
+	gaster.set_collision_padding(sf::Vector2f(0,0));
+	gaster.get_collision_bounds() = sf::FloatRect(sf::Vector2f(0, 0), sf::Vector2f(0, 0));
 
 	//----------------------------------------------------------------------------------------
 	Collision_Area col(sf::FloatRect(sf::Vector2f(576, 412), sf::Vector2f(128, 200)));
@@ -195,7 +247,7 @@ int main()
 	Core::lay_type lay0; lay0["field"] = &field;
 	Core::lay_type lay1; lay1["Ash"] = &Ash;
 	Core::lay_type lay2; lay2["fire"] = &fire;
-	Core::lay_type lay3; lay3["player"] = &player_entity; lay3["col1"] = &col; lay3["intr1"] = &intr;
+	Core::lay_type lay3; lay3["player"] = &player_entity; lay3["col1"] = &col; lay3["intr1"] = &intr; lay3["gaster"] = &gaster;
 
 
 	the_core.scene.push_back(lay0);

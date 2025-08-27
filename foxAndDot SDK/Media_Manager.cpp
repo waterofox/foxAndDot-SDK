@@ -1,0 +1,130 @@
+#include "Media_Manager.h"
+
+Media_Manager::Media_Manager()
+{
+}
+
+Media_Manager::~Media_Manager()
+{
+}
+
+void Media_Manager::add_music(const int index, const std::string& path)
+{
+
+	if (!std::filesystem::exists(path))
+	{
+		std::cerr << "ÔÀÉË ÍÅ ÑÓÙÅÑÒÂÓÅÒ";
+		return;
+	}
+
+	music_lib[index] = path;
+
+}
+
+void Media_Manager::add_sound(const int index, const std::string& path)
+{
+
+	if (!std::filesystem::exists(path))
+	{
+		std::cerr << "ÔÀÉË ÍÅ ÑÓÙÅÑÒÂÓÅÒ";
+		return;
+	}
+	sound_container cont;
+	sound_lib[index] = cont;
+
+	sound_container& cont_in_memory = sound_lib[index];
+	
+	if (cont_in_memory.buffer.loadFromFile(path))
+	{
+		cont_in_memory.sound.setBuffer(cont_in_memory.buffer);
+	}
+	else
+	{
+		std::cerr << "ÎØÈÁÊÀ ×ÒÅÍÈß";
+		return;
+	}
+}
+
+void Media_Manager::play_music(const int index)
+{
+	if (!music_player.openFromFile(music_lib[index]))
+	{
+		std::cerr << "ÎØÈÁÊÀ ×ÒÅÍÈß";
+		return;
+	}
+
+	music_player.play();
+	last_music_path = music_lib[index];
+
+}
+
+void Media_Manager::play_sound(const int index)
+{
+	auto iter_sound = sound_lib.find(index);
+	if (iter_sound != sound_lib.end())
+	{
+		(*iter_sound).second.sound.play();
+	}
+}
+
+void Media_Manager::delete_music(const int index)
+{
+	if (last_music_path == music_lib[index] and
+		music_player.getStatus() == sf::SoundSource::Status::Playing)
+	{
+		std::cerr << "ÍÅËÜÇß ÓÄÀËßÒÜ ÌÅËÎÄÈŞ ÏÎÊÀ ÎÍÀ ÈÃĞÀÅÒ";
+		return;
+	}
+
+	music_lib.erase(index);
+}
+
+void Media_Manager::delete_sound(const int index)
+{
+	auto iter_sound = sound_lib.find(index);
+	if (iter_sound != sound_lib.end())
+	{
+		if ((*iter_sound).second.sound.getStatus() == sf::SoundSource::Status::Playing)
+		{
+			std::cerr << "ÍÅËÜÇß ÓÄÀËßÒÜ ÇÂÓÊ ÏÎÊÀ ÎÍÀ ÈÃĞÀÅÒ";
+			return;
+		}
+		sound_lib.erase(index);
+	}
+}
+
+
+
+void Media_Manager::delete_all_music()
+{
+	music_player.stop();
+	music_lib.clear();
+}
+
+void Media_Manager::delete_all_sound()
+{
+	for (auto& elem : sound_lib)
+		elem.second.sound.stop();
+
+	sound_lib.clear();
+
+}
+
+sf::Music& Media_Manager::get_music_player()
+{
+	return music_player;
+}
+
+sf::Sound& Media_Manager::get_sound(const int& index)
+{
+	auto iter_sound = sound_lib.find(index);
+	if (iter_sound != sound_lib.end())
+	{
+		return (*iter_sound).second.sound;
+	}
+	else
+	{
+		std::cerr << "ÍÅÒÓ";
+	}
+}
+

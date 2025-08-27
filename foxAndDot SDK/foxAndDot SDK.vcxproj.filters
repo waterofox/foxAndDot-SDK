@@ -21,6 +21,9 @@
     <ClInclude Include="Core.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Media_Manager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp">
@@ -42,6 +45,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Intersection_Area.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Media_Manager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -76,5 +82,31 @@
     <Image Include="Game\roadV.png">
       <Filter>resources</Filter>
     </Image>
+    <Image Include="gaster.png">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Game\Untitled.wav">
+      <Filter>resources</Filter>
+    </Media>
+    <Media Include="enemy-encounter-undertale.mp3">
+      <Filter>resources</Filter>
+    </Media>
+    <Media Include="gasters-theme_PgFVfMX.mp3">
+      <Filter>resources</Filter>
+    </Media>
+    <Media Include="gaster-vanish-noise.mp3">
+      <Filter>resources</Filter>
+    </Media>
+    <Media Include="glitch_dtZTA0C.mp3">
+      <Filter>resources</Filter>
+    </Media>
+    <Media Include="undertale-save.mp3">
+      <Filter>resources</Filter>
+    </Media>
+    <Media Include="gaster-vanish-noise.wav">
+      <Filter>resources</Filter>
+    </Media>
   </ItemGroup>
 </Project>

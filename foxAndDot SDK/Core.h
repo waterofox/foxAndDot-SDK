@@ -14,6 +14,9 @@
 #include <variant>
 #include <queue>
 
+//sdk includes
+#include "Media_Manager.h"
+
 //ERRORS
 #define ECORE std::string("CORE ERROR: ")
 #define EENTITY std::string("ENTITY ERROR: ")
@@ -132,6 +135,7 @@ public:
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	static inline Resource_Manager resource_manager{}; //A single-instance resource manager. Required for managing fonts and textures
+	static inline Media_Manager media_manager{};	   //A single-instance media manager. Required for managing sounds and music
 
 	scene_type scene; //actual scene
 

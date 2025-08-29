@@ -1,6 +1,8 @@
-#include "Core.h"
+#include "../include/Core.h"
 
-
+//ERRORS
+#define ECORE std::string("CORE ERROR: ")
+#define ERROR(error_location,error_message) error_location + error_message
 
 Core::Core() 
 {}

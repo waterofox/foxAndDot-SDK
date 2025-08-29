@@ -1,4 +1,4 @@
-#include "Core.h"
+#include "../include/Core.h"
 
 Intersection_Area::Intersection_Area(const sf::FloatRect& rect)
 {

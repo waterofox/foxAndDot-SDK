@@ -1,4 +1,4 @@
-#include "Core.h"
+#include "../include/Core.h"
 
 Animated_Entity::Animated_Entity(const sf::IntRect& sprite_rectangle) : Entity(sprite_rectangle){}
 

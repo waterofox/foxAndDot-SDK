@@ -18,95 +18,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core.h">
+    <ClInclude Include="include\Core.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Media_Manager.h">
+    <ClInclude Include="include\Media_Manager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core.cpp">
+    <ClCompile Include="src\Animated_Entity.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="src\Collision_Area.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
+    <ClCompile Include="src\Core.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Resource_Manager.cpp">
+    <ClCompile Include="src\Entity.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Animated_Entity.cpp">
+    <ClCompile Include="src\Intersection_Area.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Collision_Area.cpp">
+    <ClCompile Include="src\Media_Manager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Intersection_Area.cpp">
+    <ClCompile Include="src\Resource_Manager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Media_Manager.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Game\ahIdle.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\field.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\fire.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\playerBackWalk.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\playerFrontWalk.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\playerSideLeftWalk.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\playerSideRightWalk.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\roadH.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\roadHV.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="Game\roadV.png">
-      <Filter>resources</Filter>
-    </Image>
-    <Image Include="gaster.png">
-      <Filter>resources</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="Game\Untitled.wav">
-      <Filter>resources</Filter>
-    </Media>
-    <Media Include="enemy-encounter-undertale.mp3">
-      <Filter>resources</Filter>
-    </Media>
-    <Media Include="gasters-theme_PgFVfMX.mp3">
-      <Filter>resources</Filter>
-    </Media>
-    <Media Include="gaster-vanish-noise.mp3">
-      <Filter>resources</Filter>
-    </Media>
-    <Media Include="glitch_dtZTA0C.mp3">
-      <Filter>resources</Filter>
-    </Media>
-    <Media Include="undertale-save.mp3">
-      <Filter>resources</Filter>
-    </Media>
-    <Media Include="gaster-vanish-noise.wav">
-      <Filter>resources</Filter>
-    </Media>
   </ItemGroup>
 </Project>

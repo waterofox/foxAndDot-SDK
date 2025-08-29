@@ -1,4 +1,4 @@
-#include "Core.h"
+#include "../include/Core.h"
 
 Collision_Area::Collision_Area(const sf::FloatRect& rect)
 {

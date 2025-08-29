@@ -18,16 +18,30 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Animated_Entity.cpp" />
+    <ClCompile Include="src\Collision_Area.cpp" />
+    <ClCompile Include="src\Core.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\Intersection_Area.cpp" />
+    <ClCompile Include="src\Media_Manager.cpp" />
+    <ClCompile Include="src\Resource_Manager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Core.h" />
+    <ClInclude Include="include\Media_Manager.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{4a93c420-16cc-42fe-ab8c-cc9ddf333806}</ProjectGuid>
     <RootNamespace>foxAndDotSDK</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>foxAndDot-SDK</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -40,7 +54,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -74,8 +88,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,10 +118,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>SFML-3.0.0\include;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,42 +148,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Core.h" />
-    <ClInclude Include="Media_Manager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Animated_Entity.cpp" />
-    <ClCompile Include="Collision_Area.cpp" />
-    <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Intersection_Area.cpp" />
-    <ClCompile Include="Media_Manager.cpp" />
-    <ClCompile Include="Resource_Manager.cpp" />
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Game\ahIdle.png" />
-    <Image Include="Game\field.png" />
-    <Image Include="Game\fire.png" />
-    <Image Include="Game\playerBackWalk.png" />
-    <Image Include="Game\playerFrontWalk.png" />
-    <Image Include="Game\playerSideLeftWalk.png" />
-    <Image Include="Game\playerSideRightWalk.png" />
-    <Image Include="Game\roadH.png" />
-    <Image Include="Game\roadHV.png" />
-    <Image Include="Game\roadV.png" />
-    <Image Include="gaster.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="enemy-encounter-undertale.mp3" />
-    <Media Include="Game\Untitled.wav" />
-    <Media Include="gaster-vanish-noise.mp3" />
-    <Media Include="gaster-vanish-noise.wav" />
-    <Media Include="gasters-theme_PgFVfMX.mp3" />
-    <Media Include="glitch_dtZTA0C.mp3" />
-    <Media Include="undertale-save.mp3" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

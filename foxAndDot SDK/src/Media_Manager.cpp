@@ -1,4 +1,7 @@
-#include "Media_Manager.h"
+#include "../include/Core.h"
+
+#define EMEDMAN std::string("MEDIA MANAGER ERROR: ")
+#define ERROR(error_location,error_message) error_location + error_message
 
 Media_Manager::Media_Manager()
 {
@@ -13,7 +16,7 @@ void Media_Manager::add_music(const int index, const std::string& path)
 
 	if (!std::filesystem::exists(path))
 	{
-		std::cerr << "ÔÀÉË ÍÅ ÑÓÙÅÑÒÂÓÅÒ";
+		std::cerr << ERROR(EMEDMAN,"media file: " + path + " does not exist");
 		return;
 	}
 
@@ -26,7 +29,7 @@ void Media_Manager::add_sound(const int index, const std::string& path)
 
 	if (!std::filesystem::exists(path))
 	{
-		std::cerr << "ÔÀÉË ÍÅ ÑÓÙÅÑÒÂÓÅÒ";
+		std::cerr << ERROR(EMEDMAN, "media file: " + path + " does not exist");
 		return;
 	}
 	sound_container cont;
@@ -40,7 +43,8 @@ void Media_Manager::add_sound(const int index, const std::string& path)
 	}
 	else
 	{
-		std::cerr << "ÎØÈÁÊÀ ×ÒÅÍÈß";
+		std::cerr << ERROR(EMEDMAN, "media file: " + path + " reading error");
+		sound_lib.erase(index);
 		return;
 	}
 }
@@ -49,7 +53,7 @@ void Media_Manager::play_music(const int index)
 {
 	if (!music_player.openFromFile(music_lib[index]))
 	{
-		std::cerr << "ÎØÈÁÊÀ ×ÒÅÍÈß";
+		std::cerr << ERROR(EMEDMAN, "media file: " + music_lib[index] + " reading error");
 		return;
 	}
 
@@ -65,6 +69,11 @@ void Media_Manager::play_sound(const int index)
 	{
 		(*iter_sound).second.sound.play();
 	}
+	else
+	{
+		std::cerr << ERROR(EMEDMAN, "sound does not exist");
+		return;
+	}
 }
 
 void Media_Manager::delete_music(const int index)
@@ -72,7 +81,7 @@ void Media_Manager::delete_music(const int index)
 	if (last_music_path == music_lib[index] and
 		music_player.getStatus() == sf::SoundSource::Status::Playing)
 	{
-		std::cerr << "ÍÅËÜÇß ÓÄÀËßÒÜ ÌÅËÎÄÈÞ ÏÎÊÀ ÎÍÀ ÈÃÐÀÅÒ";
+		std::cerr << ERROR(EMEDMAN, "You can't delete media whet it's playing");
 		return;
 	}
 
@@ -86,7 +95,7 @@ void Media_Manager::delete_sound(const int index)
 	{
 		if ((*iter_sound).second.sound.getStatus() == sf::SoundSource::Status::Playing)
 		{
-			std::cerr << "ÍÅËÜÇß ÓÄÀËßÒÜ ÇÂÓÊ ÏÎÊÀ ÎÍÀ ÈÃÐÀÅÒ";
+			std::cerr << ERROR(EMEDMAN, "You can't delete media whet it's playing");
 			return;
 		}
 		sound_lib.erase(index);
@@ -115,6 +124,20 @@ sf::Music& Media_Manager::get_music_player()
 	return music_player;
 }
 
+sf::SoundBuffer& Media_Manager::get_sound_buffer(const int& index)
+{
+	auto iter_sound = sound_lib.find(index);
+	if (iter_sound != sound_lib.end())
+	{
+		return (*iter_sound).second.buffer;
+	}
+	else
+	{
+		std::cerr << ERROR(EMEDMAN, "sound does not exist");
+		assert(false);
+	}
+}
+
 sf::Sound& Media_Manager::get_sound(const int& index)
 {
 	auto iter_sound = sound_lib.find(index);
@@ -124,7 +147,8 @@ sf::Sound& Media_Manager::get_sound(const int& index)
 	}
 	else
 	{
-		std::cerr << "ÍÅÒÓ";
+		std::cerr << ERROR(EMEDMAN, "sound does not exist");
+		assert(false);
 	}
 }
 

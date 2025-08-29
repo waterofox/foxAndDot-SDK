@@ -1,13 +1,16 @@
 #pragma once
 
-#include <SFML/Audio.hpp>
+#include "SFML/Config.hpp"
+#include "SFML/Audio.hpp"
+
 #include <string>
 #include <map>
 #include <fstream>
 #include <iostream>
 #include <filesystem>
 
-class Media_Manager 
+
+class  Media_Manager 
 {
 	struct sound_container
 	{
@@ -34,7 +37,9 @@ public:
 	void delete_all_sound(); //clear sound library
 
 	sf::Music& get_music_player();			//get music player (You can control it)
-	sf::Sound& get_sound(const int& index); //get sound from library (You can control it)
+
+	sf::SoundBuffer& get_sound_buffer(const int& index); //get buffer of sound from library (You can control it)
+	sf::Sound& get_sound(const int& index);              //get sound from library (You can control it)
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

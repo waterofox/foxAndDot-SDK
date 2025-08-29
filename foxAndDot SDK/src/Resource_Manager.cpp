@@ -1,4 +1,8 @@
-#include "Core.h"
+#include "../include/Core.h"
+
+#define ERESMAN std::string("RESOURCE MANAGER ERROR: ")
+#define ERROR(error_location,error_message) error_location + error_message
+
 Resource_Manager::Resource_Manager() {}
 Resource_Manager::~Resource_Manager() {}
 void Resource_Manager::update_resource(Scene_Component* component)

@@ -1,9 +1,12 @@
 #pragma once
 
-//sfml includes
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+//sfml 3.0.0 includes 
+#include "SFML/Config.hpp"
+
+#include "SFML/System.hpp"
+#include "SFML/Window.hpp"
+#include "SFML/Graphics.hpp"
+
 
 //std inlcludes
 #include <iostream>
@@ -16,12 +19,6 @@
 
 //sdk includes
 #include "Media_Manager.h"
-
-//ERRORS
-#define ECORE std::string("CORE ERROR: ")
-#define EENTITY std::string("ENTITY ERROR: ")
-#define ERESMAN std::string("RESOURCE MANAGER ERROR: ")
-#define ERROR(error_location,error_message) error_location + error_message
 
 //PROPERTIES
 #define Int(int_property) std::get<int>(int_property)
@@ -38,7 +35,7 @@ class Scene_Component;
 
 
 //RESOURCE MANAGER
-class Resource_Manager
+class  Resource_Manager
 {
 
 	friend class Core;
@@ -86,7 +83,7 @@ private:
 
 
 //CORE
-class Core : public sf::RenderWindow 
+class  Core : public sf::RenderWindow
 {
 //TYPES & ENUMS
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -240,7 +237,7 @@ public:
 
 
 //ENTITY
-class Entity : public Scene_Component, public sf::Sprite
+class  Entity : public Scene_Component, public sf::Sprite
 {
 	static inline sf::Texture empty_entity_s_texture; // I don't like that sf::Sprite needs an sf::Texture. So... this is a field to supply a default constructor argument for sf::Sprite.
 
@@ -292,7 +289,7 @@ public:
 
 
 //ANIMATED ENTITY
-class Animated_Entity : public Entity
+class  Animated_Entity : public Entity
 {
 private:
 	bool animation_enabled = false;
@@ -321,7 +318,7 @@ protected:
 
 //COLLISION AREA
 
-class Collision_Area : public Scene_Component, public sf::RectangleShape
+class  Collision_Area : public Scene_Component, public sf::RectangleShape
 {
 
 //OVERRIDED METHODS & METHODS
@@ -349,7 +346,7 @@ public:
 
 //INTERSECTION AREA
 
-class Intersection_Area : public Scene_Component, public sf::RectangleShape
+class  Intersection_Area : public Scene_Component, public sf::RectangleShape
 {
 	std::set<Scene_Component*> components_inside_area;
 	std::vector<Scene_Component*> erase_buffer;

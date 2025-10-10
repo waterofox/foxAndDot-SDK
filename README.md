@@ -12,7 +12,7 @@
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
- Before you start working with the **Fox&Dot SDK** library, you also need to perform the following actions:
+ Before you start working with the **foxAndDot SDK** library, you also need to perform the following actions:
 
 - Connect **SFML 3.0.0** (Statically or Dynamically)
 - Make sure that the C++ standard is selected in the project configuration: **ISO C++17 Standard (/std:c++17)**

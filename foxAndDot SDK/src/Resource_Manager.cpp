@@ -10,6 +10,7 @@ void Resource_Manager::update_resource(Scene_Component*& component)
 	case resource_type::no_resource: { return; } break;
 	case resource_type::texture: 
 	{
+		
 		try
 		{
 			auto texture = texture_library.find(component->resource);
@@ -47,11 +48,31 @@ void Resource_Manager::update_resource(Scene_Component*& component)
 
 void Resource_Manager::add_texture(const std::string& texture_url, const int& id)
 {
-	assert(texture_library[id].loadFromFile(texture_url));
+	try
+	{
+		if (!texture_library[id].loadFromFile(texture_url))
+		{
+			throw std::runtime_error(ERROR(ERESMAN, "texuture <" + texture_url + "> does not exist"));
+		}
+	}
+	catch (const std::exception& err)
+	{
+		std::cout << err.what() << std::endl; assert(false);
+	}
 }
 void Resource_Manager::add_font(const std::string& font_url, const int& id)
 {
-	assert(font_library[id].openFromFile(font_url));
+	try
+	{
+		if (!texture_library[id].loadFromFile(font_url))
+		{
+			throw std::runtime_error(ERROR(ERESMAN, "font <" + font_url + "> does not exist in library"));
+		}
+	}
+	catch (const std::exception& err)
+	{
+		std::cout << err.what() << std::endl; assert(false);
+	}
 }
 
 sf::Texture& Resource_Manager::texture(const int& id)

@@ -13,8 +13,6 @@ Intersection_Area::Intersection_Area(const sf::FloatRect& rect)
 	this->setOutlineThickness(5);
 }
 
-Intersection_Area::~Intersection_Area() {}
-
 void Intersection_Area::on_intersection(Core* the_core, Scene_Component* component)
 {
 	auto comp = components_inside_area.find(component);
@@ -55,11 +53,11 @@ sf::FloatRect Intersection_Area::get_component_render_bounds()
 
 void Intersection_Area::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) {}
 
-void Intersection_Area::set_slot_on_enterence(Core::slot_type slot)
+void Intersection_Area::set_slot_on_enterence(const Core::slot_type& slot)
 {
 	on_enterence = slot;
 }
-void Intersection_Area::set_slot_on_exit(Core::slot_type slot)
+void Intersection_Area::set_slot_on_exit(const Core::slot_type& slot)
 {
 	on_exit = slot;
 }

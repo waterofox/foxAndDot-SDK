@@ -13,8 +13,6 @@ Entity::Entity(const sf::IntRect& sprite_rectangle) :
 
 }
 
-Entity::~Entity() {}
-
 void Entity::on_intersection(Core* the_core, Scene_Component* component)
 {
 	//collision
@@ -80,7 +78,11 @@ void Entity::add_property(const std::string& name, const property_type& data)
 	this->properties[name] = data;
 
 }
-void Entity::set_script(script ent_script)
+void Entity::set_entity_intersection_slot(const Core::slot_type& slot)
+{
+	intersection_slot = slot;
+}
+void Entity::set_script(const script& ent_script)
 {
 	entity_script = ent_script;
 }

@@ -13,7 +13,6 @@ Collision_Area::Collision_Area(const sf::FloatRect& rect)
 
 	this->setOutlineThickness(5);
 }
-Collision_Area::~Collision_Area() {}
 
 void Collision_Area::on_intersection(Core* the_core, Scene_Component* component){}
 

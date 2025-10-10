@@ -57,8 +57,8 @@ private:
 //METHODS
 public:
 
-	Resource_Manager();
-	~Resource_Manager();
+	Resource_Manager() = default;
+	~Resource_Manager() = default;
 
 	//INTERFACE OF THE CLASS
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ public:
 
 
 private:
-	void update_resource(Scene_Component* component); 
+	void update_resource(Scene_Component*& component); 
 };
 
 
@@ -124,8 +124,8 @@ private:
 
 
 public:
-	Core();
-	~Core();
+	Core() = default;
+	virtual ~Core() = default;
 
 public:
 //INTERFACE OF THE CLASS
@@ -221,13 +221,15 @@ public:
 	const bool& is_colliding() { return colliding; };		 //retunr colliding
 
 	sf::FloatRect& get_collision_bounds() { return collision_bounds; }; //returns the bounds of the component's collision (you can control it)
-	void set_collision_padding(sf::Vector2f padding) { collision_padding = padding; } //the default values are 0 and 0, which means that the coordinates of the collision rectangle match the coordinates of the component
+	void set_collision_padding(const sf::Vector2f& padding) { collision_padding = padding; } //the default values are 0 and 0, which means that the coordinates of the collision rectangle match the coordinates of the component
 
 	const sf::Vector2f& get_last_valid_position() { return last_valid_position; } //will return the last position of the component where it did not collide with another
 
 
 	int& get_resource() { return resource; } //returns the resource ID that is used by the component (You can control it)
 	Resource_Manager::resource_type& get_type_of_resource() { return type_of_resource; } //returns the resource type used by the component (You can control it)
+
+	virtual ~Scene_Component() = default;
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 };
@@ -265,7 +267,7 @@ protected:
 
 public:
 	Entity(const sf::IntRect& sprite_rectangle);
-	~Entity();
+	virtual ~Entity() = default;
 
 //INTERFACE OF THE CLASS
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -273,8 +275,8 @@ public:
 	sf::FloatRect get_component_render_bounds() override;
 	sf::FloatRect get_component_bounds()		override;
 
-	void set_entity_intersection_slot(Core::slot_type slot); //Replacing the function that handles the intersection of an entity with another component
-	void set_script(script ent_script);						 //Replace the script
+	void set_entity_intersection_slot(const Core::slot_type& slot); //Replacing the function that handles the intersection of an entity with another component
+	void set_script(const script& ent_script);						 //Replace the script
 
 	property_type& operator[](const std::string& name);		//get property (You can control it)
 	property_type& operator[](const char*& name);			//get property (You can control it)
@@ -297,6 +299,8 @@ private:
 
 public:
 	Animated_Entity(const sf::IntRect& sprite_rectangle);
+	~Animated_Entity() = default;
+	
 
 //INTERFACE OF THE CLASS
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -330,7 +334,7 @@ protected:
 
 public:
 	Collision_Area(const sf::FloatRect& rect);
-	~Collision_Area();
+	~Collision_Area() = default;
 
 // INTERFACE OF THE CLASS
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -364,7 +368,7 @@ protected:
 
 public:
 	Intersection_Area(const sf::FloatRect& rect);
-	~Intersection_Area();
+	~Intersection_Area() = default;
 
 // INTERFACE OF THE CLASS
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -372,8 +376,8 @@ public:
 	sf::FloatRect get_component_render_bounds() override;
 	sf::FloatRect get_component_bounds()		override;
 
-	void set_slot_on_enterence(Core::slot_type slot); //What happens when a component steps into an area
-	void set_slot_on_exit(Core::slot_type slot);      //What happens when the component leaves the area
+	void set_slot_on_enterence(const Core::slot_type& slot); //What happens when a component steps into an area
+	void set_slot_on_exit(const Core::slot_type& slot);      //What happens when the component leaves the area
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

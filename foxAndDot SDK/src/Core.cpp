@@ -4,10 +4,6 @@
 #define ECORE std::string("CORE ERROR: ")
 #define ERROR(error_location,error_message) error_location + error_message
 
-Core::Core() 
-{}
-Core::~Core(){}
-
 const sf::Time& Core::get_delta_time() { return this->delta_time; }
 
 sf::View& Core::get_camera()

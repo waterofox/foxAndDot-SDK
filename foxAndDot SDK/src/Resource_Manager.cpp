@@ -64,9 +64,9 @@ void Resource_Manager::add_font(const std::string& font_url, const int& id)
 {
 	try
 	{
-		if (!texture_library[id].loadFromFile(font_url))
+		if (!font_library[id].openFromFile(font_url));
 		{
-			throw std::runtime_error(ERROR(ERESMAN, "font <" + font_url + "> does not exist in library"));
+			throw std::runtime_error(ERROR(ERESMAN, "font <" + font_url + "> does not exist"));
 		}
 	}
 	catch (const std::exception& err)

@@ -16,6 +16,7 @@
 #include <vector>
 #include <variant>
 #include <queue>
+#include <functional>
 
 //sdk includes
 #include "Media_Manager.h"
@@ -98,8 +99,8 @@ public:
 	//FUNCTION TYPES
 	using process_events_function = void(*)(Core*); //a type for a function that handles events
 	
-	using slot_type = void(*)(Core*, Scene_Component*);						   //a slot that accepts a pointer to the signal sender as an argument
-	using dual_slot_type = void(*)(Core*, Scene_Component*, Scene_Component*); //a slot that accepts a pointer to the signal sender and another pointer to a component as arguments
+	using slot_type = std::function<void(Core*, Scene_Component*)>;						   //a slot that accepts a pointer to the signal sender as an argument
+	using dual_slot_type = std::function<void(Core*, Scene_Component*, Scene_Component*)>; //a slot that accepts a pointer to the signal sender and another pointer to a component as arguments
 	
 	//CONTAINERS
 private:
@@ -246,7 +247,7 @@ class  Entity : public Scene_Component, public sf::Sprite
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 public:
-	using script = void(*)(Core*,Entity*);
+	using script = std::function<void(Core*, Entity*)>;
 
 	using property_type = std::variant<int, float, bool, std::string, const char*>;
 

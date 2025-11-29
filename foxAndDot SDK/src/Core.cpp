@@ -107,23 +107,23 @@ void Core::process_signals()
 {
 	while (!signals_queue.empty())
 	{
-		signals_container front_container = signals_queue.front();
-		signals_queue.pop();
+		signals_container& front_container = signals_queue.front();
 		switch (front_container.first.index())
 		{
 		case 0: 
 		{
-			slot_type slot = std::get<slot_type>(front_container.first);
+			slot_type& slot = std::get<slot_type>(front_container.first);
 			slot(this,front_container.second.first);
 		}break;
 		case 1:
 		{
-			dual_slot_type slot = std::get<dual_slot_type>(front_container.first);
+			dual_slot_type& slot = std::get<dual_slot_type>(front_container.first);
 			slot(this, front_container.second.first, front_container.second.second);
 		}break;
 		default:
 			break;
 		}
+		signals_queue.pop();
 	}
 }
 void Core::process_intersections_and_collisions()
@@ -157,8 +157,7 @@ void Core::update_camera()
 		try
 		{
 			sf::Sprite* entity = dynamic_cast<sf::Sprite*>(casted_target);
-			sf::Vector2f new_center(entity->getGlobalBounds().getCenter());
-			this->camera.setCenter(new_center);
+			this->camera.setCenter(entity->getGlobalBounds().getCenter());
 			this->setView(camera);
 		}
 		catch (const std::bad_cast& err)
@@ -213,12 +212,9 @@ void Core::render()
 				Scene_Component*& entity = element.second;
 				if (entity->is_visible())
 				{
-					sf::Vector2f camera_position = camera.getCenter();
-					sf::Vector2f camera_size = camera.getSize();
-
-					camera_position -= sf::Vector2f(camera_size.x / 2, camera_size.y / 2);
-
-					sf::FloatRect camera_bounds(camera_position, camera_size);
+					sf::FloatRect camera_bounds(camera.getCenter(), camera.getSize());
+					camera_bounds.position.x -= camera_bounds.size.x / 2;
+					camera_bounds.position.y -= camera_bounds.size.y / 2;
 
 					if (camera_bounds.findIntersection(entity->get_component_render_bounds()))
 					{

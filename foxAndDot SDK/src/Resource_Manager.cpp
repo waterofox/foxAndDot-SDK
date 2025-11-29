@@ -5,6 +5,10 @@
 
 void Resource_Manager::update_resource(Scene_Component*& component)
 {
+	if (!component->ready_to_update_resource) { return; } //now component isnt ready
+
+	component->ready_to_update_resource = false; 
+
 	switch (component->type_of_resource)
 	{
 	case resource_type::no_resource: { return; } break;

@@ -184,6 +184,7 @@ protected:
 	std::string component_name;
 	bool visible = true;
 	bool updateble = true;
+	bool ready_to_update_resource = true; //true when you are changing the resource
 
 	int resource;
 	Resource_Manager::resource_type type_of_resource;
@@ -198,6 +199,9 @@ protected:
 	virtual void on_intersection(Core* the_core, Scene_Component* component) = 0; //How the component reacts to the intersection
 	virtual sf::Drawable* as_drawable() = 0; //What you need to draw
 	virtual void update(Core* the_core) = 0; //How does the component behave during Core operation
+
+private:
+
 	virtual void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) = 0; //How component updates it's resource
 
 //INTERFACE OF THE CLASS
@@ -226,7 +230,10 @@ public:
 
 	const sf::Vector2f& get_last_valid_position() { return last_valid_position; } //will return the last position of the component where it did not collide with another
 
-
+	//todo new methods
+	void set_resource(const int& arg) { this->resource = arg; this->ready_to_update_resource = true; } //set current resource (ATTENTION! NOT SAFE)
+	void set_resource_and_type(const int& arg, const Resource_Manager::resource_type& arg_type) { set_resource(arg); this->type_of_resource = arg_type; } //set current resource
+	//todo урезать get_resource и get_resourceType
 	int& get_resource() { return resource; } //returns the resource ID that is used by the component (You can control it)
 	Resource_Manager::resource_type& get_type_of_resource() { return type_of_resource; } //returns the resource type used by the component (You can control it)
 

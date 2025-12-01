@@ -14,7 +14,8 @@ void Animated_Entity::update(Core* the_core)
 			current_frame = (current_frame + 1) % frame_count;
 		}
 	}
-	this->setTextureRect(sf::IntRect(sf::Vector2i(int(current_frame) * (this->getTexture().getSize().x / frame_count),0),sf::Vector2i(this->getTexture().getSize().y, this->getTexture().getSize().x / frame_count)));
+	this->setTextureRect(sf::IntRect(sf::Vector2i(int(current_frame) * (this->getTexture().getSize().x / frame_count),0),\
+		sf::Vector2i(this->getTexture().getSize().x / frame_count, this->getTexture().getSize().y)));
 }
 
 void Animated_Entity::play_animation()

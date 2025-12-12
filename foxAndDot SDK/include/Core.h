@@ -226,6 +226,7 @@ public:
 	const bool& is_colliding() { return colliding; };		 //retunr colliding
 
 	sf::FloatRect& get_collision_bounds() { return collision_bounds; }; //returns the bounds of the component's collision (you can control it)
+	void set_collision_bounds(const sf::FloatRect& bounds) { collision_bounds = bounds; } //set bounds of collisions
 	void set_collision_padding(const sf::Vector2f& padding) { collision_padding = padding; } //the default values are 0 and 0, which means that the coordinates of the collision rectangle match the coordinates of the component
 
 	const sf::Vector2f& get_last_valid_position() { return last_valid_position; } //will return the last position of the component where it did not collide with another

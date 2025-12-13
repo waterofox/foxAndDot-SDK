@@ -192,6 +192,8 @@ void Core::update()
 			{
 				Scene_Component*& comp = element.second;
 				if (comp->is_updateble()){comp->update(this);}
+				//todo нужно попробовать перенести обновление ресурсов в render (на текущей архитектуре - будет логичнее) мб вернуть там где было
+				resource_manager.update_resource(comp);
 			}
 		}
 	}
@@ -219,8 +221,6 @@ void Core::render()
 
 					if (camera_bounds.findIntersection(entity->get_component_render_bounds()))
 					{
-						//todo нужно попробовать перенести обновление ресурсов в render (на текущей архитектуре - будет логичнее) мб вернуть там где было
-						resource_manager.update_resource(entity);
 						this->draw(*entity->as_drawable());
 					}
 				}

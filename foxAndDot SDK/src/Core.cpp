@@ -151,7 +151,8 @@ void Core::update_camera()
 	{
 	case Core::dynamic_camera: 
 	{ 
-		
+	
+		//todo вот эту херню исправить. КАКОй НАХРЕН ДИНАМИК КАСТ ИЗ КАСТА
 		Scene_Component* target = this->get_component(this->camera_target);
 		sf::Drawable* casted_target = target->as_drawable();
 		try
@@ -191,7 +192,6 @@ void Core::update()
 			{
 				Scene_Component*& comp = element.second;
 				if (comp->is_updateble()){comp->update(this);}
-				resource_manager.update_resource(comp);
 			}
 		}
 	}
@@ -200,7 +200,7 @@ void Core::update()
 
 void Core::render()
 {
-	this->clear();
+	this->clear(sf::Color::Black);
 	
 	for (int i = 0; i < scene.size(); ++i)
 	{
@@ -212,14 +212,16 @@ void Core::render()
 				Scene_Component*& entity = element.second;
 				if (entity->is_visible())
 				{
+					//todo memory leak
 					sf::FloatRect camera_bounds(camera.getCenter(), camera.getSize());
 					camera_bounds.position.x -= camera_bounds.size.x / 2;
 					camera_bounds.position.y -= camera_bounds.size.y / 2;
 
 					if (camera_bounds.findIntersection(entity->get_component_render_bounds()))
 					{
-						sf::Drawable* drawable_component = entity->as_drawable();
-						this->draw(*drawable_component);
+						//todo нужно попробовать перенести обновление ресурсов в render (на текущей архитектуре - будет логичнее) мб вернуть там где было
+						resource_manager.update_resource(entity);
+						this->draw(*entity->as_drawable());
 					}
 				}
 			}

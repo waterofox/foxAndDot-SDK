@@ -45,7 +45,7 @@ Entity::property_type& Entity::operator[](const std::string& name)
 }
 sf::Drawable* Entity::as_drawable()
 {
-	return this;
+	return static_cast<sf::Sprite*>(this);
 }
 Entity::property_type& Entity::operator[](const char*& name)
 {

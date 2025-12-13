@@ -49,11 +49,13 @@ Scene_Component* Core::get_component(const std::string& name, const int& lay)
 	catch (const std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
 }
 
-void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,const sf::State& state)
+void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
+	const unsigned long& framerate_limit, const sf::State& state)
 {
 	sf::Clock clock;
 	clock.start();
 	this->create(sf::VideoMode({ window_width,window_height }), window_title,state);
+	this->setFramerateLimit(framerate_limit);
 	while (this->isOpen())
 	{
 		this->delta_time = clock.restart();

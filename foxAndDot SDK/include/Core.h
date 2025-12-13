@@ -145,7 +145,8 @@ public:
 	void set_camera_mod(const camera_settings& mod);		   //Make the camera static or dynamic
 	void set_camera_target(const std::string& name_of_target); //Specify the target for the dynamic camera
 
-	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title, const sf::State& state); //start your game
+	void run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
+		const unsigned long& framerate_limit,const sf::State& state); //start your game
 
 	Scene_Component* get_component(const std::string& name);			     //return pointer on component
 	Scene_Component* get_component(const std::string& name, const int& lay); //return pointer on component

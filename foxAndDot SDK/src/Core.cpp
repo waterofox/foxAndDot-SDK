@@ -1,4 +1,5 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Core.h"
+#include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 
 //ERRORS
 #define ECORE std::string("CORE ERROR: ")
@@ -153,22 +154,10 @@ void Core::update_camera()
 	{
 	case Core::dynamic_camera: 
 	{ 
-	
-		//todo вот эту херню исправить. КАКОй НАХРЕН ДИНАМИК КАСТ ИЗ КАСТА
+
 		Scene_Component* target = this->get_component(this->camera_target);
-		sf::Drawable* casted_target = target->as_drawable();
-		try
-		{
-			sf::Sprite* entity = dynamic_cast<sf::Sprite*>(casted_target);
-			this->camera.setCenter(entity->getGlobalBounds().getCenter());
-			this->setView(camera);
-		}
-		catch (const std::bad_cast& err)
-		{
-			std::cout << err.what() << std::endl; 
-			std::cout << ERROR(ECORE, "failed cast from your custom object");
-			this->close();
-		}
+		this->camera.setCenter(target->get_component_render_bounds().getCenter());
+		this->setView(camera);
 
 	}break;
 	case Core::static_camera: 
@@ -194,7 +183,6 @@ void Core::update()
 			{
 				Scene_Component*& comp = element.second;
 				if (comp->is_updateble()){comp->update(this);}
-				//todo нужно попробовать перенести обновление ресурсов в render (на текущей архитектуре - будет логичнее) мб вернуть там где было
 				resource_manager.update_resource(comp);
 			}
 		}
@@ -216,7 +204,6 @@ void Core::render()
 				Scene_Component*& entity = element.second;
 				if (entity->is_visible())
 				{
-					//todo memory leak
 					sf::FloatRect camera_bounds(camera.getCenter(), camera.getSize());
 					camera_bounds.position.x -= camera_bounds.size.x / 2;
 					camera_bounds.position.y -= camera_bounds.size.y / 2;

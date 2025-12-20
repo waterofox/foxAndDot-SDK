@@ -1,4 +1,4 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Components/Collision_Area.h"
 
 Collision_Area::Collision_Area(const sf::FloatRect& rect)
 {
@@ -16,7 +16,7 @@ Collision_Area::Collision_Area(const sf::FloatRect& rect)
 
 void Collision_Area::on_intersection(Core* the_core, Scene_Component* component){}
 
-sf::Drawable* Collision_Area::as_drawable() { return this; }
+sf::Drawable* Collision_Area::as_drawable() { return static_cast<sf::RectangleShape*>(this); }
 
 void Collision_Area::update(Core* the_core) {}
 

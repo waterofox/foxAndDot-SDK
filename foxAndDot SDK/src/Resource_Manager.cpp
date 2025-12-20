@@ -1,4 +1,5 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Core.h"
+#include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 
 #define ERESMAN std::string("RESOURCE MANAGER ERROR: ")
 #define ERROR(error_location,error_message) error_location + error_message
@@ -59,7 +60,7 @@ void Resource_Manager::add_font(const std::string& font_url, const int& id)
 	font_library[id].openFromFile(font_url);
 }
 
-sf::Texture& Resource_Manager::texture(const int& id)
+sf::Texture& Resource_Manager::get_texture(const int& id)
 {
 	try
 	{
@@ -75,7 +76,7 @@ sf::Texture& Resource_Manager::texture(const int& id)
 		std::cout << err.what() << std::endl; assert(false);
 	}
 }
-sf::Font& Resource_Manager::font(const int& id)
+sf::Font& Resource_Manager::get_font(const int& id)
 {
 	try
 	{

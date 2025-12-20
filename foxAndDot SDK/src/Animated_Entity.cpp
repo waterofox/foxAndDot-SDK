@@ -1,4 +1,4 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Components/Animated_Entity.h"
 
 Animated_Entity::Animated_Entity(const sf::IntRect& sprite_rectangle) : Entity(sprite_rectangle){}
 

@@ -1,4 +1,4 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Components/Entity.h"
 
 #define EENTITY std::string("ENTITY ERROR: ")
 #define ERROR(error_location,error_message) error_location + error_message

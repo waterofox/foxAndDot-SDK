@@ -1,4 +1,4 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Media_Manager.h"
 
 #define EMEDMAN std::string("MEDIA MANAGER ERROR: ")
 #define ERROR(error_location,error_message) error_location + error_message

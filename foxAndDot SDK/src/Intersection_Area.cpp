@@ -1,4 +1,4 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Components/Intersection_Area.h"
 
 Intersection_Area::Intersection_Area(const sf::FloatRect& rect)
 {
@@ -22,7 +22,7 @@ void Intersection_Area::on_intersection(Core* the_core, Scene_Component* compone
 		if (on_enterence != nullptr) { on_enterence(the_core, component); }
 	}
 }
-sf::Drawable* Intersection_Area::as_drawable() { return this; }
+sf::Drawable* Intersection_Area::as_drawable() { return static_cast<sf::RectangleShape*>(this); }
 void Intersection_Area::update(Core* the_core)
 {
 	if (!erase_buffer.empty()) { erase_buffer.clear(); }

@@ -1,4 +1,5 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Core.h"
+#include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 
 //ERRORS
 #define ECORE std::string("CORE ERROR: ")
@@ -49,11 +50,13 @@ Scene_Component* Core::get_component(const std::string& name, const int& lay)
 	catch (const std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
 }
 
-void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,const sf::State& state)
+void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
+	const unsigned long& framerate_limit, const sf::State& state)
 {
 	sf::Clock clock;
 	clock.start();
 	this->create(sf::VideoMode({ window_width,window_height }), window_title,state);
+	this->setFramerateLimit(framerate_limit);
 	while (this->isOpen())
 	{
 		this->delta_time = clock.restart();
@@ -107,23 +110,23 @@ void Core::process_signals()
 {
 	while (!signals_queue.empty())
 	{
-		signals_container front_container = signals_queue.front();
-		signals_queue.pop();
+		signals_container& front_container = signals_queue.front();
 		switch (front_container.first.index())
 		{
 		case 0: 
 		{
-			slot_type slot = std::get<slot_type>(front_container.first);
+			slot_type& slot = std::get<slot_type>(front_container.first);
 			slot(this,front_container.second.first);
 		}break;
 		case 1:
 		{
-			dual_slot_type slot = std::get<dual_slot_type>(front_container.first);
+			dual_slot_type& slot = std::get<dual_slot_type>(front_container.first);
 			slot(this, front_container.second.first, front_container.second.second);
 		}break;
 		default:
 			break;
 		}
+		signals_queue.pop();
 	}
 }
 void Core::process_intersections_and_collisions()
@@ -151,22 +154,10 @@ void Core::update_camera()
 	{
 	case Core::dynamic_camera: 
 	{ 
-		
+
 		Scene_Component* target = this->get_component(this->camera_target);
-		sf::Drawable* casted_target = target->as_drawable();
-		try
-		{
-			sf::Sprite* entity = dynamic_cast<sf::Sprite*>(casted_target);
-			sf::Vector2f new_center(entity->getGlobalBounds().getCenter());
-			this->camera.setCenter(new_center);
-			this->setView(camera);
-		}
-		catch (const std::bad_cast& err)
-		{
-			std::cout << err.what() << std::endl; 
-			std::cout << ERROR(ECORE, "failed cast from your custom object");
-			this->close();
-		}
+		this->camera.setCenter(target->get_component_render_bounds().getCenter());
+		this->setView(camera);
 
 	}break;
 	case Core::static_camera: 
@@ -201,7 +192,7 @@ void Core::update()
 
 void Core::render()
 {
-	this->clear();
+	this->clear(sf::Color::Black);
 	
 	for (int i = 0; i < scene.size(); ++i)
 	{
@@ -213,17 +204,13 @@ void Core::render()
 				Scene_Component*& entity = element.second;
 				if (entity->is_visible())
 				{
-					sf::Vector2f camera_position = camera.getCenter();
-					sf::Vector2f camera_size = camera.getSize();
-
-					camera_position -= sf::Vector2f(camera_size.x / 2, camera_size.y / 2);
-
-					sf::FloatRect camera_bounds(camera_position, camera_size);
+					sf::FloatRect camera_bounds(camera.getCenter(), camera.getSize());
+					camera_bounds.position.x -= camera_bounds.size.x / 2;
+					camera_bounds.position.y -= camera_bounds.size.y / 2;
 
 					if (camera_bounds.findIntersection(entity->get_component_render_bounds()))
 					{
-						sf::Drawable* drawable_component = entity->as_drawable();
-						this->draw(*drawable_component);
+						this->draw(*entity->as_drawable());
 					}
 				}
 			}

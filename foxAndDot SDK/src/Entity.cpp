@@ -1,4 +1,4 @@
-#include "../include/Core.h"
+#include "../include/foxAndDot-SDK/Components/Entity.h"
 
 #define EENTITY std::string("ENTITY ERROR: ")
 #define ERROR(error_location,error_message) error_location + error_message
@@ -45,7 +45,7 @@ Entity::property_type& Entity::operator[](const std::string& name)
 }
 sf::Drawable* Entity::as_drawable()
 {
-	return this;
+	return static_cast<sf::Sprite*>(this);
 }
 Entity::property_type& Entity::operator[](const char*& name)
 {

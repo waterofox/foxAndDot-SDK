@@ -16,14 +16,9 @@
     <Filter Include="resources">
       <UniqueIdentifier>{5a893296-4d60-4b02-be98-3426331f13aa}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Core.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Media_Manager.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
+    <Filter Include="Файлы заголовков\COMPS">
+      <UniqueIdentifier>{3bb27d1f-3160-424e-b4f4-de973e5be5d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Animated_Entity.cpp">
@@ -47,5 +42,34 @@
     <ClCompile Include="src\Resource_Manager.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\Scene_Component.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\foxAndDot-SDK\Core.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Media_Manager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Entity.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Collision_Area.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

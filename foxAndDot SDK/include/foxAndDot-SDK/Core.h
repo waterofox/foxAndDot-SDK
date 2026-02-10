@@ -39,7 +39,7 @@ public:
 	};
 	
 	//FUNCTION TYPES
-	using process_events_function = void(*)(Core*); //a type for a function that handles events
+	using process_events_function = std::function< void(Core*) >; //a type for a function that handles events
 	
 	using slot_type = std::function<void(Core*, Scene_Component*)>;						   //a slot that accepts a pointer to the signal sender as an argument
 	using dual_slot_type = std::function<void(Core*, Scene_Component*, Scene_Component*)>; //a slot that accepts a pointer to the signal sender and another pointer to a component as arguments

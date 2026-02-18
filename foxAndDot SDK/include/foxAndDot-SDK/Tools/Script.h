@@ -6,6 +6,7 @@ class Entity;
 
 class Script : public Executable
 {
+protected:
 	Entity* this_entity = nullptr;
 
 public: 

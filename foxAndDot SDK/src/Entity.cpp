@@ -57,6 +57,8 @@ void Entity::update(Core* the_core)
 	last_valid_position = this->getPosition();
 
 	if (entity_script == nullptr) { return; }
+
+	entity_script->set_entity(this);
 	(*entity_script)();
 
 	collision_bounds.position = this->getPosition();

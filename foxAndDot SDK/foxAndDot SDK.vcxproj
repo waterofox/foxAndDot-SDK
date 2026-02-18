@@ -27,6 +27,7 @@
     <ClCompile Include="src\Media_Manager.cpp" />
     <ClCompile Include="src\Resource_Manager.cpp" />
     <ClCompile Include="src\Scene_Component.cpp" />
+    <ClCompile Include="src\Script.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h" />
@@ -37,6 +38,8 @@
     <ClInclude Include="include\foxAndDot-SDK\Core.h" />
     <ClInclude Include="include\foxAndDot-SDK\Media_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

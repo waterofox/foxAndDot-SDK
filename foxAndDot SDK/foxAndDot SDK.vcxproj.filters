@@ -19,6 +19,9 @@
     <Filter Include="Файлы заголовков\COMPS">
       <UniqueIdentifier>{3bb27d1f-3160-424e-b4f4-de973e5be5d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\TOOLS">
+      <UniqueIdentifier>{d9cb48dd-eb1f-4a8e-8c43-b26c641b4f9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Animated_Entity.cpp">
@@ -43,6 +46,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene_Component.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Script.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h">
       <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

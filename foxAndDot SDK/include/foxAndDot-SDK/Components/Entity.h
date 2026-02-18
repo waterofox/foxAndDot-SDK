@@ -3,6 +3,7 @@
 //sdk includes
 #include "../Core.h"
 #include "Scene_Component.h"
+#include "../Tools/Script.h"
 
 //ENTITY
 class  Entity : public Scene_Component, public sf::Sprite
@@ -12,14 +13,13 @@ class  Entity : public Scene_Component, public sf::Sprite
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 public:
-	using script = std::function<void(Core*, Entity*)>;
 
 	using property_type = std::variant<int, float, bool, std::string, const char*>;
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 private:
-	script entity_script = nullptr;
+	Script* entity_script = nullptr;
 	Core::slot_type intersection_slot = nullptr;
 
 	std::map<std::string, property_type> properties;
@@ -42,7 +42,7 @@ public:
 	sf::FloatRect get_component_bounds()		override;
 
 	void set_entity_intersection_slot(const Core::slot_type& slot); //Replacing the function that handles the intersection of an entity with another component
-	void set_script(const script& ent_script);						 //Replace the script
+	void set_script(Script* ent_script);						 //Replace the script
 
 	property_type& operator[](const std::string& name);		//get property (You can control it)
 	property_type& operator[](const char*& name);			//get property (You can control it)

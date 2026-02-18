@@ -57,7 +57,7 @@ void Entity::update(Core* the_core)
 	last_valid_position = this->getPosition();
 
 	if (entity_script == nullptr) { return; }
-	entity_script(the_core,this);
+	(*entity_script)();
 
 	collision_bounds.position = this->getPosition();
 	collision_bounds.position += collision_padding;
@@ -82,7 +82,7 @@ void Entity::set_entity_intersection_slot(const Core::slot_type& slot)
 {
 	intersection_slot = slot;
 }
-void Entity::set_script(const script& ent_script)
+void Entity::set_script(Script* ent_script)
 {
 	entity_script = ent_script;
 }

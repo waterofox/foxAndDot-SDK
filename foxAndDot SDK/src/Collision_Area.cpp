@@ -18,7 +18,7 @@ void Collision_Area::on_intersection(Core* the_core, Scene_Component* component)
 
 sf::Drawable* Collision_Area::as_drawable() { return static_cast<sf::RectangleShape*>(this); }
 
-void Collision_Area::update(Core* the_core) {}
+void Collision_Area::update() {}
 
 sf::FloatRect Collision_Area::get_component_bounds()
 {

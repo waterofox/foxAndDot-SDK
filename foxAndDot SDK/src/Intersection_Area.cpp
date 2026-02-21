@@ -23,14 +23,14 @@ void Intersection_Area::on_intersection(Core* the_core, Scene_Component* compone
 	}
 }
 sf::Drawable* Intersection_Area::as_drawable() { return static_cast<sf::RectangleShape*>(this); }
-void Intersection_Area::update(Core* the_core)
+void Intersection_Area::update()
 {
 	if (!erase_buffer.empty()) { erase_buffer.clear(); }
 	for (auto& element : components_inside_area)
 	{
 		if (!element->get_component_bounds().findIntersection(this->get_component_bounds()))
 		{
-			if (on_exit != nullptr) { on_exit(the_core, element); }
+			if (on_exit != nullptr) { on_exit(Core::the_core, element); }
 			erase_buffer.push_back(element);
 		}
 	}

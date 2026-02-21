@@ -6,7 +6,6 @@
 Entity::Entity(const sf::IntRect& sprite_rectangle) :
 	Sprite(empty_entity_s_texture, sprite_rectangle)
 {
-	//on_intersection = Entity::entity_on_intersection;
 	this->collision_bounds = this->getGlobalBounds();
 	this->colliding = false;
 	last_valid_position = sf::Vector2f(0, 0);
@@ -21,7 +20,7 @@ void Entity::on_intersection(Core* the_core, Scene_Component* component)
 		this->setPosition(last_valid_position);
 
 		this->collision_bounds.position = this->getPosition();
-		this->collision_bounds.position += this->collision_padding;
+		this->collision_bounds.position += this->collision_margin;
 	}
 	//intersection
 	if (this->intersection_slot != nullptr)
@@ -52,7 +51,7 @@ Entity::property_type& Entity::operator[](const char*& name)
 	return (*this)[std::string(name)];
 }
 
-void Entity::update(Core* the_core)
+void Entity::update()
 {
 	last_valid_position = this->getPosition();
 
@@ -62,7 +61,7 @@ void Entity::update(Core* the_core)
 	(*entity_script)();
 
 	collision_bounds.position = this->getPosition();
-	collision_bounds.position += collision_padding;
+	collision_bounds.position += collision_margin;
 }
 
 sf::FloatRect Entity::get_component_bounds()

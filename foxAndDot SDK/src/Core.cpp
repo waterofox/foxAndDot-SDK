@@ -7,6 +7,11 @@
 
 const sf::Time& Core::get_delta_time() { return this->delta_time; }
 
+Core::Core()
+{
+	this->the_core = this;
+}
+
 sf::View& Core::get_camera()
 {
 	return this->camera;
@@ -182,7 +187,7 @@ void Core::update()
 			for (auto& element : lay)
 			{
 				Scene_Component*& comp = element.second;
-				if (comp->is_updateble()){comp->update(this);}
+				if (comp->is_updateble()){comp->update();}
 				resource_manager.update_resource(comp);
 			}
 		}

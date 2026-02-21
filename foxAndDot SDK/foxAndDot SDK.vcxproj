@@ -28,6 +28,8 @@
     <ClCompile Include="src\Resource_Manager.cpp" />
     <ClCompile Include="src\Scene_Component.cpp" />
     <ClCompile Include="src\Script.cpp" />
+    <ClCompile Include="src\Signal.cpp" />
+    <ClCompile Include="src\Slot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h" />
@@ -40,6 +42,8 @@
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Signal.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Slot.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -66,7 +70,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v145</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">

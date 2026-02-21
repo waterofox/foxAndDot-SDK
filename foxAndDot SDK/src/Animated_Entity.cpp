@@ -2,12 +2,12 @@
 
 Animated_Entity::Animated_Entity(const sf::IntRect& sprite_rectangle) : Entity(sprite_rectangle){}
 
-void Animated_Entity::update(Core* the_core)
+void Animated_Entity::update()
 {
-	Entity::update(the_core);
+	Entity::update();
 	if (animation_enabled)
 	{
-		animation_timer += the_core->get_delta_time();
+		animation_timer += Core::the_core->get_delta_time();
 		if (animation_timer.asSeconds() >= 1.0 / frame_per_seconds)
 		{
 			animation_timer = sf::Time::Zero;

@@ -17,18 +17,26 @@ public:
 	using property_type = std::variant<int, float, bool, std::string, const char*>;
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+protected:
 
-private:
+	//EXECUTABLE STAFF
 	Script* entity_script = nullptr;
 	Core::slot_type intersection_slot = nullptr;
 
+	//PROPERTIES
 	std::map<std::string, property_type> properties;
+	
+	//COLLISION
+	//bool colliding = false;
+	sf::Vector2f  last_valid_position;
+	sf::Vector2f  collision_margin;
+	sf::FloatRect collision_bounds;
 
 	//OVERRIDED METHODS & METHODS
-protected:
 	void on_intersection(Core* the_core, Scene_Component* component) override;
 	sf::Drawable* as_drawable() override;
-	void update(Core* the_core) override;
+	void update() override;
 	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
 
 public:
@@ -48,6 +56,9 @@ public:
 	property_type& operator[](const char*& name);			//get property (You can control it)
 	void add_property(const std::string& name, const property_type& data); //add property (int/float/bool/string/const char*)
 
+	//bool  is_colliding();
+	//void set_colliding(const bool& arg);
+	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 };

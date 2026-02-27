@@ -90,16 +90,16 @@ void Core::remove_view(const std::string& view_name)
 	}
 }
 
-sf::View& Core::get_view(const std::string& view_name)
+sf::View* Core::get_view(const std::string& view_name)
 {
 	if (this->views.find(view_name) == this->views.end())
 	{
 		printf("CORE ERROR: Getting a non-existent view\n");
-		return;
+		return nullptr;
 	}
 	else
 	{
-		this->views.erase(view_name);
+		return &this->views[view_name];
 	}
 }
 

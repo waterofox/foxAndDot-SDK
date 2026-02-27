@@ -36,7 +36,6 @@ private:
 	using signals_container = std::pair<std::variant<slot_type, dual_slot_type>, std::pair<Scene_Component*, Scene_Component*>>;
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-private:
 	sf::Time delta_time = sf::Time::Zero;
 	std::unordered_map<std::string,sf::View> views;
 	
@@ -71,7 +70,7 @@ public:
 
 	void      add_view   (const std::string& view_name, const sf::View& view); //Add view.
 	void      remove_view(const std::string& view_name);					   //Remove_view.
-	sf::View& get_view   (const std::string& view_name);					   //Get View.
+	sf::View* get_view   (const std::string& view_name);					   //Get View.
 
 	//GAME SETTINGS
 	void set_event_handler(Executable* handler);       //change the object that handles events
@@ -91,7 +90,5 @@ private:
 	void process_intersections_and_collisions();
 
 	void update();
-	//void update_camera();
-
 	void render();
 };

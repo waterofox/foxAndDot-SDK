@@ -5,6 +5,12 @@
 #include "Scene_Component.h"
 #include "../Tools/Script.h"
 
+//PROPERTIES
+#define Int(int_property) std::get<int>(int_property)
+#define Float(float_property) std::get<float>(float_property)
+#define Bool(bool_property) std::get<bool>(bool_property)
+#define String(string_property) std::get<std::string>(string_property)
+
 //ENTITY
 class  Entity : public Scene_Component, public sf::Sprite
 {

@@ -5,56 +5,31 @@
 #define ECORE std::string("CORE ERROR: ")
 #define ERROR(error_location,error_message) error_location + error_message
 
+void Core::change_scene(Scene* new_Scene)
+{
+	if (changin_scene)
+	{
+		printf("CORE ERROR: More than one scene change per tick\n");
+		return;
+	}
+	else
+	{
+		scene_buffer = new_Scene;
+		changin_scene = true;
+	}
+}
+
 const sf::Time& Core::get_delta_time() { return this->delta_time; }
+
+void Core::set_event_handler(Executable* handler)
+{
+	this->event_handler = handler;
+}
 
 Core::Core()
 {
 	this->the_core = this;
 }
-
-sf::View& Core::get_camera()
-{
-	return this->camera;
-}
-
-void Core::set_camera_mod(const camera_settings& mod)
-{
-	camera_mod = mod;
-}
-
-void Core::set_camera_target(const std::string& name_of_target)
-{
-	camera_target = name_of_target;
-}
-
-void Core::set_process_events_function(const process_events_function& function) { this->process_events = function; }
-
-Scene_Component* Core::get_component(const std::string& name)
-{
-	try
-	{
-		for (int i = 0; i < scene.size(); ++i)
-		{
-			lay_type& lay = scene[i];
-			auto entity = lay.find(name);
-			if (entity != lay.end()) { return (*entity).second; }
-		}
-		throw std::runtime_error (ERROR(ECORE,"component <" + name + "> does not exist"));
-	}
-	catch (const std::exception& err){ std::cout << err.what() << std::endl; this->close();}
-}
-Scene_Component* Core::get_component(const std::string& name, const int& lay)
-{
-	try
-	{
-		lay_type& our_lay = scene[lay];
-		auto entity = our_lay.find(name);
-		if (entity != our_lay.end()) { return (*entity).second; }
-		else { throw std::runtime_error(ERROR(ECORE, "component <" + name + "> does not exist")); }
-	}
-	catch (const std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
-}
-
 void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
 	const unsigned long& framerate_limit, const sf::State& state)
 {
@@ -64,9 +39,18 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 	this->setFramerateLimit(framerate_limit);
 	while (this->isOpen())
 	{
+
+		//scene
+		if(changin_scene)
+		{
+			actual_scene = scene_buffer;
+			scene_buffer = nullptr;
+			changin_scene = false;
+		}
+
 		this->delta_time = clock.restart();
 		try{
-			process_events == nullptr ? throw std::runtime_error(ERROR(ECORE, "process events function does not exist")) : process_events(this);
+			 event_handler == nullptr ? throw std::runtime_error(ERROR(ECORE, "process events function does not exist")) : (*event_handler)();
 		}
 		catch (std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
 
@@ -78,6 +62,45 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 void Core::connect(const int& signal_id, const std::variant<slot_type, dual_slot_type>& slot)
 {
 	connections[signal_id] = slot;
+}
+
+void Core::add_view(const std::string& view_name, const sf::View& view)
+{
+	if (this->views.find(view_name) != this->views.end())
+	{
+		printf("CORE ERROR: Overwriting an existing view\n");
+		return;
+	}
+	else
+	{
+		this->views[view_name] = view;
+	}
+}
+
+void Core::remove_view(const std::string& view_name)
+{
+	if (this->views.find(view_name) == this->views.end())
+	{
+		printf("CORE ERROR: Removing a non-existent view\n");
+		return;
+	}
+	else
+	{
+		this->views.erase(view_name);
+	}
+}
+
+sf::View& Core::get_view(const std::string& view_name)
+{
+	if (this->views.find(view_name) == this->views.end())
+	{
+		printf("CORE ERROR: Getting a non-existent view\n");
+		return;
+	}
+	else
+	{
+		this->views.erase(view_name);
+	}
 }
 
 void Core::emit_signal(const int& signal_id, Scene_Component*& sender)
@@ -136,61 +159,28 @@ void Core::process_signals()
 }
 void Core::process_intersections_and_collisions()
 {
-	for (int i = 0; i <  scene.size(); ++i)
+	for (auto& elementA : actual_scene->scene_data)
 	{
-		Core::lay_type& actual_lay = scene[i];
-		for (auto& elementA : actual_lay)
+		for (auto& elementB : actual_scene->scene_data)
 		{
-			for (auto& elementB : actual_lay)
+			if (&elementA == &elementB) { continue; }
+			if (elementA.second.component->get_component_bounds().findIntersection(elementB.second.component->get_component_bounds()))
 			{
-				if (&elementA == &elementB) { continue; }
-				if (elementA.second->get_component_bounds().findIntersection(elementB.second->get_component_bounds()))
-				{
-					elementA.second->on_intersection(this, elementB.second);
-				}
+				elementA.second.component->on_intersection(this, elementB.second.component);
 			}
 		}
-	}
-}
-
-void Core::update_camera() 
-{
-	switch (camera_mod)
-	{
-	case Core::dynamic_camera: 
-	{ 
-
-		Scene_Component* target = this->get_component(this->camera_target);
-		this->camera.setCenter(target->get_component_render_bounds().getCenter());
-		this->setView(camera);
-
-	}break;
-	case Core::static_camera: 
-	{
-		this->setView(camera);
-	}break;
-	default:
-		break;
 	}
 }
 
 void Core::update()
 {
 	process_signals();
-	update_camera();
 
-	for (int i = 0; i < scene.size(); ++i)
+	for (auto& element : actual_scene->scene_data)
 	{
-		lay_type& lay = scene[i];
-		if (!lay.empty())
-		{
-			for (auto& element : lay)
-			{
-				Scene_Component*& comp = element.second;
-				if (comp->is_updateble()){comp->update();}
-				resource_manager.update_resource(comp);
-			}
-		}
+		Scene_Component*& comp = element.second.component;
+		if (comp->is_updateble()) { comp->update(); }
+		resource_manager.update_resource(comp);
 	}
 	process_intersections_and_collisions();
 }
@@ -198,30 +188,12 @@ void Core::update()
 void Core::render()
 {
 	this->clear(sf::Color::Black);
-	
-	for (int i = 0; i < scene.size(); ++i)
+
+	for (auto& view : views)
 	{
-		lay_type& lay = scene[i];
-		if (!lay.empty())
-		{
-			for (auto& element : lay)
-			{
-				Scene_Component*& entity = element.second;
-				if (entity->is_visible())
-				{
-					sf::FloatRect camera_bounds(camera.getCenter(), camera.getSize());
-					camera_bounds.position.x -= camera_bounds.size.x / 2;
-					camera_bounds.position.y -= camera_bounds.size.y / 2;
-
-					if (camera_bounds.findIntersection(entity->get_component_render_bounds()))
-					{
-						this->draw(*entity->as_drawable());
-					}
-				}
-			}
-		}
+		this->setView(view.second);
+		actual_scene->render(view.second);
 	}
-
 
 	this->display();
 }

@@ -26,6 +26,7 @@
     <ClCompile Include="src\Intersection_Area.cpp" />
     <ClCompile Include="src\Media_Manager.cpp" />
     <ClCompile Include="src\Resource_Manager.cpp" />
+    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Scene_Component.cpp" />
     <ClCompile Include="src\Script.cpp" />
     <ClCompile Include="src\Signal.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="include\foxAndDot-SDK\Media_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Signal.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Slot.h" />
@@ -51,7 +53,7 @@
     <ProjectGuid>{4a93c420-16cc-42fe-ab8c-cc9ddf333806}</ProjectGuid>
     <RootNamespace>foxAndDotSDK</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>foxAndDot-SDK</ProjectName>
+    <ProjectName>s</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -70,7 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">

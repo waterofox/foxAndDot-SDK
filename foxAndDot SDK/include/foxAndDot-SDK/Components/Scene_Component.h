@@ -35,7 +35,6 @@ protected:
 	//VIRTUAL METHODS & METHODS
 protected:
 	virtual void on_intersection(Core* the_core, Scene_Component* component) = 0; //How the component reacts to the intersection
-	virtual sf::Drawable* as_drawable() = 0; //What you need to draw
 	//todo changed
 	virtual void update() = 0; //How does the component behave during Core operation
 	virtual void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) = 0; //How component updates it's resource
@@ -44,6 +43,8 @@ protected:
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 public:
+	virtual sf::Drawable* as_drawable() = 0; //What you need to draw
+
 	virtual sf::FloatRect get_component_render_bounds() = 0; //Returns the bounds that are used to determine whether the component intersects with the camera
 	virtual sf::FloatRect get_component_bounds() = 0; //Returns the bounds that are used to determine whether a component intersects with other components
 

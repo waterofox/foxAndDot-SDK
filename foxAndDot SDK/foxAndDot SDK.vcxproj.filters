@@ -71,9 +71,6 @@
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
-      <Filter>Файлы заголовков\COMPS</Filter>
-    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Entity.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
@@ -92,14 +89,17 @@
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h">
       <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Signal.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Slot.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

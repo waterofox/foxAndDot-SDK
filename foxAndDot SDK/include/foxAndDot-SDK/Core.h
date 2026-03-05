@@ -17,6 +17,8 @@
 
 #include "Tools/Scene.h"
 #include "Tools/Executable.h"
+#include "Tools/Signal.h"
+#include "Tools/Slot.h"
 
 //Any other questions? a3shirnin@gmail.com
 
@@ -43,9 +45,10 @@ private:
 	bool   changin_scene  = false;
 	Scene* scene_buffer   = nullptr;
 
-	std::queue<signals_container> signals_queue;
-	std::map<int, std::variant<slot_type, dual_slot_type>> connections;
+	//std::queue<signals_container> signals_queue;
+	//std::map<int, std::variant<slot_type, dual_slot_type>> connections;
 
+	std::queue<Executable*> emited_queue;
 
 public:
 	Core();
@@ -64,9 +67,28 @@ public:
 	void change_scene(Scene* new_Scene);               //change actual scene by other scene
 	const sf::Time& get_delta_time();                  //get actual delta time (elapsed time since last frame)
 
-	void emit_signal(const int& signal_id, Scene_Component*&);						         //emit signal
-	void emit_signal(const int& signal_id, Scene_Component*&, Scene_Component*&);	         //emit signal (dual slot)
-	void connect(const int& signal_id, const std::variant<slot_type, dual_slot_type>& slot); //create connection between signal and slot
+
+	template<typename args_package>
+	static void connect(Signal<args_package>* signal, Slot<args_package>* slot)
+	{
+		signal->next_connectable = slot;
+		signal->next_connectable_type = 1;
+	}
+	template<typename args_package>
+	static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)
+	{
+		signal->next_connectable = signal_2;
+		signal->next_connectable = 0;
+	}
+	template<typename args_package>
+	void emit(Signal<args_package>* signal)
+	{
+		signal->core_queue = &(this->emited_queue);
+	}
+
+	//void emit_signal(const int& signal_id, Scene_Component*&);						         //emit signal
+	//void emit_signal(const int& signal_id, Scene_Component*&, Scene_Component*&);	         //emit signal (dual slot)
+	//void connect(const int& signal_id, const std::variant<slot_type, dual_slot_type>& slot); //create connection between signal and slot
 
 	void      add_view   (const std::string& view_name, const sf::View& view); //Add view.
 	void      remove_view(const std::string& view_name);					   //Remove_view.
@@ -85,7 +107,7 @@ public:
 
 private:
 	Executable*  event_handler = nullptr;
-	void process_signals();
+	void handle_slots();
 	void process_intersections_and_collisions();
 
 	void update();

@@ -54,6 +54,9 @@
     <ClCompile Include="src\Scene.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\Connectable.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
     <ClCompile Include="src\Signal.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -89,13 +92,16 @@
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h">
       <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Tools\Signal.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Signal.h">
       <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Slot.h">

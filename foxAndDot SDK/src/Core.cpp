@@ -59,11 +59,6 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 	}
 }
 
-void Core::connect(const int& signal_id, const std::variant<slot_type, dual_slot_type>& slot)
-{
-	connections[signal_id] = slot;
-}
-
 void Core::add_view(const std::string& view_name, const sf::View& view)
 {
 	if (this->views.find(view_name) != this->views.end())
@@ -103,58 +98,13 @@ sf::View* Core::get_view(const std::string& view_name)
 	}
 }
 
-void Core::emit_signal(const int& signal_id, Scene_Component*& sender)
-{
-	auto connection = connections.find(signal_id);
-	try {
-		if (connection == connections.end()) { throw std::runtime_error(ERROR(ECORE, "connection does not exist")); }
-		else 
-		{
-			signals_container new_container;
-			new_container.first = (*connection).second;
-			new_container.second = std::pair<Scene_Component*, Scene_Component*>(sender, sender);
-			signals_queue.push(new_container);
-		}
-	}
-	catch (std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
-}
-void Core::emit_signal(const int& signal_id, Scene_Component*& sender_A, Scene_Component*& sender_B) 
-{
-	auto connection = connections.find(signal_id);
-	try {
-		if (connection == connections.end()) { throw std::runtime_error(ERROR(ECORE, "connection does not exist")); }
-		else
-		{
-			signals_container new_container;
-			new_container.first = (*connection).second;
-			new_container.second = std::pair<Scene_Component*, Scene_Component*>(sender_A, sender_B);
-			signals_queue.push(new_container);
-		}
-	}
-	catch (std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
-}
 
-void Core::process_signals() 
+void Core::handle_slots() 
 {
-	while (!signals_queue.empty())
+	while (!this->emited_queue.empty())
 	{
-		signals_container& front_container = signals_queue.front();
-		switch (front_container.first.index())
-		{
-		case 0: 
-		{
-			slot_type& slot = std::get<slot_type>(front_container.first);
-			slot(this,front_container.second.first);
-		}break;
-		case 1:
-		{
-			dual_slot_type& slot = std::get<dual_slot_type>(front_container.first);
-			slot(this, front_container.second.first, front_container.second.second);
-		}break;
-		default:
-			break;
-		}
-		signals_queue.pop();
+		(*emited_queue.front())();
+		emited_queue.pop();
 	}
 }
 void Core::process_intersections_and_collisions()
@@ -174,8 +124,6 @@ void Core::process_intersections_and_collisions()
 
 void Core::update()
 {
-	process_signals();
-
 	for (auto& element : actual_scene->scene_data)
 	{
 		Scene_Component*& comp = element.second.component;
@@ -183,6 +131,8 @@ void Core::update()
 		resource_manager.update_resource(comp);
 	}
 	process_intersections_and_collisions();
+
+	handle_slots();
 }
 
 void Core::render()

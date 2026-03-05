@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\Animated_Entity.cpp" />
     <ClCompile Include="src\Collision_Area.cpp" />
+    <ClCompile Include="src\Connectable.cpp" />
     <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Intersection_Area.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="include\foxAndDot-SDK\Core.h" />
     <ClInclude Include="include\foxAndDot-SDK\Media_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h" />
@@ -72,7 +74,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -153,7 +155,8 @@
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /e /y "$(ProjectDir)include" "$(OutDir)include"</Command>
+      <Command>mkdir ""$(OutDir)include""
+xcopy /e /y "$(ProjectDir)include" "$(OutDir)include"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

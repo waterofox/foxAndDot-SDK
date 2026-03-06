@@ -65,6 +65,7 @@ public:
 
 	//GAME TOOLS
 	void change_scene(Scene* new_Scene);               //change actual scene by other scene
+	Scene* get_actual_scene();						   //get actual scene
 	const sf::Time& get_delta_time();                  //get actual delta time (elapsed time since last frame)
 
 
@@ -78,12 +79,13 @@ public:
 	static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)
 	{
 		signal->next_connectable = signal_2;
-		signal->next_connectable = 0;
+		signal->next_connectable_type = 0;
 	}
 	template<typename args_package>
 	void emit(Signal<args_package>* signal)
 	{
 		signal->core_queue = &(this->emited_queue);
+		(*signal)();
 	}
 
 	//void emit_signal(const int& signal_id, Scene_Component*&);						         //emit signal

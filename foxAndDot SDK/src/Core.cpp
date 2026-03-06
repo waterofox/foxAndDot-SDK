@@ -19,6 +19,16 @@ void Core::change_scene(Scene* new_Scene)
 	}
 }
 
+Scene* Core::get_actual_scene()
+{
+	if (actual_scene == nullptr)
+	{
+		printf("CORE WARNING: No scenes are installed. <nullptr> is passed\n");
+	}
+
+	return actual_scene;
+}
+
 const sf::Time& Core::get_delta_time() { return this->delta_time; }
 
 void Core::set_event_handler(Executable* handler)

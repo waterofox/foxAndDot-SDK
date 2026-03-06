@@ -32,7 +32,7 @@ protected:
 			printf("SIGNAL ERROR: Incorrect signal call. Use <Core::emit>\n");
 			return;
 		}
-		else if (this->next_connectable = nullptr)
+		else if (this->next_connectable == nullptr)
 		{
 			printf("SIGNAL WARNING: No Signal/Slot is connected\n");
 			return;

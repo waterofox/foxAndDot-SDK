@@ -39,12 +39,12 @@ void Core::set_event_handler(Executable* handler)
 Core::Core()
 {
 	this->the_core = this;
+	
 }
 void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
 	const unsigned long& framerate_limit, const sf::State& state)
 {
-	sf::Clock clock;
-	clock.start();
+	this->game_cycle_clock.start();
 	this->create(sf::VideoMode({ window_width,window_height }), window_title,state);
 	this->setFramerateLimit(framerate_limit);
 	while (this->isOpen())
@@ -58,7 +58,7 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 			changin_scene = false;
 		}
 
-		this->delta_time = clock.restart();
+		this->delta_time = this->game_cycle_clock.restart();
 		try{
 			 event_handler == nullptr ? throw std::runtime_error(ERROR(ECORE, "process events function does not exist")) : (*event_handler)();
 		}
@@ -67,6 +67,11 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 		update();
 		render();
 	}
+}
+
+void Core::set_slot_handler_timelimit(const int& new_timelimit)
+{
+	this->slot_handler_timelimit = new_timelimit;
 }
 
 void Core::add_view(const std::string& view_name, const sf::View& view)
@@ -113,7 +118,17 @@ void Core::handle_slots()
 {
 	while (!this->emited_queue.empty())
 	{
-		(*emited_queue.front())();
+		this->emited_timer += this->game_cycle_clock.getElapsedTime();
+
+		if (this->emited_timer.asMilliseconds() >= slot_handler_timelimit)
+		{
+			printf("CORE WARNING: Too many triggered slots for the current time limit <%d milly seconds>\n",slot_handler_timelimit);
+			emited_timer = sf::Time::Zero;
+			break;
+		}
+
+
+		(*(this->emited_queue).front())();
 		emited_queue.pop();
 	}
 }

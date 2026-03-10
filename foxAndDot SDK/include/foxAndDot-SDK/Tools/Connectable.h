@@ -6,7 +6,7 @@ class Connectable : public Executable
 {
 protected:
 	args_package args;
-	
+
 public:
 	void push_args(const args_package& package)
 	{

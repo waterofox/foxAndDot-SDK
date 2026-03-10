@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Animated_Entity.cpp" />
-    <ClCompile Include="src\Collision_Area.cpp" />
+    <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\Connectable.cpp" />
     <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\Handle_Collider_Slot.cpp" />
+    <ClCompile Include="src\Handle_Collision_Slot.cpp" />
     <ClCompile Include="src\Intersection_Area.cpp" />
     <ClCompile Include="src\Media_Manager.cpp" />
     <ClCompile Include="src\Resource_Manager.cpp" />
@@ -35,7 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h" />
-    <ClInclude Include="include\foxAndDot-SDK\Components\Collision_Area.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Components\Collider.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h" />
@@ -44,6 +46,8 @@
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collider_Slot.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collision_Slot.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Signal.h" />

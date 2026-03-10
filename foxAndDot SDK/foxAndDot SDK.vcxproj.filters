@@ -22,12 +22,12 @@
     <Filter Include="Файлы заголовков\TOOLS">
       <UniqueIdentifier>{d9cb48dd-eb1f-4a8e-8c43-b26c641b4f9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\TOOLS\ReadySlots">
+      <UniqueIdentifier>{55e952e4-7423-4335-af11-a975258445b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Animated_Entity.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Collision_Area.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\Core.cpp">
@@ -63,6 +63,15 @@
     <ClCompile Include="src\Slot.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\Collider.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Handle_Collider_Slot.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Handle_Collision_Slot.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Core.h">
@@ -80,9 +89,6 @@
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Collision_Area.h">
-      <Filter>Файлы заголовков\COMPS</Filter>
-    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
@@ -90,12 +96,6 @@
       <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h">
-      <Filter>Файлы заголовков\TOOLS</Filter>
-    </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h">
-      <Filter>Файлы заголовков\COMPS</Filter>
-    </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
       <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h">
@@ -106,6 +106,21 @@
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Slot.h">
       <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Collider.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collider_Slot.h">
+      <Filter>Файлы заголовков\TOOLS\ReadySlots</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collision_Slot.h">
+      <Filter>Файлы заголовков\TOOLS\ReadySlots</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

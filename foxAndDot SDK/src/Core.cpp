@@ -141,7 +141,7 @@ void Core::process_intersections_and_collisions()
 			if (&elementA == &elementB) { continue; }
 			if (elementA.second.component->get_component_bounds().findIntersection(elementB.second.component->get_component_bounds()))
 			{
-				elementA.second.component->on_intersection(this, elementB.second.component);
+				elementA.second.component->on_intersection(elementB.second.component);
 			}
 		}
 	}

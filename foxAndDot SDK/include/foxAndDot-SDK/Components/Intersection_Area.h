@@ -17,7 +17,7 @@ class  Intersection_Area : public Scene_Component, public sf::RectangleShape
 
 	//OVERRIDED METHODS & METHODS
 protected:
-	void on_intersection(Core* the_core, Scene_Component* component) override;
+	void on_intersection(Scene_Component* component) override;
 	sf::Drawable* as_drawable() override;
 	void update() override;
 	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;

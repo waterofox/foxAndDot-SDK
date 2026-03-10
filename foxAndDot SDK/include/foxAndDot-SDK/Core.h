@@ -20,6 +20,8 @@
 #include "Tools/Signal.h"
 #include "Tools/Slot.h"
 
+#include "Tools/Ready slots/Handle_Collider_Slot.h"
+
 //Any other questions? a3shirnin@gmail.com
 
 //CORE
@@ -55,6 +57,9 @@ private:
 
 	std::queue<Executable*> emited_queue;
 
+
+
+
 public:
 	Core();
 	virtual ~Core() = default;
@@ -63,6 +68,7 @@ public:
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	//STAIC FIELDS
+	static inline Slot<Collider_Args_Package> handle_collider;
 	static inline Resource_Manager resource_manager{}; //A single-instance resource manager. Required for managing fonts  and textures
 	static inline Media_Manager    media_manager   {}; //A single-instance media    manager. Required for managing sounds and music
 	static inline Core*            the_core;           //Static Core reference. Actually this is a "this" pointer. foxAndDot SDK using 

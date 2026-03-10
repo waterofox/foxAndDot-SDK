@@ -1,5 +1,18 @@
 #include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 
+
+void Scene_Component::on_intersection(Scene_Component* component)
+{
+}
+
+void Scene_Component::on_intersection(Collider* component)
+{
+}
+
+void Scene_Component::update()
+{
+}
+
 const std::string& Scene_Component::get_name()
 {
 	return this->component_name;
@@ -17,7 +30,6 @@ const bool& Scene_Component::is_visible() { return visible; };
 void Scene_Component::set_updateble(const bool& arg) { updateble = arg; } //when set_updateble(true) component will be updated by Core							
 const bool& Scene_Component::is_updateble() { return updateble; }		 //return updateble
 
-const bool& Scene_Component::is_colliding() { return colliding; };		 //retunr colliding
 
 //sf::FloatRect& Scene_Component::get_collision_bounds() { return collision_bounds; }; //returns the bounds of the component's collision (you can control it)
 //void Scene_Component::set_collision_bounds(const sf::FloatRect& bounds) { collision_bounds = bounds; } //set bounds of collisions

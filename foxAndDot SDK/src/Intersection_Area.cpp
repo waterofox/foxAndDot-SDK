@@ -2,7 +2,6 @@
 
 Intersection_Area::Intersection_Area(const sf::FloatRect& rect)
 {
-	this->colliding = false;
 
 	this->setSize(rect.size);
 	this->setPosition(rect.position);
@@ -13,13 +12,13 @@ Intersection_Area::Intersection_Area(const sf::FloatRect& rect)
 	this->setOutlineThickness(5);
 }
 
-void Intersection_Area::on_intersection(Core* the_core, Scene_Component* component)
+void Intersection_Area::on_intersection(Scene_Component* component)
 {
 	auto comp = components_inside_area.find(component);
 	if (comp == components_inside_area.end())
 	{
 		components_inside_area.insert(component);
-		if (on_enterence != nullptr) { on_enterence(the_core, component); }
+		if (on_enterence != nullptr) { on_enterence(Core::the_core, component); }
 	}
 }
 sf::Drawable* Intersection_Area::as_drawable() { return static_cast<sf::RectangleShape*>(this); }

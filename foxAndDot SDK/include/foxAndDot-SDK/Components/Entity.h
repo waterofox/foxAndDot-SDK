@@ -3,8 +3,9 @@
 //sdk includes
 #include "../Core.h"
 #include "Collider.h"
-#include "../Tools/Ready slots/Handle_Collision_Slot.h"
 #include "../Tools/Script.h"
+
+
 
 //PROPERTIES
 //#define Int(int_property) std::get<int>(int_property)
@@ -15,9 +16,20 @@
 //ENTITY
 class  Entity : public Collider, public sf::Sprite
 {
+
 	static inline sf::Texture empty_entity_s_texture; // I don't like that sf::Sprite needs an sf::Texture. So... this is a field to supply a default constructor argument for sf::Sprite.
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	class Handle_Collision_Slot : public Slot<sf::Vector2f>
+	{
+		friend class Entity;
+
+		Entity* this_entity = nullptr;
+		void do_something() override;
+	};
+
+	friend class Handle_Collision_Slot;
 
 public:
 

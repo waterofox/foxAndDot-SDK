@@ -26,7 +26,7 @@ sf::FloatRect Collider::get_component_bounds()
 
 void Collider::update()
 {
-	last_valid_position = this->collision_bounds.position;
+	last_valid_position = (this->collision_bounds.position);
 }
 
 Collider::Collider()

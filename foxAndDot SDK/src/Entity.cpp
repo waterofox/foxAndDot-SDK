@@ -6,8 +6,19 @@
 Entity::Entity(const sf::IntRect& sprite_rectangle) :
 	Sprite(empty_entity_s_texture, sprite_rectangle)
 {
+	collision_slot.this_entity = this;
+	
+	Core::connect(&this->collision, &this->collision_slot);
+}
 
+void Entity::set_collider_margin(const sf::Vector2f& arg)
+{
+	this->collider_margin = arg;
+}
 
+void Entity::set_collision_size(const sf::Vector2f& arg)
+{
+	this->collision_bounds.size = arg;
 }
 
 sf::Drawable* Entity::as_drawable()

@@ -3,6 +3,7 @@
 //sdk includes
 #include "../Core.h"
 #include "Collider.h"
+#include "../Tools/Ready slots/Handle_Collision_Slot.h"
 #include "../Tools/Script.h"
 
 //PROPERTIES
@@ -40,6 +41,10 @@ protected:
 	//sf::FloatRect collision_bounds;
 	sf::Vector2f collider_margin;
 
+	Handle_Collision_Slot collision_slot;
+
+	
+
 	sf::Drawable* as_drawable() override;
 	void update() override;
 	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
@@ -47,6 +52,9 @@ protected:
 public:
 	Entity(const sf::IntRect& sprite_rectangle);
 	virtual ~Entity() = default;
+
+	void set_collider_margin(const sf::Vector2f& arg);
+	void set_collision_size(const sf::Vector2f& arg);
 
 	//INTERFACE OF THE CLASS
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

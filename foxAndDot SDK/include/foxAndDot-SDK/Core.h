@@ -68,7 +68,7 @@ public:
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	//STAIC FIELDS
-	static inline Slot<Collider_Args_Package> handle_collider;
+	static inline Handle_Collider_Slot handle_collider;
 	static inline Resource_Manager resource_manager{}; //A single-instance resource manager. Required for managing fonts  and textures
 	static inline Media_Manager    media_manager   {}; //A single-instance media    manager. Required for managing sounds and music
 	static inline Core*            the_core;           //Static Core reference. Actually this is a "this" pointer. foxAndDot SDK using 

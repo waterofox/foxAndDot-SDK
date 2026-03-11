@@ -9,8 +9,9 @@ class Collider : public Scene_Component
 {
 
 	Signal<Collider_Args_Package>* im_collider = nullptr;
+protected:
 	Signal<sf::Vector2f> collision;
-
+private:
 	
 	
 	void on_intersection(Scene_Component* comp)    override;

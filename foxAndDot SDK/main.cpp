@@ -40,7 +40,7 @@ int main()
 	core.resource_manager.add_texture("resources\\sprites\\area\\floor.png", floor_t);
 
 	Entity ent(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(20, 30)));
-	ent.set_resource_and_type(frisk, Resource_Manager::texture);
+	ent.set_resource_and_type(frisk, Resource_Types::Texture);
 	ent.set_colliding(true);
 	ent.set_collider_margin(sf::Vector2f(0, 0));
 	ent.set_collision_size(sf::Vector2f(20, 30));
@@ -51,7 +51,7 @@ int main()
 	ent.set_script(&scrt);
 
 	Entity obst(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(20, 20)));
-	obst.set_resource_and_type(floor_t, Resource_Manager::texture);
+	obst.set_resource_and_type(floor_t, Resource_Types::Texture);
 	obst.set_colliding(true);
 	obst.set_collider_margin(sf::Vector2f(0, 0));
 	obst.set_collision_size(sf::Vector2f(20, 20));

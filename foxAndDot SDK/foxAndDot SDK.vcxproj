@@ -65,6 +65,7 @@
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collider_Slot.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collision_Slot.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Resource_Types.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Signal.h" />

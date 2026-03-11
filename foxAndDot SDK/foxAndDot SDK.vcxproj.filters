@@ -125,5 +125,8 @@
     <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collision_Slot.h">
       <Filter>Файлы заголовков\TOOLS\ReadySlots</Filter>
     </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Resource_Types.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

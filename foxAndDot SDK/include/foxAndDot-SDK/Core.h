@@ -51,10 +51,6 @@ private:
 	//std::map<int, std::variant<slot_type, dual_slot_type>> connections;
 
 	sf::Clock game_cycle_clock;
-	sf::Time emited_timer = sf::Time::Zero;
-
-	int slot_handler_timelimit = 500;
-
 	std::queue<Executable*> emited_queue;
 
 
@@ -98,8 +94,6 @@ public:
 		signal->core_queue = &(this->emited_queue);
 		(*signal)();
 	}
-
-	void set_slot_handler_timelimit(const int& new_timelimit);
 
 	//void emit_signal(const int& signal_id, Scene_Component*&);						         //emit signal
 	//void emit_signal(const int& signal_id, Scene_Component*&, Scene_Component*&);	         //emit signal (dual slot)

@@ -69,10 +69,6 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 	}
 }
 
-void Core::set_slot_handler_timelimit(const int& new_timelimit)
-{
-	this->slot_handler_timelimit = new_timelimit;
-}
 
 void Core::add_view(const std::string& view_name, const sf::View& view)
 {
@@ -118,16 +114,6 @@ void Core::handle_slots()
 {
 	while (!this->emited_queue.empty())
 	{
-		this->emited_timer += this->game_cycle_clock.getElapsedTime();
-
-		if (this->emited_timer.asMilliseconds() >= slot_handler_timelimit)
-		{
-			printf("CORE WARNING: Too many triggered slots for the current time limit <%d milly seconds>\n",slot_handler_timelimit);
-			emited_timer = sf::Time::Zero;
-			break;
-		}
-
-
 		(*(this->emited_queue).front())();
 		emited_queue.pop();
 	}

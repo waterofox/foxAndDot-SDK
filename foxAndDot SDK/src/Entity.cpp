@@ -1,8 +1,5 @@
 #include "../include/foxAndDot-SDK/Components/Entity.h"
 
-#define EENTITY std::string("ENTITY ERROR: ")
-#define ERROR(error_location,error_message) error_location + error_message
-
 Entity::Entity(const sf::IntRect& sprite_rectangle) :
 	Sprite(empty_entity_s_texture, sprite_rectangle)
 {

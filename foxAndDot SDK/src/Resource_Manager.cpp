@@ -103,29 +103,28 @@ void Resource_Manager::clear_fonts_library()
 
 sf::Texture& Resource_Manager::get_texture(const int& id)
 {
-
-	//todo нужно решить проблему. Возможно буду просто писать ошибку в концоль и возврашать end либо перейду на указатели
 	auto texture = texture_library.find(id);
 	if (texture != texture_library.end())
 	{
 		return texture_library[id];
 	}
-	else { throw std::runtime_error(ERROR(ERESMAN, "texuture <" + std::to_string(id) + "> does not exist in library")); }
+	else 
+	{ 
+		printf("RESOURCE MANAGER WARNING: texture <%d> does not exist in library. An empty texture is returned\n", id);
+		return b_t;
+	}
 }
 sf::Font& Resource_Manager::get_font(const int& id)
 {
-	try
+	auto font = font_library.find(id);
+	if (font != font_library.end())
 	{
-		auto font = font_library.find(id);
-		if (font != font_library.end())
-		{
-			return font_library[id];
-		}
-		else { throw std::runtime_error(ERROR(ERESMAN, "font <" + std::to_string(id) + "> does not exist in library")); }
+		return font_library[id];
 	}
-	catch (const std::exception& err)
+	else
 	{
-		std::cout << err.what() << std::endl; assert(false);
+		printf("RESOURCE MANAGER WARNING: font <%d> does not exist in library. An empty font is returned\n", id);
+		return b_f;
 	}
 }
 

@@ -49,6 +49,7 @@ int main()
 
 	meScrpt scrt;
 	ent.set_script(&scrt);
+	
 
 	Entity obst(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(20, 20)));
 	obst.set_resource_and_type(floor_t, Resource_Types::Texture);

@@ -2,7 +2,8 @@
 
 //sdk includes
 #include "../Core.h"
-#include "Collider.h"
+
+#include "../Tools/Collider.h"
 #include "../Tools/Script.h"
 
 class  Entity : public Collider, public sf::Sprite

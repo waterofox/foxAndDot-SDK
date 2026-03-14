@@ -1,4 +1,4 @@
-#include "../include/foxAndDot-SDK/Components/Collider.h"
+#include "../include/foxAndDot-SDK/Tools/Collider.h"
 #include "../include/foxAndDot-SDK/Core.h"
 
 void Collider::on_intersection(Scene_Component* comp)

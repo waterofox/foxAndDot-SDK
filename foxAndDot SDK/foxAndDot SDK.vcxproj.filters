@@ -119,9 +119,6 @@
     <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Collider.h">
-      <Filter>Файлы заголовков\COMPS</Filter>
-    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collider_Slot.h">
       <Filter>Файлы заголовков\TOOLS\ReadySlots</Filter>
     </ClInclude>
@@ -129,6 +126,9 @@
       <Filter>Файлы заголовков\TOOLS\ReadySlots</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Resource_Types.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Collider.h">
       <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
   </ItemGroup>

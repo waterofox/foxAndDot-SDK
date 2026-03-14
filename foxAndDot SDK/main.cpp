@@ -59,11 +59,12 @@ int main()
 
 	Entity obst(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(20, 20)));
 	obst.set_resource_and_type(floor_t, Resource_Types::Texture);
-	obst.set_colliding(true);
+	obst.set_colliding(false);
 	obst.set_collider_margin(sf::Vector2f(0, 0));
 	obst.set_collision_size(sf::Vector2f(20, 20));
 	obst.setPosition(sf::Vector2f(100, 0));
 	obst.set_name("obst");
+
 
 	sf::View camera;
 	camera.setCenter(sf::Vector2f(0, 0));

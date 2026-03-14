@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene_Component.h"
+#include "../Components/Scene_Component.h"
 #include "../Tools/Signal.h"
 
 struct Collider_Args_Package;

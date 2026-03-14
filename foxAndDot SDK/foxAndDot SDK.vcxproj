@@ -54,13 +54,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h" />
-    <ClInclude Include="include\foxAndDot-SDK\Components\Collider.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h" />
     <ClInclude Include="include\foxAndDot-SDK\Core.h" />
     <ClInclude Include="include\foxAndDot-SDK\Media_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Collider.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collider_Slot.h" />

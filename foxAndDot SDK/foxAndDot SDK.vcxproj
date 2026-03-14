@@ -51,12 +51,14 @@
     <ClCompile Include="src\Script.cpp" />
     <ClCompile Include="src\Signal.cpp" />
     <ClCompile Include="src\Slot.cpp" />
+    <ClCompile Include="src\Visualized_Collider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Components\Visualized_Collider.h" />
     <ClInclude Include="include\foxAndDot-SDK\Core.h" />
     <ClInclude Include="include\foxAndDot-SDK\Media_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />

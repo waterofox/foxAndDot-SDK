@@ -1,7 +1,7 @@
 
 #include "include/foxAndDot-SDK/Core.h"
 #include "include/foxAndDot-SDK/Tools/Script.h"
-#include "include/foxAndDot-SDK/Components/Entity.h"
+#include "include/foxAndDot-SDK/Components/Animated_Entity.h"
 
 enum textures
 {
@@ -39,13 +39,19 @@ int main()
 	core.resource_manager.add_texture("resources\\sprites\\frisk\\frisk_front.png", frisk);
 	core.resource_manager.add_texture("resources\\sprites\\area\\floor.png", floor_t);
 
-	Entity ent(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(20, 30)));
+	Animated_Entity ent(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(20, 30)));
 	ent.set_resource_and_type(frisk, Resource_Types::Texture);
 	ent.set_colliding(true);
 	ent.set_collider_margin(sf::Vector2f(0, 0));
 	ent.set_collision_size(sf::Vector2f(20, 30));
 	ent.setPosition(sf::Vector2f(-100, 0));
 	ent.set_name("ent");
+
+	ent.current_frame = 0;
+	ent.frame_count = 4;
+	ent.frame_per_seconds = 6;
+
+	ent.play_animation();
 
 	meScrpt scrt;
 	ent.set_script(&scrt);

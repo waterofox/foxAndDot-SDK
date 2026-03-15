@@ -36,9 +36,6 @@
     <ClCompile Include="src\Collider.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
-    <ClCompile Include="src\Connectable.cpp">
-      <Filter>Исходные файлы\SDK</Filter>
-    </ClCompile>
     <ClCompile Include="src\Core.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>

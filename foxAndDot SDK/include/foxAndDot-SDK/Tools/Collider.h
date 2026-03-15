@@ -12,33 +12,47 @@ struct Collider_Args_Package
 class Collider : public Scene_Component
 {
 
-	Signal<Collider_Args_Package>* im_collider = nullptr;
+	//-----------------------------------------------------------------------------------------------------------------
+		sf::Vector2f last_valid_position; // The last position where there was no collision
+
+		Signal<Collider_Args_Package>* im_collider = nullptr;
+
+		bool colliding = true;
+	//-----------------------------------------------------------------------------------------------------------------
+
+		void on_intersection(Scene_Component* comp)    override;
+		
+		void on_intersection(Collider* other_collider) override;
+
+	//-----------------------------------------------------------------------------------------------------------------
+
 protected:
-	Signal<sf::Vector2f> collision;
-private:
-	
-	
-	void on_intersection(Scene_Component* comp)    override;
-	void on_intersection(Collider* other_collider) override;
 
-	bool colliding = true;
+	//-----------------------------------------------------------------------------------------------------------------
+		
+		Signal<sf::Vector2f> collision; // This signal is called when a collision is detected. The parameter is the last valid position
+		
+		sf::FloatRect collision_bounds; // Dimensions and position of the collider
+		
+	//-----------------------------------------------------------------------------------------------------------------
+		
+		void update() override;
 
-protected:
-	sf::FloatRect collision_bounds;
-private:
-	sf::Vector2f last_valid_position;
-
+	//-----------------------------------------------------------------------------------------------------------------
 public:
-	sf::FloatRect get_component_bounds() override;
 
-protected:
-	void update() override;
-
-public:
 	Collider();
-	~Collider();
+	virtual ~Collider();
 
-	void set_colliding(const bool& arg);
-	bool is_colliding();
+	//INTERFACE
+	//=================================================================================================================
+	
+		sf::FloatRect get_component_bounds() override;
+
+		void set_colliding(const bool& arg); // Enable/disable collisions
+		
+		bool is_colliding();				 // Do collisions work?
+
+	//=================================================================================================================
 };
 

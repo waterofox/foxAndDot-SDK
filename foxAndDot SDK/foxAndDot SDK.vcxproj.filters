@@ -60,12 +60,6 @@
     <ClCompile Include="src\Script.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
-    <ClCompile Include="src\Signal.cpp">
-      <Filter>Исходные файлы\SDK</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Slot.cpp">
-      <Filter>Исходные файлы\SDK</Filter>
-    </ClCompile>
     <ClCompile Include="src\Visualized_Collider.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>

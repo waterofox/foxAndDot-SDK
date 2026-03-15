@@ -1,9 +1,15 @@
 #pragma once
 class Executable
 {
+
 public:
     Executable() = default;
     virtual ~Executable() = default;
 
-    virtual void operator()() = 0;
+    //INTERFACE
+    //===============================================================================
+        
+        virtual void operator()() = 0; // This is the operator
+
+    //===============================================================================
 };

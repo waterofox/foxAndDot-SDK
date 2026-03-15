@@ -46,8 +46,6 @@
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Scene_Component.cpp" />
     <ClCompile Include="src\Script.cpp" />
-    <ClCompile Include="src\Signal.cpp" />
-    <ClCompile Include="src\Slot.cpp" />
     <ClCompile Include="src\Visualized_Collider.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -225,13 +223,13 @@ xcopy /e /y "$(ProjectDir)include" "$(OutDir)include"</Command>
       </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>SFML-3.0.0\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SFML-3.0.2\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>SFML-3.0.0\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>SFML-3.0.2\lib;</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

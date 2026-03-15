@@ -19,21 +19,41 @@ class Scene
 		int actual_comp_lay = 0;
 	};
 
-	std::unordered_map<std::string, comp_info> scene_data;
-	std::unordered_map<int,std::unordered_map<std::string, Scene_Component*>> render_order;
+	//---------------------------------------------------------------------------------------------------------------------------------------------
+		
+		std::unordered_map<std::string, comp_info> scene_data;
+		
+		std::unordered_map<int,std::unordered_map<std::string, Scene_Component*>> render_order;
 
-	void render(const sf::View& view);
+	//---------------------------------------------------------------------------------------------------------------------------------------------
 
-public:	
-	void add(Scene_Component*, const int& lay);
-	void remove(const std::string& component_name);
-	void move_on_lay(const std::string& component_name, const int& lay);
-	bool is_on_scene(const std::string& component_name);
+		void render(const sf::View& view);
 
-	Scene_Component* operator[](const std::string& component_name);
-	Scene_Component* operator[](const char* component_name);
+	//---------------------------------------------------------------------------------------------------------------------------------------------
 
+public:
+	
 	Scene(const int& lays_count);
-	~Scene() = default;
+	virtual ~Scene() = default;
+
+	//INTERFACE
+	//=============================================================================================================================================
+	
+		void add(Scene_Component*, const int& lay);							 // Add component to the sсene
+		
+		void remove(const std::string& component_name);						 // Remove component from the scene
+		
+		void move_on_lay(const std::string& component_name, const int& lay); // Move component to another layer
+		
+		bool is_on_scene(const std::string& component_name);				 // Component on the stage?
+
+	//---------------------------------------------------------------------------------------------------------------------------------------------
+
+		Scene_Component* operator[](const std::string& component_name); // Get component pointer
+		
+		Scene_Component* operator[](const char* component_name);		// Get component pointer
+
+	//=============================================================================================================================================
+
 };
 

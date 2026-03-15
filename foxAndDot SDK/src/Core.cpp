@@ -1,10 +1,6 @@
 #include "../include/foxAndDot-SDK/Core.h"
 #include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 
-//ERRORS
-#define ECORE std::string("CORE ERROR: ")
-#define ERROR(error_location,error_message) error_location + error_message
-
 void Core::change_scene(Scene* new_Scene)
 {
 	if (changing_scene)

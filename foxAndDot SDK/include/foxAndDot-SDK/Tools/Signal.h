@@ -3,16 +3,26 @@
 
 #include <queue>
 
+enum class Connection_Types
+{
+	Undefined = -1,
+	Signal = 0,
+	Slot = 1,
+};
+
 template<typename args_package>
 class Signal : public Connectable<args_package>
 {
 	friend class Core;
 private:
+
 	std::queue<Executable*>* core_queue = nullptr;
+
 	void handle_connected_slot()
 	{
 		this->core_queue->push(this->next_connectable);
 	}
+
 	void handle_connected_signal()
 	{
 		Signal<args_package>* next_signal_pointer = static_cast<Signal<args_package>*>(next_connectable);
@@ -20,9 +30,10 @@ private:
 
 		(*(this->next_connectable))();
 	}
-protected:
+
 	Connectable<args_package>* next_connectable = nullptr;
-	int next_connectable_type = 0;
+	
+	Connection_Types next_connectable_type = Connection_Types::Undefined;
 
 	void operator()() override 
 	{
@@ -42,8 +53,8 @@ protected:
 
 		switch (next_connectable_type)
 		{
-		case 0: { this->handle_connected_signal(); } break;
-		case 1: { this->handle_connected_slot(); } break;
+		case Connection_Types::Signal: { this->handle_connected_signal(); } break;
+		case Connection_Types::Slot: { this->handle_connected_slot(); } break;
 		default: 
 			break;
 		}
@@ -53,4 +64,8 @@ protected:
 		Connectable<args_package>::operator()();
 		
 	}
+
+public:
+	Signal() = default;
+	~Signal() = default;
 };

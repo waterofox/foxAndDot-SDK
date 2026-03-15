@@ -97,13 +97,13 @@ public:
 		static void connect(Signal<args_package>* signal, Slot<args_package>* slot)			// Connect signal to slot
 		{
 			signal->next_connectable = slot;
-			signal->next_connectable_type = 1;
+			signal->next_connectable_type = Connection_Types::Slot;
 		}
 		template<typename args_package>
 		static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)	// Connect signal to signal
 		{
 			signal->next_connectable = signal_2;
-			signal->next_connectable_type = 0;
+			signal->next_connectable_type = Connection_Types::Signal;
 		}
 		template<typename args_package>				
 		void emit(Signal<args_package>* signal)												// Emit connected signal

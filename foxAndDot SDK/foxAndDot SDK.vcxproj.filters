@@ -22,9 +22,6 @@
     <Filter Include="Файлы заголовков\TOOLS">
       <UniqueIdentifier>{d9cb48dd-eb1f-4a8e-8c43-b26c641b4f9a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\TOOLS\ReadySlots">
-      <UniqueIdentifier>{55e952e4-7423-4335-af11-a975258445b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\SDK">
       <UniqueIdentifier>{21b0703f-047c-4f18-8602-d69c43a280cc}</UniqueIdentifier>
     </Filter>
@@ -46,12 +43,6 @@
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
     <ClCompile Include="src\Entity.cpp">
-      <Filter>Исходные файлы\SDK</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Handle_Collider_Slot.cpp">
-      <Filter>Исходные файлы\SDK</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Handle_Collision_Slot.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
     <ClCompile Include="src\Intersection_Area.cpp">
@@ -121,12 +112,6 @@
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
       <Filter>Файлы заголовков\COMPS</Filter>
-    </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collider_Slot.h">
-      <Filter>Файлы заголовков\TOOLS\ReadySlots</Filter>
-    </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Tools\Ready slots\Handle_Collision_Slot.h">
-      <Filter>Файлы заголовков\TOOLS\ReadySlots</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Tools\Resource_Types.h">
       <Filter>Файлы заголовков\TOOLS</Filter>

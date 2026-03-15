@@ -7,7 +7,7 @@
 
 void Core::change_scene(Scene* new_Scene)
 {
-	if (changin_scene)
+	if (changing_scene)
 	{
 		printf("CORE ERROR: More than one scene change per tick\n");
 		return;
@@ -15,7 +15,7 @@ void Core::change_scene(Scene* new_Scene)
 	else
 	{
 		scene_buffer = new_Scene;
-		changin_scene = true;
+		changing_scene = true;
 	}
 }
 
@@ -44,6 +44,11 @@ Core::Core()
 void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
 	const unsigned long& framerate_limit, const sf::State& state)
 {
+	if (this->isOpen())
+	{
+		printf("CORE ERROR: There is already an active window. You cannot start the Core again\n");
+	}
+
 	this->game_cycle_clock.start();
 	this->create(sf::VideoMode({ window_width,window_height }), window_title,state);
 	this->setFramerateLimit(framerate_limit);
@@ -51,18 +56,23 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 	{
 
 		//scene
-		if(changin_scene)
+		if(changing_scene)
 		{
 			actual_scene = scene_buffer;
 			scene_buffer = nullptr;
-			changin_scene = false;
+			changing_scene = false;
 		}
 
 		this->delta_time = this->game_cycle_clock.restart();
-		try{
-			 event_handler == nullptr ? throw std::runtime_error(ERROR(ECORE, "process events function does not exist")) : (*event_handler)();
+		
+		if (this->event_handler == nullptr)
+		{
+			printf("CORE WARNING: The event handler is not defined\n");
 		}
-		catch (std::exception& err) { std::cout << err.what() << std::endl; this->close(); }
+		else
+		{
+			(*this->event_handler)();
+		}
 
 		update();
 		render();
@@ -157,4 +167,9 @@ void Core::render()
 	}
 
 	this->display();
+}
+
+void Core::Handle_Collider_Slot::do_something()
+{
+	args.other_comp->on_intersection(args.collider);
 }

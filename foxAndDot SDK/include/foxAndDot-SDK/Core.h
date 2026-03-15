@@ -17,108 +17,101 @@
 
 #include "Tools/Scene.h"
 #include "Tools/Executable.h"
+#include "Tools/Collider.h"
 #include "Tools/Signal.h"
 #include "Tools/Slot.h"
 
-#include "Tools/Ready slots/Handle_Collider_Slot.h"
-
 //Any other questions? a3shirnin@gmail.com
 
-//CORE
 class  Core : public sf::RenderWindow
 {
-//TYPES & ENUMS
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-public:	
-	//FUNCTION TYPES
-	using slot_type      = std::function<void(Core*, Scene_Component*)>; //a slot that accepts a pointer to the signal sender as an argument.
-	using dual_slot_type = std::function<void(Core*, Scene_Component*,\
-		                                             Scene_Component*)>; //a slot that accepts a pointer to the signal sender and another 
-	                                                                     //pointer to a component as arguments.
-private:
-	//CONTAINERS
-	using signals_container = std::pair<std::variant<slot_type, dual_slot_type>, std::pair<Scene_Component*, Scene_Component*>>;
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	class Handle_Collider_Slot : public Slot<Collider_Args_Package>
+	{
+		void do_something() override;
+	};
+	//-------------------------------------------------------------------------------------------------------
+		sf::Time delta_time = sf::Time::Zero;
+		sf::Clock game_cycle_clock;
 
-	sf::Time delta_time = sf::Time::Zero;
-	std::unordered_map<std::string,sf::View> views;
+		std::unordered_map<std::string,sf::View> views;
 	
-	Scene* actual_scene   = nullptr;
-	bool   changin_scene  = false;
-	Scene* scene_buffer   = nullptr;
+		Scene* actual_scene   = nullptr;
+		bool   changing_scene  = false;
+		Scene* scene_buffer   = nullptr;
 
-	//std::queue<signals_container> signals_queue;
-	//std::map<int, std::variant<slot_type, dual_slot_type>> connections;
+		std::queue<Executable*> emited_queue;
+	//-------------------------------------------------------------------------------------------------------
+		Executable* event_handler = nullptr;
+		void handle_slots();
+		void process_intersections_and_collisions();
 
-	sf::Clock game_cycle_clock;
-	std::queue<Executable*> emited_queue;
-
-
-
-
+		void update();
+		void render();
+	//-------------------------------------------------------------------------------------------------------
 public:
+
 	Core();
 	virtual ~Core() = default;
 
-//INTERFACE OF THE CLASS
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//INTERFACE
+	//=================================================================================================================================
 	
-	//STAIC FIELDS
-	static inline Handle_Collider_Slot handle_collider;
-	static inline Resource_Manager resource_manager{}; //A single-instance resource manager. Required for managing fonts  and textures
-	static inline Media_Manager    media_manager   {}; //A single-instance media    manager. Required for managing sounds and music
-	static inline Core*            the_core;           //Static Core reference. Actually this is a "this" pointer. foxAndDot SDK using 
-													   //a single ton pattern
+		static inline Handle_Collider_Slot handle_collider; // Сollision handling slot
 
-	//GAME TOOLS
-	void change_scene(Scene* new_Scene);               //change actual scene by other scene
-	Scene* get_actual_scene();						   //get actual scene
-	const sf::Time& get_delta_time();                  //get actual delta time (elapsed time since last frame)
+		static inline Resource_Manager resource_manager;	// Resource manager for managing fonts and textures
+
+		static inline Media_Manager    media_manager;		// Media manager for managing sounds and a music center
+
+		static inline Core*            the_core;            // A static Core pointer to itself. Provides access to core settings from anywhere
+
+	//---------------------------------------------------------------------------------------------------------------------------------
+
+		void set_event_handler(Executable* handler);       // Change the object that handles events
+
+		void run(const unsigned int& window_width, \
+			const unsigned int& window_height, \
+			const std::string& window_title, \
+			const unsigned long& framerate_limit, \
+			const sf::State& state);					   // Start your game
 
 
-	template<typename args_package>
-	static void connect(Signal<args_package>* signal, Slot<args_package>* slot)
-	{
-		signal->next_connectable = slot;
-		signal->next_connectable_type = 1;
-	}
-	template<typename args_package>
-	static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)
-	{
-		signal->next_connectable = signal_2;
-		signal->next_connectable_type = 0;
-	}
-	template<typename args_package>
-	void emit(Signal<args_package>* signal)
-	{
-		signal->core_queue = &(this->emited_queue);
-		(*signal)();
-	}
+	//---------------------------------------------------------------------------------------------------------------------------------
 
-	//void emit_signal(const int& signal_id, Scene_Component*&);						         //emit signal
-	//void emit_signal(const int& signal_id, Scene_Component*&, Scene_Component*&);	         //emit signal (dual slot)
-	//void connect(const int& signal_id, const std::variant<slot_type, dual_slot_type>& slot); //create connection between signal and slot
+		void change_scene(Scene* new_Scene); // Change actual scene by other scene
+		
+		Scene* get_actual_scene();			 // Get actual scene
+		
+		const sf::Time& get_delta_time();    // Get actual delta time (elapsed time since last frame)
 
-	void      add_view   (const std::string& view_name, const sf::View& view); //Add view.
-	void      remove_view(const std::string& view_name);					   //Remove_view.
-	sf::View* get_view   (const std::string& view_name);					   //Get View.
+	//---------------------------------------------------------------------------------------------------------------------------------
+		
+		void      add_view(const std::string& view_name, const sf::View& view); // Add view
+	
+		void      remove_view(const std::string& view_name);					// Remove view
+		
+		sf::View* get_view(const std::string& view_name);					    // Get View
 
-	//GAME SETTINGS
-	void set_event_handler(Executable* handler);       //change the object that handles events
+	//---------------------------------------------------------------------------------------------------------------------------------
 
-	void run(const unsigned int& window_width, \
-		     const unsigned int& window_height,\
-		     const std::string& window_title,\
-		     const unsigned long& framerate_limit,\
-		     const sf::State& state);				  //start your game
+		template<typename args_package>
+		static void connect(Signal<args_package>* signal, Slot<args_package>* slot)			// Connect signal to slot
+		{
+			signal->next_connectable = slot;
+			signal->next_connectable_type = 1;
+		}
+		template<typename args_package>
+		static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)	// Connect signal to signal
+		{
+			signal->next_connectable = signal_2;
+			signal->next_connectable_type = 0;
+		}
+		template<typename args_package>				
+		void emit(Signal<args_package>* signal)												// Emit connected signal
+		{
+			signal->core_queue = &(this->emited_queue);
+			(*signal)();
+		}
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//=================================================================================================================================
 
-private:
-	Executable*  event_handler = nullptr;
-	void handle_slots();
-	void process_intersections_and_collisions();
-
-	void update();
-	void render();
 };

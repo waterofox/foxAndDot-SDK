@@ -3,7 +3,11 @@
 #include "../Components/Scene_Component.h"
 #include "../Tools/Signal.h"
 
-struct Collider_Args_Package;
+struct Collider_Args_Package
+{
+	Collider* collider = nullptr;
+	Scene_Component* other_comp = nullptr;
+};
 
 class Collider : public Scene_Component
 {

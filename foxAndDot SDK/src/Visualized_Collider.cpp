@@ -1,4 +1,6 @@
 #include "../include/foxAndDot-SDK/Components/Visualized_Collider.h"
+#include "../include/foxAndDot-SDK/Core.h"
+
 
 void Visualized_Collider::update()
 {
@@ -12,6 +14,8 @@ void Visualized_Collider::update()
 Visualized_Collider::Visualized_Collider()
 {
 
+	Core::connect(&this->collision, &this->v_collider_slot);
+
 	this->type_of_resource = Resource_Types::Undefined;
 
 	this->setSize(sf::Vector2f(40, 40));
@@ -20,7 +24,7 @@ Visualized_Collider::Visualized_Collider()
 	this->setFillColor(   sf::Color(144, 238, 144, 100));
 	this->setOutlineColor(sf::Color(144, 238, 144, 255));
 
-	this->setOutlineThickness(-2);
+	this->setOutlineThickness(-1);
 }
 
 void Visualized_Collider::set_bounds(const sf::FloatRect& new_bounds)

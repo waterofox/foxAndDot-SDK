@@ -2,6 +2,7 @@
 #include "include/foxAndDot-SDK/Core.h"
 #include "include/foxAndDot-SDK/Tools/Script.h"
 #include "include/foxAndDot-SDK/Components/Animated_Entity.h"
+#include "include/foxAndDot-SDK/Components/Visualized_Collider.h"
 
 enum textures
 {
@@ -16,6 +17,13 @@ class meScrpt : public Script
 	void operator()() override
 	{
 		this_entity->move(sf::Vector2f(speed * Core::the_core->get_delta_time().asSeconds(), 0));
+		sf::View& camera = *Core::the_core->get_view("main");
+
+		if (this_entity->getPosition().x >= camera.getCenter().x + camera.getSize().x / 2)
+		{
+			this_entity->setPosition(sf::Vector2f(camera.getCenter().x - camera.getSize().x / 2 - 20, 0));
+		}
+		
 	}
 };
 
@@ -57,6 +65,9 @@ int main()
 	ent.set_script(&scrt);
 	
 
+	Visualized_Collider col;
+	col.set_bounds(sf::FloatRect(sf::Vector2f(80, 0), sf::Vector2f(1, 20)));
+
 	Entity obst(sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(20, 20)));
 	obst.set_resource_and_type(floor_t, Resource_Types::Texture);
 	obst.set_colliding(false);
@@ -73,17 +84,18 @@ int main()
 
 	core.add_view("main", camera);
 
-	Scene scene(1);
+	Scene scene(2);
 
 	scene.add(&ent, 0);
 	scene.add(&obst, 0);
+	scene.add(&col, 1);
 
 	core.change_scene(&scene);
 
 	evhandler handler;
 	core.set_event_handler(&handler);
 
-	core.run(640, 480, "test", 60, sf::State::Windowed);
+	core.run(640, 480, "test", 120, sf::State::Windowed);
 
 
 

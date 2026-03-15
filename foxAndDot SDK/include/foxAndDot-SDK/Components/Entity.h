@@ -44,7 +44,6 @@ protected:
 protected:
 
 	//----------------------------------------------------------------------------------------------------------------------------------
-		sf::Drawable* as_drawable() override;
 		void update() override;
 		void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
 	//----------------------------------------------------------------------------------------------------------------------------------
@@ -59,6 +58,8 @@ public:
 	//===================================================================================================================================
 		
 		sf::FloatRect get_component_render_bounds() override; //Returns GlobalBounds of sf::Sprite
+
+		sf::Drawable* as_drawable() override;
 
 		void set_script(Script* ent_script);			      //Set a Script
 

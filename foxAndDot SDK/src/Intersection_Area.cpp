@@ -1,4 +1,5 @@
 #include "../include/foxAndDot-SDK/Components/Intersection_Area.h"
+#include "../include/foxAndDot-SDK/Core.h"
 
 Intersection_Area::Intersection_Area(const sf::FloatRect& rect)
 {
@@ -18,7 +19,9 @@ void Intersection_Area::on_intersection(Scene_Component* component)
 	if (comp == components_inside_area.end())
 	{
 		components_inside_area.insert(component);
-		if (on_enterence != nullptr) { on_enterence(Core::the_core, component); }
+
+		this->component_in.push_args(component);
+		Core::the_core->emit(&component_in);
 	}
 }
 sf::Drawable* Intersection_Area::as_drawable() { return static_cast<sf::RectangleShape*>(this); }
@@ -29,7 +32,8 @@ void Intersection_Area::update()
 	{
 		if (!element->get_component_bounds().findIntersection(this->get_component_bounds()))
 		{
-			if (on_exit != nullptr) { on_exit(Core::the_core, element); }
+			this->component_out.push_args(element);
+			Core::the_core->emit(&this->component_out);
 			erase_buffer.push_back(element);
 		}
 	}
@@ -51,12 +55,3 @@ sf::FloatRect Intersection_Area::get_component_render_bounds()
 }
 
 void Intersection_Area::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) {}
-
-void Intersection_Area::set_slot_on_enterence(const Core::slot_type& slot)
-{
-	on_enterence = slot;
-}
-void Intersection_Area::set_slot_on_exit(const Core::slot_type& slot)
-{
-	on_exit = slot;
-}

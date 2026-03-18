@@ -58,6 +58,7 @@ public:
 	//===================================================================================================================================
 		
 		sf::FloatRect get_component_render_bounds() override; //Returns GlobalBounds of sf::Sprite
+		sf::FloatRect get_component_bounds() override;		  //Returns collider bounds + collider margin
 
 		sf::Drawable* as_drawable() override;
 

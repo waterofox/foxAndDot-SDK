@@ -43,6 +43,15 @@ sf::FloatRect Entity::get_component_render_bounds()
 	return this->getGlobalBounds();
 }
 
+sf::FloatRect Entity::get_component_bounds()
+{
+	sf::FloatRect bounds = this->collision_bounds;
+	bounds.position += this->collider_margin;
+	
+	return bounds;
+}
+
+
 void Entity::set_script(Script* ent_script)
 {
 	entity_script = ent_script;

@@ -47,7 +47,7 @@ public:
 	//INTERFACE
 	//=================================================================================================================
 	
-		sf::FloatRect get_component_bounds() override;
+		virtual sf::FloatRect get_component_bounds() override;
 
 		void set_colliding(const bool& arg); // Enable/disable collisions
 		

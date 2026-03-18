@@ -35,7 +35,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Animated_Entity.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\Core.cpp" />
@@ -201,7 +200,7 @@
       </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>SFML-3.0.0\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SFML-3.0.2\include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

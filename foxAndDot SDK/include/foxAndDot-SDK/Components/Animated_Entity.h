@@ -23,7 +23,11 @@ private:
 public:
 
 	Animated_Entity(const sf::IntRect& sprite_rectangle);
-	~Animated_Entity() = default;
+	Animated_Entity(const sf::IntRect& sprite_rectangle, const int& resource_id);
+	Animated_Entity(const sf::Vector2i& sprite_size);
+	Animated_Entity(const sf::Vector2i& sprite_size, const int& resource_id);
+
+	virtual ~Animated_Entity() = default;
 
 	//INTERFACE
 	//===============================================================================================================

@@ -3,10 +3,26 @@
 Entity::Entity(const sf::IntRect& sprite_rectangle) :
 	Sprite(empty_entity_s_texture, sprite_rectangle)
 {
-	collision_slot.this_entity = this;
-	
+	this->collision_slot.this_entity = this;	
 	Core::connect(&this->collision, &this->collision_slot);
+
+	this->collider_margin = sf::Vector2f(0, 0);
+	this->collision_bounds = this->getGlobalBounds();
 }
+
+Entity::Entity(const sf::IntRect& sprite_rectangle, const int& resource_id) : Entity(sprite_rectangle)
+{
+	this->set_resource(resource_id);
+}
+
+Entity::Entity(const sf::Vector2i& size_of_sprite_rectangle) : Entity(sf::IntRect(sf::Vector2i(0, 0), size_of_sprite_rectangle))
+{}
+
+Entity::Entity(const sf::Vector2i& size_of_sprite_rectangle, const int& resource_id) : Entity(size_of_sprite_rectangle)
+{
+	this->set_resource(resource_id);
+}
+
 
 void Entity::set_collider_margin(const sf::Vector2f& arg)
 {
@@ -45,10 +61,7 @@ sf::FloatRect Entity::get_component_render_bounds()
 
 sf::FloatRect Entity::get_component_bounds()
 {
-	sf::FloatRect bounds = this->collision_bounds;
-	bounds.position += this->collider_margin;
-	
-	return bounds;
+	return this->collision_bounds;
 }
 
 
@@ -66,6 +79,6 @@ void Entity::update_resource(const std::variant<sf::Texture*, sf::Font*>& resour
 void Entity::Handle_Collision_Slot::do_something()
 {
 	this->this_entity->setPosition(this->args);
+	this->this_entity->move(-this->this_entity->collider_margin);
 	this->this_entity->collision_bounds.position = this->args;
-	this->this_entity->collision_bounds.position += this->this_entity->collider_margin;
 }

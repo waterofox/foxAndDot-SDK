@@ -23,6 +23,17 @@ Entity::Entity(const sf::Vector2i& size_of_sprite_rectangle, const int& resource
 	this->set_resource(resource_id);
 }
 
+Entity::Entity(const sf::IntRect& sprite_rectangle, const int& resource_id): Entity(sprite_rectangle)
+{
+	this->set_resource(resource_id);
+}
+
+Entity::Entity(const sf::Vector2i& sprite_size): Entity(sf::IntRect(sf::Vector2i(0,0),sprite_size)){}
+
+Entity::Entity(const sf::Vector2i& sprite_size, const int& resource_id) : Entity(sprite_size)
+{
+	this->set_resource(resource_id);
+}
 
 void Entity::set_collider_margin(const sf::Vector2f& arg)
 {

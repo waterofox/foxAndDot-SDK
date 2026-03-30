@@ -48,6 +48,8 @@
     <ClCompile Include="src\Visualized_Collider.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Animated_Entity.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h" />

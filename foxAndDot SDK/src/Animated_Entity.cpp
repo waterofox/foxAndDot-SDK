@@ -9,6 +9,12 @@ Animated_Entity::Animated_Entity(const sf::Vector2i& size_of_sprite_rectangle) :
 Animated_Entity::Animated_Entity(const sf::Vector2i& size_of_sprite_rectangle, const int& resource_id) : 
 	Entity(size_of_sprite_rectangle, resource_id) {}
 
+Animated_Entity::Animated_Entity(const sf::IntRect& sprite_rectangle, const int& resource_id) : Entity(sprite_rectangle,resource_id){}
+
+Animated_Entity::Animated_Entity(const sf::Vector2i& sprite_size) : Entity(sprite_size){}
+
+Animated_Entity::Animated_Entity(const sf::Vector2i& sprite_size, const int& resource_id) : Entity(sprite_size,resource_id){}
+
 void Animated_Entity::update()
 {
 	Entity::update();

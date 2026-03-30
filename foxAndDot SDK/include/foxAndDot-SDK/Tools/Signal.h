@@ -18,51 +18,42 @@ private:
 
 	std::queue<Executable*>* core_queue = nullptr;
 
-	void handle_connected_slot()
+	void handle_connected_slot(Connectable<args_package>* next_connectable)
 	{
-		this->core_queue->push(this->next_connectable);
+		this->core_queue->push(next_connectable);
 	}
 
-	void handle_connected_signal()
+	void handle_connected_signal(Connectable<args_package>* next_connectable)
 	{
 		Signal<args_package>* next_signal_pointer = static_cast<Signal<args_package>*>(next_connectable);
 		next_signal_pointer->core_queue = this->core_queue;
 
-		(*(this->next_connectable))();
+		(*(next_connectable))();
 	}
-
-	Connectable<args_package>* next_connectable = nullptr;
 	
-	Connection_Types next_connectable_type = Connection_Types::Undefined;
+	std::unordered_map<Connectable<args_package>*, Connection_Types> next_c;
 
 	void operator()() override 
-	{
-		
+	{	
 		if (this->core_queue == nullptr)
 		{
 			printf("SIGNAL ERROR: Incorrect signal call. Use <Core::emit>\n");
 			return;
 		}
-		else if (this->next_connectable == nullptr)
+		for (auto& next_connectable : next_c)
 		{
-			printf("SIGNAL WARNING: No Signal/Slot is connected\n");
-			return;
+			next_connectable.first->push_args(this->args);
+
+			switch (next_connectable.second)
+			{
+			case Connection_Types::Signal: { this->handle_connected_signal(next_connectable.first); } break;
+			case Connection_Types::Slot: { this->handle_connected_slot(next_connectable.first); } break;
+			default:
+				break;
+			}
 		}
-
-		next_connectable->push_args(this->args);
-
-		switch (next_connectable_type)
-		{
-		case Connection_Types::Signal: { this->handle_connected_signal(); } break;
-		case Connection_Types::Slot: { this->handle_connected_slot(); } break;
-		default: 
-			break;
-		}
-
 		this->core_queue = nullptr;
-
 		Connectable<args_package>::operator()();
-		
 	}
 
 public:

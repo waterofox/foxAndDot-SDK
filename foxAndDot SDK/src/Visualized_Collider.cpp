@@ -6,8 +6,7 @@ void Visualized_Collider::update()
 {
 	Collider::update();
 
-	collision_bounds.position = this->getGlobalBounds().position;
-	this->setSize(collision_bounds.size);
+	this->collision_bounds = this->getGlobalBounds();
 
 }
 
@@ -15,7 +14,7 @@ Visualized_Collider::Visualized_Collider(const sf::FloatRect& rect)
 {
 
 	this->setSize(rect.size);
-	this->setPosition(rect.size);
+	this->setPosition(rect.position);
 
 	Core::connect(&this->collision, &this->v_collider_slot);
 

@@ -50,6 +50,13 @@ class  Core : public sf::RenderWindow
 	//-------------------------------------------------------------------------------------------------------
 public:
 
+	struct Changed_Scene_Package
+	{
+		Scene* new_scene = nullptr;
+		Scene* old_scene = nullptr;
+	};
+
+
 	Core();
 	virtual ~Core() = default;
 
@@ -57,6 +64,9 @@ public:
 	//=================================================================================================================================
 	
 		static inline Handle_Collider_Slot handle_collider; // Сollision handling slot
+
+		static inline Signal<Changed_Scene_Package> scene_had_changed;		// Emited when new scene had loaded
+
 
 		static inline Resource_Manager resource_manager;	// Resource manager for managing fonts and textures
 

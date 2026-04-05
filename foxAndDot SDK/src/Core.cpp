@@ -54,9 +54,24 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 		//scene
 		if(changing_scene)
 		{
+			Changed_Scene_Package package;
+			
+			package.old_scene = actual_scene;
+			package.new_scene = scene_buffer;
+
 			actual_scene = scene_buffer;
 			scene_buffer = nullptr;
-			changing_scene = false;
+			changing_scene = false;	
+
+			this->scene_had_changed.push_args(package);
+			this->emit(&scene_had_changed);
+		}
+
+		if (actual_scene == nullptr) 
+		{
+			printf("CORE ERROR: No loaded scene\n");
+			this->close();
+			return;
 		}
 
 		this->delta_time = this->game_cycle_clock.restart();

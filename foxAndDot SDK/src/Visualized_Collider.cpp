@@ -11,8 +11,11 @@ void Visualized_Collider::update()
 
 }
 
-Visualized_Collider::Visualized_Collider()
+Visualized_Collider::Visualized_Collider(const sf::FloatRect& rect)
 {
+
+	this->setSize(rect.size);
+	this->setPosition(rect.size);
 
 	Core::connect(&this->collision, &this->v_collider_slot);
 
@@ -25,11 +28,6 @@ Visualized_Collider::Visualized_Collider()
 	this->setOutlineColor(sf::Color(144, 238, 144, 255));
 
 	this->setOutlineThickness(-1);
-}
-
-void Visualized_Collider::set_bounds(const sf::FloatRect& new_bounds)
-{
-	this->collision_bounds = new_bounds;
 }
 
 sf::FloatRect Visualized_Collider::get_component_render_bounds()

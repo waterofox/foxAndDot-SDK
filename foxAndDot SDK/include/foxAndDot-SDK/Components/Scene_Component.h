@@ -27,7 +27,6 @@ protected:
 		
 		bool updatable = true;				  // When true => component will update every iteration of game cycle
 
-		//todo : remake it as signal
 		bool ready_to_update_resource = true; // True when you are changing the resource (Marker for Resource Manager)
 
 	//-------------------------------------------------------------------------------------------------------------------

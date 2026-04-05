@@ -15,13 +15,11 @@ class Visualized_Collider : public Collider, public sf::RectangleShape
 	//----------------------------------------------------------------------------------------------------------------------
 
 public:
-		Visualized_Collider();
+		Visualized_Collider(const sf::FloatRect& rect);
 		~Visualized_Collider() = default;
 	
 		//INTERFACE
 	//======================================================================================================================
-
-		void set_bounds(const sf::FloatRect& new_bounds);		//Set collider bounds
 		
 		sf::FloatRect get_component_render_bounds() override;
 		

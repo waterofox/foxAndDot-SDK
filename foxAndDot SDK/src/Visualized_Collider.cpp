@@ -20,9 +20,6 @@ Visualized_Collider::Visualized_Collider(const sf::FloatRect& rect)
 
 	this->type_of_resource = Resource_Types::Undefined;
 
-	this->setSize(sf::Vector2f(40, 40));
-	this->setPosition(sf::Vector2f(0, 0));
-
 	this->setFillColor(   sf::Color(144, 238, 144, 100));
 	this->setOutlineColor(sf::Color(144, 238, 144, 255));
 

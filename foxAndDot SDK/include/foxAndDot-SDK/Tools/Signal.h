@@ -1,7 +1,5 @@
 #pragma once
-#include "Connectable.h"
-
-#include <queue>
+#include "Slot.h"
 
 enum class Connection_Types
 {
@@ -59,4 +57,28 @@ private:
 public:
 	Signal() = default;
 	~Signal() = default;
+
+	void connect(Slot<args_package>* slot)
+	{
+		this->next_c.emplace(slot, Connection_Types::Slot);
+	}
+	void connect(Signal<args_package>* signal)
+	{
+		this->next_c.emplace(signal, Connection_Types::Signal);
+	}
+	void disconnect(Connectable<args_package>* connected)
+	{
+		if (this->next_c.find(connected) != this->next_c.end())
+		{
+			this->next_c.erase(connected);
+		}
+		else
+		{
+			printf("SIGNAL WARNING: Attempting to disconnect an unconnected slot or signal\n");
+			return;
+		}
+	}
+	
+
+
 };

@@ -32,7 +32,7 @@ void Collider::update()
 Collider::Collider()
 {
 	im_collider = new Signal<Collider_Args_Package>;
-	Core::connect<Collider_Args_Package>(im_collider, &Core::handle_collider);
+	this->im_collider->connect(&Core::handle_collider);
 }
 
 Collider::~Collider()

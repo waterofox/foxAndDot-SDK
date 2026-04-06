@@ -16,7 +16,7 @@ Visualized_Collider::Visualized_Collider(const sf::FloatRect& rect)
 	this->setSize(rect.size);
 	this->setPosition(rect.position);
 
-	Core::connect(&this->collision, &this->v_collider_slot);
+	this->collision.connect(&this->v_collider_slot);
 
 	this->type_of_resource = Resource_Types::Undefined;
 

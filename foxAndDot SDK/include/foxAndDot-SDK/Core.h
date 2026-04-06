@@ -103,16 +103,6 @@ public:
 
 	//---------------------------------------------------------------------------------------------------------------------------------
 
-		template<typename args_package>
-		static void connect(Signal<args_package>* signal, Slot<args_package>* slot)			// Connect signal to slot
-		{
-			signal->next_c.emplace(slot,Connection_Types::Slot);
-		}
-		template<typename args_package>
-		static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)	// Connect signal to signal
-		{
-			signal->next_c.emplace(signal_2, Connection_Types::Signal);
-		}
 		template<typename args_package>				
 		void emit(Signal<args_package>* signal)												// Emit connected signal
 		{

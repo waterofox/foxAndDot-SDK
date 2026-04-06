@@ -4,7 +4,7 @@ Entity::Entity(const sf::IntRect& sprite_rectangle) :
 	Sprite(empty_entity_s_texture, sprite_rectangle)
 {
 	this->collision_slot.this_entity = this;	
-	Core::connect(&this->collision, &this->collision_slot);
+	this->collision.connect(&this->collision_slot);
 
 	this->collider_margin = sf::Vector2f(0, 0);
 	this->collision_bounds = this->getGlobalBounds();

@@ -48,7 +48,6 @@ void Scene::remove(const std::string& component_name)
 		//so all good man
 
 		this->render_order.erase(this->scene_data[component_name].actual_comp_lay);
-		delete this->scene_data[component_name].component;
 		this->scene_data.erase(component_name);
 	}
 	else

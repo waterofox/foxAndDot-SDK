@@ -58,13 +58,16 @@ public:
 	Signal() = default;
 	~Signal() = default;
 
-	void connect(Slot<args_package>* slot)
+	template<typename owner>
+	friend static void connect(Signal<args_package>* signal,Slot<args_package,owner>* slot)
 	{
-		this->next_c.emplace(slot, Connection_Types::Slot);
+		signal->next_c.emplace(slot, Connection_Types::Slot);
 	}
-	void connect(Signal<args_package>* signal)
+	
+
+	friend static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)
 	{
-		this->next_c.emplace(signal, Connection_Types::Signal);
+		signal->next_c.emplace(signal_2, Connection_Types::Signal);
 	}
 	void disconnect(Connectable<args_package>* connected)
 	{

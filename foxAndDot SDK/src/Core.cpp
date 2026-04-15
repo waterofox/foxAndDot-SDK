@@ -35,7 +35,12 @@ void Core::set_event_handler(Executable* handler)
 Core::Core()
 {
 	this->the_core = this;
+	this->handle_collider_slot = new Slot<Collider_Args_Package, Core>(&Core::handle_collider,this);
 	
+}
+Core::~Core()
+{
+	delete this->handle_collider_slot;
 }
 void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
 	const unsigned long& framerate_limit, const sf::State& state)
@@ -131,7 +136,12 @@ sf::View* Core::get_view(const std::string& view_name)
 }
 
 
-void Core::handle_slots() 
+void Core::handle_collider(const Collider_Args_Package& args)
+{
+	args.other_comp->on_intersection(args.collider);
+}
+
+void Core::handle_slots()
 {
 	while (!this->emited_queue.empty())
 	{
@@ -178,9 +188,4 @@ void Core::render()
 	}
 
 	this->display();
-}
-
-void Core::Handle_Collider_Slot::do_something()
-{
-	args.other_comp->on_intersection(args.collider);
 }

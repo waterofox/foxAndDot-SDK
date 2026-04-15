@@ -16,7 +16,10 @@ Visualized_Collider::Visualized_Collider(const sf::FloatRect& rect)
 	this->setSize(rect.size);
 	this->setPosition(rect.position);
 
-	this->collision.connect(&this->v_collider_slot);
+	this->v_collider_slot = new Slot<sf::Vector2f, Visualized_Collider>(&Visualized_Collider::v_collider, this);
+	connect(&this->collision, this->v_collider_slot);
+
+	//this->collision.connect(&this->v_collider_slot);
 
 	this->type_of_resource = Resource_Types::Undefined;
 
@@ -34,6 +37,10 @@ sf::FloatRect Visualized_Collider::get_component_render_bounds()
 sf::Drawable* Visualized_Collider::as_drawable()
 {
 	return static_cast<sf::RectangleShape*>(this);
+}
+
+void Visualized_Collider::v_collider(const sf::Vector2f&)
+{
 }
 
 void Visualized_Collider::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource)

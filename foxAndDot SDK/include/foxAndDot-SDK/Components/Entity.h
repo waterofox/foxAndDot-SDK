@@ -12,15 +12,8 @@ class  Entity : public Collider, public sf::Sprite
 													  //So... this is a field to supply a default constructor argument for sf::Sprite.
 	//----------------------------------------------------------------------------------------------------------------------------------
 
-		class Handle_Collision_Slot : public Slot<sf::Vector2f> //This slot is triggered when the parent collider's 
-															    //signal is called to handle a collision
-		{
-			friend class Entity;
-
-			Entity* this_entity = nullptr;
-			void do_something() override;
-		};
-		friend class Handle_Collision_Slot;
+		Slot<sf::Vector2f, Entity>* handle_collision_slot = nullptr; //This slot is triggered when the parent collider's 
+		void handle_collision(const sf::Vector2f&);					 //signal is called to handle a collision
 
 	//----------------------------------------------------------------------------------------------------------------------------------	
 
@@ -31,9 +24,6 @@ protected:
 	//----------------------------------------------------------------------------------------------------------------------------------
 		
 		Script* entity_script = nullptr;	  //A script describing the behavior of an Entity
-
-		Handle_Collision_Slot collision_slot; //This slot is triggered when the parent collider's 
-											  //signal is called to handle a collision
 
 	//----------------------------------------------------------------------------------------------------------------------------------
 	
@@ -55,7 +45,7 @@ public:
 	Entity(const sf::Vector2i& sprite_size);
 	Entity(const sf::Vector2i& sprite_size, const int& resource_id);
 
-	virtual ~Entity() = default;
+	virtual ~Entity();
 
 
 	//INTERFACE

@@ -8,7 +8,8 @@
 class Visualized_Collider : public Collider, public sf::RectangleShape
 {
 	//----------------------------------------------------------------------------------------------------------------------
-		Slot<sf::Vector2f> v_collider_slot;
+		Slot<sf::Vector2f,Visualized_Collider>* v_collider_slot = nullptr;
+		void v_collider(const sf::Vector2f&);
 
 		void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
 		void update() override;

@@ -15,7 +15,7 @@ class Collider : public Scene_Component
 	//-----------------------------------------------------------------------------------------------------------------
 		sf::Vector2f last_valid_position; // The last position where there was no collision
 
-		Signal<Collider_Args_Package>* im_collider = nullptr;
+		Signal<Collider_Args_Package>im_collider;
 
 		bool colliding = true;
 	//-----------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ protected:
 public:
 
 	Collider();
-	virtual ~Collider();
+	virtual ~Collider() = default;
 
 	//INTERFACE
 	//=================================================================================================================

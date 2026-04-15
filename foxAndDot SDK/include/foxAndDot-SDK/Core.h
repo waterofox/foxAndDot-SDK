@@ -25,10 +25,6 @@
 
 class  Core : public sf::RenderWindow
 {
-	class Handle_Collider_Slot : public Slot<Collider_Args_Package>
-	{
-		void do_something() override;
-	};
 	//-------------------------------------------------------------------------------------------------------
 		sf::Time delta_time = sf::Time::Zero;
 		sf::Clock game_cycle_clock;
@@ -45,6 +41,9 @@ class  Core : public sf::RenderWindow
 		void handle_slots();
 		void process_intersections_and_collisions();
 
+		void handle_collider(const Collider_Args_Package& args);
+
+
 		void update();
 		void render();
 	//-------------------------------------------------------------------------------------------------------
@@ -58,12 +57,12 @@ public:
 
 
 	Core();
-	virtual ~Core() = default;
+	virtual ~Core();
 
 	//INTERFACE
 	//=================================================================================================================================
 	
-		static inline Handle_Collider_Slot handle_collider; // Сollision handling slot
+		static inline Slot<Collider_Args_Package, Core>* handle_collider_slot;// Сollision handling slot
 
 		static inline Signal<Changed_Scene_Package> scene_had_changed;		// Emited when new scene had loaded
 

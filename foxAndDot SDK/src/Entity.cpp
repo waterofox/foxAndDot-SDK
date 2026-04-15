@@ -3,8 +3,9 @@
 Entity::Entity(const sf::IntRect& sprite_rectangle) :
 	Sprite(empty_entity_s_texture, sprite_rectangle)
 {
-	this->collision_slot.this_entity = this;	
-	this->collision.connect(&this->collision_slot);
+	this->handle_collision_slot = new Slot<sf::Vector2f, Entity>(&Entity::handle_collision,this);
+	connect(&this->collision, this->handle_collision_slot);
+	//this->collision.connect(this->handle_collision_slot);
 
 	this->collider_margin = sf::Vector2f(0, 0);
 	this->collision_bounds = this->getGlobalBounds();
@@ -22,6 +23,11 @@ Entity::Entity(const sf::Vector2i& sprite_size, const int& resource_id) : Entity
 	this->set_resource(resource_id);
 }
 
+Entity::~Entity()
+{
+	delete this->handle_collision_slot;
+}
+
 void Entity::set_collider_margin(const sf::Vector2f& arg)
 {
 	this->collider_margin = arg;
@@ -37,6 +43,13 @@ sf::Drawable* Entity::as_drawable()
 	return static_cast<sf::Sprite*>(this);
 }
 
+
+void Entity::handle_collision(const sf::Vector2f& args)
+{
+	this->setPosition(args);
+	this->move(this->collider_margin);
+	this->collision_bounds.position = args;
+}
 
 void Entity::update()
 {
@@ -71,12 +84,4 @@ void Entity::set_script(Script* ent_script)
 void Entity::update_resource(const std::variant<sf::Texture*, sf::Font*>& resource)
 {
 	this->setTexture(*std::get<sf::Texture*>(resource));
-}
-
-
-void Entity::Handle_Collision_Slot::do_something()
-{
-	this->this_entity->setPosition(this->args);
-	this->this_entity->move(-this->this_entity->collider_margin);
-	this->this_entity->collision_bounds.position = this->args;
 }

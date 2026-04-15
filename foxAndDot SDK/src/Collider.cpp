@@ -6,8 +6,8 @@ void Collider::on_intersection(Scene_Component* comp)
 	Collider_Args_Package args;
 	args.collider   = this;
 	args.other_comp = comp;
-	this->im_collider->push_args(args);
-	Core::the_core->emit(im_collider);
+	this->im_collider.push_args(args);
+	Core::the_core->emit(&im_collider);
 }
 
 void Collider::on_intersection(Collider* other_collider)
@@ -31,14 +31,7 @@ void Collider::update()
 
 Collider::Collider()
 {
-	im_collider = new Signal<Collider_Args_Package>;
-	this->im_collider->connect(&Core::handle_collider);
-}
-
-Collider::~Collider()
-{
-	delete im_collider;
-	im_collider = nullptr;
+	connect(&this->im_collider, Core::handle_collider_slot);
 }
 
 void Collider::set_colliding(const bool& arg)

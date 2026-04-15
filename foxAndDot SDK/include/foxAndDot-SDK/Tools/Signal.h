@@ -12,7 +12,6 @@ template<typename args_package>
 class Signal : public Connectable<args_package>
 {
 	friend class Core;
-private:
 
 	std::queue<Executable*>* core_queue = nullptr;
 
@@ -64,11 +63,11 @@ public:
 		signal->next_c.emplace(slot, Connection_Types::Slot);
 	}
 	
-
 	friend static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)
 	{
 		signal->next_c.emplace(signal_2, Connection_Types::Signal);
 	}
+
 	void disconnect(Connectable<args_package>* connected)
 	{
 		if (this->next_c.find(connected) != this->next_c.end())

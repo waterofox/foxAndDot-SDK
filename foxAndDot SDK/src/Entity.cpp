@@ -47,7 +47,7 @@ sf::Drawable* Entity::as_drawable()
 void Entity::handle_collision(const sf::Vector2f& args)
 {
 	this->setPosition(args);
-	this->move(this->collider_margin);
+	this->move(-this->collider_margin);
 	this->collision_bounds.position = args;
 }
 

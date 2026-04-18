@@ -17,7 +17,11 @@ class Visualized_Collider : public Collider, public sf::RectangleShape
 
 public:
 		Visualized_Collider(const sf::FloatRect& rect);
+		Visualized_Collider(const sf::Vector2f& size);
 		~Visualized_Collider() = default;
+
+		Visualized_Collider(const Visualized_Collider& other);
+		Visualized_Collider& operator=(const Visualized_Collider& other);
 	
 		//INTERFACE
 	//======================================================================================================================

@@ -31,7 +31,6 @@ protected:
 
 	//----------------------------------------------------------------------------------------------------------------------------------
 
-protected:
 
 	//----------------------------------------------------------------------------------------------------------------------------------
 		void update() override;
@@ -44,6 +43,9 @@ public:
 	Entity(const sf::IntRect& sprite_rectangle, const int& resource_id);
 	Entity(const sf::Vector2i& sprite_size);
 	Entity(const sf::Vector2i& sprite_size, const int& resource_id);
+
+	Entity(const Entity& other);
+	Entity& operator=(const Entity& other);
 
 	virtual ~Entity();
 

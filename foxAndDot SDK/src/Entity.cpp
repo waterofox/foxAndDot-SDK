@@ -23,6 +23,32 @@ Entity::Entity(const sf::Vector2i& sprite_size, const int& resource_id) : Entity
 	this->set_resource(resource_id);
 }
 
+Entity::Entity(const Entity& other) : Sprite(empty_entity_s_texture, sf::IntRect(other.getTextureRect().position,other.getTextureRect().size))
+{
+	this->handle_collision_slot = new Slot<sf::Vector2f, Entity>(*other.handle_collision_slot);
+	this->entity_script = other.entity_script;
+	this->collider_margin = other.collider_margin;
+}
+
+Entity& Entity::operator=(const Entity& other)
+{
+	if (this == &other)
+	{
+		return *this;
+	}
+	
+	if (this->handle_collision_slot != nullptr)
+	{
+		delete this->handle_collision_slot;
+	}
+
+	this->handle_collision_slot = new Slot<sf::Vector2f, Entity>(*other.handle_collision_slot);
+	this->entity_script = other.entity_script;
+	this->collider_margin = other.collider_margin;
+
+	return *this;
+}
+
 Entity::~Entity()
 {
 	delete this->handle_collision_slot;

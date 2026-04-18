@@ -29,6 +29,31 @@ Visualized_Collider::Visualized_Collider(const sf::FloatRect& rect)
 	this->setOutlineThickness(-1);
 }
 
+Visualized_Collider::Visualized_Collider(const sf::Vector2f& size) : Visualized_Collider(sf::FloatRect(sf::Vector2f(0,0),size))
+{
+}
+
+Visualized_Collider::Visualized_Collider(const Visualized_Collider& other)
+{
+	this->v_collider_slot = new Slot<sf::Vector2f, Visualized_Collider>(*other.v_collider_slot);
+}
+
+Visualized_Collider& Visualized_Collider::operator=(const Visualized_Collider& other)
+{
+	if (this == &other)
+	{
+		return *this;
+	}
+
+	if (this->v_collider_slot != nullptr)
+	{
+		delete this->v_collider_slot;
+	}
+	this->v_collider_slot = new Slot<sf::Vector2f, Visualized_Collider>(*other.v_collider_slot);
+	
+	return *this;
+}
+
 sf::FloatRect Visualized_Collider::get_component_render_bounds()
 {
 	return this->getGlobalBounds();

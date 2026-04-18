@@ -14,9 +14,7 @@ public:
 	virtual void operator()() override {}
 
 	Script()  = default;
-	virtual ~Script() = default;
 	Script(Entity* entity_ptr);
-	Script(const Script& other_script);
-	Script& operator=(const Script& other_script);
+	virtual ~Script() = default;
 };
 

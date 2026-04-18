@@ -9,14 +9,3 @@ Script::Script(Entity* entity_ptr)
 {
 	set_entity(entity_ptr);
 }
-
-Script::Script(const Script& other_script)
-{
-	//this class must not make the of it's fields!
-}
-
-Script& Script::operator=(const Script& other_script)
-{
-	//this class must not make the of it's fields!
-	return *this;
-}

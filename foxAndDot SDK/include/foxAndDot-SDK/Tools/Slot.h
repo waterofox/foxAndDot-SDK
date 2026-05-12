@@ -21,11 +21,18 @@ class Slot : public Connectable<args_package>
 
 		void operator()() override
 		{
-			Connectable<args_package>::push_args(args_buffer.front());
-			((*slot_owner).*owner_function)(this->args);
-			Connectable<args_package>::operator()();
+			this->args = this->args_buffer.front();
 			this->args_buffer.pop();
-		}
+
+			if (this->owner_function != nullptr and this->slot_owner != nullptr)
+			{
+				((*slot_owner).*owner_function)(this->args);
+			}
+			else
+			{
+				
+			}
+			Connectable<args_package>::operator()();		}
 
 	//------------------------------------------------------------------------------------
 

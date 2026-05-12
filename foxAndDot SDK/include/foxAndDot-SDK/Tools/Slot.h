@@ -36,5 +36,9 @@ public:
 		this->owner_function = owner_function;
 		this->slot_owner = owner;
 	}
-	~Slot() = default;
+	~Slot()
+	{
+		this->owner_function = nullptr;
+		this->slot_owner = nullptr;
+	}
 };

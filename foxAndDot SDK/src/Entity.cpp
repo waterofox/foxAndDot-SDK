@@ -1,57 +1,40 @@
 #include "../include/foxAndDot-SDK/Components/Entity.h"
 
-Entity::Entity(const sf::IntRect& sprite_rectangle) :
-	Sprite(empty_entity_s_texture, sprite_rectangle)
+Entity::Entity() : Collider(), sf::Sprite(empty_entity_s_texture)
 {
-	this->handle_collision_slot = new Slot<sf::Vector2f, Entity>(&Entity::handle_collision,this);
-	connect(&this->collision, this->handle_collision_slot);
-	//this->collision.connect(this->handle_collision_slot);
+	this->handle_collision_slot = Slot<sf::Vector2f, Entity>(&Entity::handle_collision, this);
+	connect(&this->collision, &this->handle_collision_slot);
 
 	this->collider_margin = sf::Vector2f(0, 0);
+
+	this->type_of_resource = Resource_Types::Texture;
+}
+
+Entity::Entity(const int& resource_id) : Entity()
+{
+	this->set_resource(resource_id);
+}
+
+Entity::Entity(const sf::Vector2i& size) : Entity()
+{
+	this->setTextureRect(sf::IntRect(this->getTextureRect().position, size));
 	this->collision_bounds = this->getGlobalBounds();
 }
 
-Entity::Entity(const sf::IntRect& sprite_rectangle, const int& resource_id) : Entity(sprite_rectangle)
+Entity::Entity(const sf::Vector2i& size, const int& resource_id) : Entity(size)
 {
 	this->set_resource(resource_id);
 }
 
-Entity::Entity(const sf::Vector2i& sprite_size): Entity(sf::IntRect(sf::Vector2i(0,0),sprite_size)){}
+Entity::Entity(const sf::IntRect& rect) : Entity()
+{
+	this->setTextureRect(rect);
+	this->collision_bounds = this->getGlobalBounds();
+}
 
-Entity::Entity(const sf::Vector2i& sprite_size, const int& resource_id) : Entity(sprite_size)
+Entity::Entity(const sf::IntRect& rect, const int& resource_id) : Entity(rect)
 {
 	this->set_resource(resource_id);
-}
-
-Entity::Entity(const Entity& other) : Sprite(empty_entity_s_texture, sf::IntRect(other.getTextureRect().position,other.getTextureRect().size))
-{
-	this->handle_collision_slot = new Slot<sf::Vector2f, Entity>(*other.handle_collision_slot);
-	this->entity_script = other.entity_script;
-	this->collider_margin = other.collider_margin;
-}
-
-Entity& Entity::operator=(const Entity& other)
-{
-	if (this == &other)
-	{
-		return *this;
-	}
-	
-	if (this->handle_collision_slot != nullptr)
-	{
-		delete this->handle_collision_slot;
-	}
-
-	this->handle_collision_slot = new Slot<sf::Vector2f, Entity>(*other.handle_collision_slot);
-	this->entity_script = other.entity_script;
-	this->collider_margin = other.collider_margin;
-
-	return *this;
-}
-
-Entity::~Entity()
-{
-	delete this->handle_collision_slot;
 }
 
 void Entity::set_collider_margin(const sf::Vector2f& arg)
@@ -111,3 +94,5 @@ void Entity::update_resource(const std::variant<sf::Texture*, sf::Font*>& resour
 {
 	this->setTexture(*std::get<sf::Texture*>(resource));
 }
+
+

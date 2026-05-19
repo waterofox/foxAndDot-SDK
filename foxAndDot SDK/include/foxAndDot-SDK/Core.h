@@ -57,14 +57,14 @@ public:
 
 
 	Core();
-	virtual ~Core();
+	virtual ~Core() = default;
 
 	//INTERFACE
 	//=================================================================================================================================
 	
-		static inline Slot<Collider_Args_Package, Core>* handle_collider_slot;// Сollision handling slot
+		static inline Slot<Collider_Args_Package, Core> handle_collider_slot; // Сollision handling slot
 
-		static inline Signal<Changed_Scene_Package> scene_had_changed;		// Emited when new scene had loaded
+		static inline Signal<Changed_Scene_Package> scene_had_changed;		  // Emited when new scene had loaded
 
 
 		static inline Resource_Manager resource_manager;	// Resource manager for managing fonts and textures

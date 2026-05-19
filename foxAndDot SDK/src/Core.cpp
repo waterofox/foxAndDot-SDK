@@ -35,13 +35,10 @@ void Core::set_event_handler(Executable* handler)
 Core::Core()
 {
 	this->the_core = this;
-	this->handle_collider_slot = new Slot<Collider_Args_Package, Core>(&Core::handle_collider,this);
+	this->handle_collider_slot = Slot<Collider_Args_Package, Core>(&Core::handle_collider,this);
 	
 }
-Core::~Core()
-{
-	delete this->handle_collider_slot;
-}
+
 void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
 	const unsigned long& framerate_limit, const sf::State& state)
 {

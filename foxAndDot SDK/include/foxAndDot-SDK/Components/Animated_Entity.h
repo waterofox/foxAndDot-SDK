@@ -21,12 +21,13 @@ private:
 	//---------------------------------------------------------------------------------------------------------------
 
 public:
-
-	Animated_Entity(const sf::IntRect& sprite_rectangle);
-	Animated_Entity(const sf::IntRect& sprite_rectangle, const int& resource_id);
-	Animated_Entity(const sf::Vector2i& sprite_size);
-	Animated_Entity(const sf::Vector2i& sprite_size, const int& resource_id);
-
+	Animated_Entity();
+	Animated_Entity(const int& resource_id);
+	Animated_Entity(const sf::Vector2i& size);
+	Animated_Entity(const sf::Vector2i& size, const int& resource_id);
+	Animated_Entity(const sf::IntRect& rect);
+	Animated_Entity(const sf::IntRect& rect, const int& resource_id);
+	
 	virtual ~Animated_Entity() = default;
 
 	//INTERFACE

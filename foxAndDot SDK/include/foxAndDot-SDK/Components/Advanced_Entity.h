@@ -7,10 +7,12 @@ class Advanced_Entity : public Entity
 public:
 	properties_package properties;
 
-	Advanced_Entity(const sf::IntRect& sprite_rectangle) : Entity(sprite_rectangle){}
-	Advanced_Entity(const sf::IntRect& sprite_rectangle, const int& resource_id) : Entity(sprite_rectangle, resource_id) {}
-	Advanced_Entity(const sf::Vector2i& sprite_size) : Entity(sprite_size) {}
-	Advanced_Entity(const sf::Vector2i& sprite_size, const int& resource_id) : Entity(sprite_size, resource_id) {}
+	Advanced_Entity() : Entity() {};
+	Advanced_Entity(const int& resource_id) : Entity(resource_id) {};
+	Advanced_Entity(const sf::Vector2i& size) : Entity(size) {};
+	Advanced_Entity(const sf::Vector2i& size, const int& resource_id) : Entity(size, resource_id) {};
+	Advanced_Entity(const sf::IntRect& rect) : Entity(rect) {};
+	Advanced_Entity(const sf::IntRect& rect, const int& resource_id) : Entity(rect, resource_id) {};
 
 	~Advanced_Entity() = default;
 };

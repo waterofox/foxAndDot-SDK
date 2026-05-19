@@ -8,7 +8,7 @@
 class Visualized_Collider : public Collider, public sf::RectangleShape
 {
 	//----------------------------------------------------------------------------------------------------------------------
-		Slot<sf::Vector2f,Visualized_Collider>* v_collider_slot = nullptr;
+		static Slot<sf::Vector2f,Visualized_Collider> v_collider_slot;
 		void v_collider(const sf::Vector2f&);
 
 		void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
@@ -16,13 +16,11 @@ class Visualized_Collider : public Collider, public sf::RectangleShape
 	//----------------------------------------------------------------------------------------------------------------------
 
 public:
-		Visualized_Collider(const sf::FloatRect& rect);
-		Visualized_Collider(const sf::Vector2f& size);
-		~Visualized_Collider() = default;
 
-		Visualized_Collider(const Visualized_Collider& other);
-		Visualized_Collider& operator=(const Visualized_Collider& other);
-	
+	Visualized_Collider();
+	Visualized_Collider(const sf::Vector2f& size);
+	Visualized_Collider(const sf::FloatRect& rect);
+
 		//INTERFACE
 	//======================================================================================================================
 		

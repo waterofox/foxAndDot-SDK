@@ -4,8 +4,3 @@ void Script::set_entity(Entity* entity_ptr)
 {
 	this->this_entity = entity_ptr;
 }
-
-Script::Script(Entity* entity_ptr)
-{
-	set_entity(entity_ptr);
-}

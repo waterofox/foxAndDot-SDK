@@ -1,13 +1,5 @@
 #include "../include/foxAndDot-SDK/Components/Animated_Entity.h"
 
-Animated_Entity::Animated_Entity(const sf::IntRect& sprite_rectangle) : Entity(sprite_rectangle){}
-
-Animated_Entity::Animated_Entity(const sf::IntRect& sprite_rectangle, const int& resource_id) : Entity(sprite_rectangle, resource_id) {}
-
-Animated_Entity::Animated_Entity(const sf::Vector2i& size_of_sprite_rectangle) : Entity(size_of_sprite_rectangle){}
-
-Animated_Entity::Animated_Entity(const sf::Vector2i& size_of_sprite_rectangle, const int& resource_id) : Entity(size_of_sprite_rectangle, resource_id) {}
-
 void Animated_Entity::update()
 {
 	Entity::update();
@@ -23,6 +15,29 @@ void Animated_Entity::update()
 	this->setTextureRect(sf::IntRect(sf::Vector2i(int(current_frame) * (this->getTexture().getSize().x / frame_count),0),\
 		sf::Vector2i(this->getTexture().getSize().x / frame_count, this->getTexture().getSize().y)));
 }
+
+Animated_Entity::Animated_Entity() : Entity(){}
+
+Animated_Entity::Animated_Entity(const int& resource_id) : Entity(resource_id)
+{
+}
+
+Animated_Entity::Animated_Entity(const sf::Vector2i& size) : Entity(size)
+{
+}
+
+Animated_Entity::Animated_Entity(const sf::Vector2i& size, const int& resource_id) : Entity(size,resource_id)
+{
+}
+
+Animated_Entity::Animated_Entity(const sf::IntRect& rect) : Entity(rect)
+{
+}
+
+Animated_Entity::Animated_Entity(const sf::IntRect& rect, const int& resource_id) : Entity(rect,resource_id)
+{
+}
+
 
 void Animated_Entity::play_animation()
 {

@@ -12,8 +12,8 @@ class  Entity : public Collider, public sf::Sprite
 													  //So... this is a field to supply a default constructor argument for sf::Sprite.
 	//----------------------------------------------------------------------------------------------------------------------------------
 
-		Slot<sf::Vector2f, Entity>* handle_collision_slot = nullptr; //This slot is triggered when the parent collider's 
-		void handle_collision(const sf::Vector2f&);					 //signal is called to handle a collision
+		Slot<sf::Vector2f, Entity> handle_collision_slot; //This slot is triggered when the parent collider's 
+		void handle_collision(const sf::Vector2f&);		  //signal is called to handle a collision
 
 	//----------------------------------------------------------------------------------------------------------------------------------	
 
@@ -39,15 +39,14 @@ protected:
 
 public:
 
-	Entity(const sf::IntRect& sprite_rectangle);
-	Entity(const sf::IntRect& sprite_rectangle, const int& resource_id);
-	Entity(const sf::Vector2i& sprite_size);
-	Entity(const sf::Vector2i& sprite_size, const int& resource_id);
+	Entity();
+	Entity(const int& resource_id);
+	Entity(const sf::Vector2i& size);
+	Entity(const sf::Vector2i& size, const int& resource_id);
+	Entity(const sf::IntRect& rect);
+	Entity(const sf::IntRect& rect, const int& resource_id);
 
-	Entity(const Entity& other);
-	Entity& operator=(const Entity& other);
-
-	virtual ~Entity();
+	virtual ~Entity() = default;
 
 
 	//INTERFACE

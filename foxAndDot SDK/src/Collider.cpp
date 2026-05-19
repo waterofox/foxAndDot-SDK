@@ -31,7 +31,7 @@ void Collider::update()
 
 Collider::Collider()
 {
-	connect(&this->im_collider, Core::handle_collider_slot);
+	connect(&this->im_collider, &Core::handle_collider_slot);
 }
 
 void Collider::set_colliding(const bool& arg)

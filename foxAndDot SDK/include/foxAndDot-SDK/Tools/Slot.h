@@ -1,13 +1,13 @@
 #pragma once
 #include "Connectable.h"
 #include <queue>
-template <typename args_package, typename owner>
+template <typename args_package, typename Owner>
 class Slot : public Connectable<args_package>
 {
 	friend class Core;
 
-	owner* slot_owner = nullptr;
-	void(owner::* owner_function)(const args_package&) = nullptr;
+	Owner* slot_owner = nullptr;
+	void(Owner::* owner_function)(const args_package&) = nullptr;
 
 	//------------------------------------------------------------------------------------
 
@@ -30,15 +30,18 @@ class Slot : public Connectable<args_package>
 			}
 			else
 			{
-				
+				printf("SLOT ERROR: Slot construction is not completed.\n");
 			}
-			Connectable<args_package>::operator()();		}
+			Connectable<args_package>::operator()();		
+		}
 
 	//------------------------------------------------------------------------------------
 
 public:
 
-	Slot(void(owner::* owner_function)(const args_package&),owner* owner) : Connectable<args_package>()
+	Slot() : Connectable<args_package>() {}
+
+	Slot(void(Owner::* owner_function)(const args_package&),Owner* owner) : Slot<args_package,Owner>()
 	{
 		this->owner_function = owner_function;
 		this->slot_owner = owner;

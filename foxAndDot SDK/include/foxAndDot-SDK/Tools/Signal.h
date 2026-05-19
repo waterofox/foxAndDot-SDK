@@ -54,8 +54,6 @@ class Signal : public Connectable<args_package>
 	}
 
 public:
-	Signal() = default;
-	~Signal() = default;
 
 	template<typename owner>
 	friend static void connect(Signal<args_package>* signal,Slot<args_package,owner>* slot)

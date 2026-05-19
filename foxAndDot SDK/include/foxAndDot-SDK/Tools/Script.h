@@ -12,9 +12,6 @@ protected:
 public: 
 	void set_entity(Entity* entity_ptr);
 	virtual void operator()() override {}
-
-	Script()  = default;
-	Script(Entity* entity_ptr);
 	virtual ~Script() = default;
 };
 

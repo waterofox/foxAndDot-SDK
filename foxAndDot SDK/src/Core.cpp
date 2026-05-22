@@ -7,7 +7,8 @@ void Core::change_scene(Scene* new_Scene)
 	{
 		printf("CORE ERROR: More than one scene change per tick\n");
 		return;
-	}
+	} 
+
 	else
 	{
 		scene_buffer = new_Scene;

@@ -14,5 +14,20 @@ public:
 	Advanced_Animated_Entity(const sf::IntRect& rect) : Animated_Entity(rect) {};
 	Advanced_Animated_Entity(const sf::IntRect& rect, const int& resource_id) : Animated_Entity(rect, resource_id) {};
 
+	Advanced_Animated_Entity(const Advanced_Animated_Entity<properties_package>& other) : Animated_Entity(other)
+	{
+		this->properties = other.properties;
+	}
+	Advanced_Animated_Entity<properties_package>& operator=(const Advanced_Animated_Entity<properties_package>& other)
+	{
+		if (this == &other) { return *this; }
+
+		Animated_Entity::operator=(other);
+
+		this->properties = other.properties;
+
+		return *this;
+	}
+
 	~Advanced_Animated_Entity() = default;
 };

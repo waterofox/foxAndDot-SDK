@@ -2,7 +2,7 @@
 
 Entity::Entity() : Collider(), sf::Sprite(empty_entity_s_texture)
 {
-	this->handle_collision_slot = Slot<sf::Vector2f, Entity>(&Entity::handle_collision, this);
+	this->handle_collision_slot.reassign(&Entity::handle_collision, this);
 	connect(&this->collision, &this->handle_collision_slot);
 
 	this->collider_margin = sf::Vector2f(0, 0);
@@ -35,6 +35,35 @@ Entity::Entity(const sf::IntRect& rect) : Entity()
 Entity::Entity(const sf::IntRect& rect, const int& resource_id) : Entity(rect)
 {
 	this->set_resource(resource_id);
+}
+
+Entity::Entity(const Entity& other) : Collider(other), sf::Sprite(other)
+{
+	this->entity_script = other.entity_script;
+	this->collider_margin = other.collider_margin;
+
+	this->handle_collision_slot = other.handle_collision_slot;
+	this->handle_collision_slot.reassign(&Entity::handle_collision, this);
+	connect(&this->collision, &this->handle_collision_slot);
+}
+
+Entity& Entity::operator=(const Entity& other)
+{
+	if (this == &other) { return *this; }
+	
+	Collider::operator=(other);
+	sf::Sprite::operator=(other);
+
+	this->entity_script = other.entity_script;
+	this->collider_margin = other.collider_margin;
+
+	this->handle_collision_slot = other.handle_collision_slot;
+	this->handle_collision_slot.reassign(&Entity::handle_collision, this);
+	connect(&this->collision, &this->handle_collision_slot);
+
+	
+	return *this;
+	
 }
 
 void Entity::set_collider_margin(const sf::Vector2f& arg)

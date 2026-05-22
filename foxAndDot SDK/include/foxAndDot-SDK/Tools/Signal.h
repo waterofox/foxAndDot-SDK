@@ -55,8 +55,15 @@ class Signal : public Connectable<args_package>
 
 public:
 
+	Signal() = default;
+	Signal(const Signal<args_package>& other){}
+	Signal<args_package>& operator=(const Signal<args_package>& other) 
+	{
+		return *this;
+	}
+
 	template<typename owner>
-	friend static void connect(Signal<args_package>* signal,Slot<args_package,owner>* slot)
+	friend void connect(Signal<args_package>* signal,Slot<args_package,owner>* slot)
 	{
 		signal->next_c.emplace(slot, Connection_Types::Slot);
 	}
@@ -77,6 +84,13 @@ public:
 			printf("SIGNAL WARNING: Attempting to disconnect an unconnected slot or signal\n");
 			return;
 		}
+	}
+
+	
+
+	void disconnect_all()
+	{
+		this->next_c.clear();
 	}
 	
 

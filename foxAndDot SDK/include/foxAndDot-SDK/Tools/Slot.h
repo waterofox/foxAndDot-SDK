@@ -14,7 +14,7 @@ class Slot : public Connectable<args_package>
 		std::queue<args_package> args_buffer;
 
 	//------------------------------------------------------------------------------------
-		void push_args(const args_package& args)
+		void push_args(const args_package& args) override
 		{
 			this->args_buffer.push(args);
 		}
@@ -40,6 +40,34 @@ class Slot : public Connectable<args_package>
 public:
 
 	Slot() : Connectable<args_package>() {}
+
+	Slot(const Slot<args_package, Owner>& other)
+	{
+		this->args = other.args;
+		this->args_buffer = other.args_buffer;
+
+		this->slot_owner = nullptr;
+		this->owner_function = nullptr;
+	}
+
+	Slot<args_package,Owner>& operator=(const Slot<args_package,Owner>& other)
+	{
+		if (this == &other) { return *this; }
+		
+		this->args = other.args;
+		this->args_buffer = other.args_buffer;
+
+		this->slot_owner = nullptr;
+		this->owner_function = nullptr;
+
+		return *this;
+	}
+
+	void reassign(void(Owner::* owner_function)(const args_package&), Owner* owner)
+	{
+		this->owner_function = owner_function;
+		this->slot_owner = owner;
+	}
 
 	Slot(void(Owner::* owner_function)(const args_package&),Owner* owner) : Slot<args_package,Owner>()
 	{

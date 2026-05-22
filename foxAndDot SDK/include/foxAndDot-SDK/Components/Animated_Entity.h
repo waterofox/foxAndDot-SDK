@@ -27,6 +27,9 @@ public:
 	Animated_Entity(const sf::Vector2i& size, const int& resource_id);
 	Animated_Entity(const sf::IntRect& rect);
 	Animated_Entity(const sf::IntRect& rect, const int& resource_id);
+
+	Animated_Entity(const Animated_Entity& other);
+	Animated_Entity& operator=(const Animated_Entity& other);
 	
 	virtual ~Animated_Entity() = default;
 

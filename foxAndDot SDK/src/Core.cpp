@@ -35,7 +35,7 @@ void Core::set_event_handler(Executable* handler)
 Core::Core()
 {
 	this->the_core = this;
-	this->handle_collider_slot = Slot<Collider_Args_Package, Core>(&Core::handle_collider,this);
+	this->handle_collider_slot.reassign(&Core::handle_collider, this);
 	
 }
 

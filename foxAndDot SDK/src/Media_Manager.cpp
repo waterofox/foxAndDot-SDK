@@ -1,22 +1,12 @@
 #include "../include/foxAndDot-SDK/Media_Manager.h"
 
-#define EMEDMAN std::string("MEDIA MANAGER ERROR: ")
-#define ERROR(error_location,error_message) error_location + error_message
-
-Media_Manager::Media_Manager()
-{
-}
-
-Media_Manager::~Media_Manager()
-{
-}
-
 void Media_Manager::add_music(const int index, const std::string& path)
 {
 
 	if (!std::filesystem::exists(path))
 	{
-		std::cerr << ERROR(EMEDMAN,"media file: " + path + " does not exist");
+		printf("MEDIA MANAGER ERROR: Media file <%d> does not exist in directory:", index);
+		std::cout << path << std::endl;
 		return;
 	}
 
@@ -29,7 +19,8 @@ void Media_Manager::add_sound(const int index, const std::string& path)
 
 	if (!std::filesystem::exists(path))
 	{
-		std::cerr << ERROR(EMEDMAN, "media file: " + path + " does not exist");
+		printf("MEDIA MANAGER ERROR: Media file <%d> does not exist in directory:", index);
+		std::cout << path << std::endl;
 		return;
 	}
 	sound_container cont;
@@ -43,8 +34,8 @@ void Media_Manager::add_sound(const int index, const std::string& path)
 	}
 	else
 	{
-		std::cerr << ERROR(EMEDMAN, "media file: " + path + " reading error");
-		sound_lib.erase(index);
+		printf("MEDIA MANAGER ERROR: Media file <%d> does not exist in directory:", index);
+		std::cout << path << std::endl;
 		return;
 	}
 }
@@ -53,7 +44,7 @@ void Media_Manager::play_music(const int index)
 {
 	if (!music_player.openFromFile(music_lib[index]))
 	{
-		std::cerr << ERROR(EMEDMAN, "media file: " + music_lib[index] + " reading error");
+		printf("MEDIA MANAGER ERROR: Music file <%d>  reading error", index);
 		return;
 	}
 
@@ -71,7 +62,7 @@ void Media_Manager::play_sound(const int index)
 	}
 	else
 	{
-		std::cerr << ERROR(EMEDMAN, "sound does not exist");
+		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library", index);
 		return;
 	}
 }
@@ -81,7 +72,7 @@ void Media_Manager::delete_music(const int index)
 	if (last_music_path == music_lib[index] and
 		music_player.getStatus() == sf::SoundSource::Status::Playing)
 	{
-		std::cerr << ERROR(EMEDMAN, "You can't delete media whet it's playing");
+		printf("MEDIA MANAGER ERROR: You cannot delete a music file <%d> while it is playing", index);
 		return;
 	}
 
@@ -95,7 +86,7 @@ void Media_Manager::delete_sound(const int index)
 	{
 		if ((*iter_sound).second.sound.getStatus() == sf::SoundSource::Status::Playing)
 		{
-			std::cerr << ERROR(EMEDMAN, "You can't delete media whet it's playing");
+			printf("MEDIA MANAGER ERROR: You cannot delete a sound <%d> while it is playing", index);
 			return;
 		}
 		sound_lib.erase(index);
@@ -133,8 +124,8 @@ sf::SoundBuffer& Media_Manager::get_sound_buffer(const int& index)
 	}
 	else
 	{
-		std::cerr << ERROR(EMEDMAN, "sound does not exist");
-		assert(false);
+		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library", index);
+		return e_c.buffer;
 	}
 }
 
@@ -147,8 +138,8 @@ sf::Sound& Media_Manager::get_sound(const int& index)
 	}
 	else
 	{
-		std::cerr << ERROR(EMEDMAN, "sound does not exist");
-		assert(false);
+		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library", index);
+		return e_c.sound;
 	}
 }
 

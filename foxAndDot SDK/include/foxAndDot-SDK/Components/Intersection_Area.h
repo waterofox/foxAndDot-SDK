@@ -1,41 +1,48 @@
 #pragma once
 
+//std inclides
+#include <set>
+
 //sdk includes
-
-#include "../Core.h"
 #include "Scene_Component.h"
+#include "../Tools/Signal.h"
 
-//INTERSECTION AREA
 
 class  Intersection_Area : public Scene_Component, public sf::RectangleShape
 {
-	std::set<Scene_Component*> components_inside_area;
-	std::vector<Scene_Component*> erase_buffer;
+	//----------------------------------------------------------------------------------------------------------------
+		
+		std::set<Scene_Component*> components_inside_area;
+		std::vector<Scene_Component*> erase_buffer;
 
-	Core::slot_type on_enterence = nullptr;
-	Core::slot_type on_exit = nullptr;
+	//----------------------------------------------------------------------------------------------------------------
 
-	//OVERRIDED METHODS & METHODS
-protected:
-	void on_intersection(Core* the_core, Scene_Component* component) override;
-	sf::Drawable* as_drawable() override;
-	void update(Core* the_core) override;
-	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
+		void update() override;
+		void on_intersection(Scene_Component* component) override;
+		void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
 
+	//----------------------------------------------------------------------------------------------------------------
 
 public:
+
 	Intersection_Area(const sf::FloatRect& rect);
 	~Intersection_Area() = default;
 
-	// INTERFACE OF THE CLASS
-	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//INTERFACE
+	//================================================================================================================
 
-	sf::FloatRect get_component_render_bounds() override;
-	sf::FloatRect get_component_bounds()		override;
+		Signal<Scene_Component*> component_in;	// Emited when component in
+		
+		Signal<Scene_Component*> component_out; // Emited when component out
 
-	void set_slot_on_enterence(const Core::slot_type& slot); //What happens when a component steps into an area
-	void set_slot_on_exit(const Core::slot_type& slot);      //What happens when the component leaves the area
+	//----------------------------------------------------------------------------------------------------------------
 
-	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		sf::Drawable* as_drawable() override;
+
+		sf::FloatRect get_component_render_bounds() override;
+		
+		sf::FloatRect get_component_bounds()		override;
+
+	//================================================================================================================
 
 };

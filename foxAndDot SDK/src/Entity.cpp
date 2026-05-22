@@ -1,88 +1,120 @@
 #include "../include/foxAndDot-SDK/Components/Entity.h"
 
-#define EENTITY std::string("ENTITY ERROR: ")
-#define ERROR(error_location,error_message) error_location + error_message
-
-Entity::Entity(const sf::IntRect& sprite_rectangle) :
-	Sprite(empty_entity_s_texture, sprite_rectangle)
+Entity::Entity() : Collider(), sf::Sprite(empty_entity_s_texture)
 {
-	//on_intersection = Entity::entity_on_intersection;
+	this->handle_collision_slot.reassign(&Entity::handle_collision, this);
+	connect(&this->collision, &this->handle_collision_slot);
+
+	this->collider_margin = sf::Vector2f(0, 0);
+
+	this->type_of_resource = Resource_Types::Texture;
+}
+
+Entity::Entity(const int& resource_id) : Entity()
+{
+	this->set_resource(resource_id);
+}
+
+Entity::Entity(const sf::Vector2i& size) : Entity()
+{
+	this->setTextureRect(sf::IntRect(this->getTextureRect().position, size));
 	this->collision_bounds = this->getGlobalBounds();
-	this->colliding = false;
-	last_valid_position = sf::Vector2f(0, 0);
-
 }
 
-void Entity::on_intersection(Core* the_core, Scene_Component* component)
+Entity::Entity(const sf::Vector2i& size, const int& resource_id) : Entity(size)
 {
-	//collision
-	if (this->colliding and component->is_colliding())
-	{
-		this->setPosition(last_valid_position);
-
-		this->collision_bounds.position = this->getPosition();
-		this->collision_bounds.position += this->collision_padding;
-	}
-	//intersection
-	if (this->intersection_slot != nullptr)
-	{
-		this->intersection_slot(the_core, component);
-	}
+	this->set_resource(resource_id);
 }
 
-
-Entity::property_type& Entity::operator[](const std::string& name)
+Entity::Entity(const sf::IntRect& rect) : Entity()
 {
-	try
-	{
-		auto iter_on_property = this->properties.find(name);
-		if (iter_on_property == this->properties.end()) {
-			throw std::runtime_error(ERROR(EENTITY, "property [" + name + "] does not exist"));
-		}
-		else { return this->properties[name]; }
-	}
-	catch (std::exception& err) { std::cout << err.what() << std::endl; assert(false); }
+	this->setTextureRect(rect);
+	this->collision_bounds = this->getGlobalBounds();
 }
+
+Entity::Entity(const sf::IntRect& rect, const int& resource_id) : Entity(rect)
+{
+	this->set_resource(resource_id);
+}
+
+Entity::Entity(const Entity& other) : Collider(other), sf::Sprite(other)
+{
+	this->entity_script = other.entity_script;
+	this->collider_margin = other.collider_margin;
+
+	this->handle_collision_slot = other.handle_collision_slot;
+	this->handle_collision_slot.reassign(&Entity::handle_collision, this);
+	connect(&this->collision, &this->handle_collision_slot);
+}
+
+Entity& Entity::operator=(const Entity& other)
+{
+	if (this == &other) { return *this; }
+	
+	Collider::operator=(other);
+	sf::Sprite::operator=(other);
+
+	this->entity_script = other.entity_script;
+	this->collider_margin = other.collider_margin;
+
+	this->handle_collision_slot = other.handle_collision_slot;
+	this->handle_collision_slot.reassign(&Entity::handle_collision, this);
+	connect(&this->collision, &this->handle_collision_slot);
+
+	
+	return *this;
+	
+}
+
+void Entity::set_collider_margin(const sf::Vector2f& arg)
+{
+	this->collider_margin = arg;
+}
+
+void Entity::set_collision_size(const sf::Vector2f& arg)
+{
+	this->collision_bounds.size = arg;
+}
+
 sf::Drawable* Entity::as_drawable()
 {
 	return static_cast<sf::Sprite*>(this);
 }
-Entity::property_type& Entity::operator[](const char*& name)
+
+
+void Entity::handle_collision(const sf::Vector2f& args)
 {
-	return (*this)[std::string(name)];
+	this->setPosition(args);
+	this->move(-this->collider_margin);
+	this->collision_bounds.position = args;
 }
 
-void Entity::update(Core* the_core)
+void Entity::update()
 {
-	last_valid_position = this->getPosition();
+	Collider::update();
 
-	if (entity_script == nullptr) { return; }
-	entity_script(the_core,this);
+	if (entity_script != nullptr) 
+	{ 
+		entity_script->set_entity(this);
+		(*entity_script)();
+	}
 
-	collision_bounds.position = this->getPosition();
-	collision_bounds.position += collision_padding;
+	collision_bounds.position  = this->getPosition();
+	collision_bounds.position += collider_margin;
 }
 
-sf::FloatRect Entity::get_component_bounds()
-{
-	return collision_bounds;
-}
 sf::FloatRect Entity::get_component_render_bounds()
 {
 	return this->getGlobalBounds();
 }
 
-void Entity::add_property(const std::string& name, const property_type& data)
+sf::FloatRect Entity::get_component_bounds()
 {
-	if (data.index() == 4) { this->properties[name] = std::string(std::get<const char*>(data)); return; }
-	this->properties[name] = data;
+	return this->collision_bounds;
+}
 
-}
-void Entity::set_entity_intersection_slot(const Core::slot_type& slot)
-{
-	intersection_slot = slot;
-}
-void Entity::set_script(const script& ent_script)
+
+void Entity::set_script(Script* ent_script)
 {
 	entity_script = ent_script;
 }
@@ -91,3 +123,5 @@ void Entity::update_resource(const std::variant<sf::Texture*, sf::Font*>& resour
 {
 	this->setTexture(*std::get<sf::Texture*>(resource));
 }
+
+

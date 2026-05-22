@@ -19,31 +19,46 @@
     <Filter Include="Файлы заголовков\COMPS">
       <UniqueIdentifier>{3bb27d1f-3160-424e-b4f4-de973e5be5d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\TOOLS">
+      <UniqueIdentifier>{d9cb48dd-eb1f-4a8e-8c43-b26c641b4f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\SDK">
+      <UniqueIdentifier>{21b0703f-047c-4f18-8602-d69c43a280cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Animated_Entity.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
-    <ClCompile Include="src\Collision_Area.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="src\Collider.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
     <ClCompile Include="src\Core.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
     <ClCompile Include="src\Entity.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
     <ClCompile Include="src\Intersection_Area.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
     <ClCompile Include="src\Media_Manager.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
     <ClCompile Include="src\Resource_Manager.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene_Component.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Script.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Visualized_Collider.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,19 +71,49 @@
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
-      <Filter>Файлы заголовков\COMPS</Filter>
-    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Entity.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Collision_Area.h">
+    <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h">
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Signal.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Slot.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Resource_Types.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\Collider.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Visualized_Collider.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Entity.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Animated_Entity.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
   </ItemGroup>

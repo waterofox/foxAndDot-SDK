@@ -1,6 +1,11 @@
 #include "../include/foxAndDot-SDK/Core.h"
 #include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 
+sf::RenderWindow& Core::get_window()
+{
+	return this->game_window;
+}
+
 void Core::change_scene(Scene* new_Scene)
 {
 	if (changing_scene)
@@ -35,23 +40,22 @@ void Core::set_event_handler(Executable* handler)
 
 Core::Core()
 {
+	this->handle_collider_slot.reassign(&Core::handle_collider, this);	
 	this->the_core = this;
-	this->handle_collider_slot.reassign(&Core::handle_collider, this);
-	
 }
 
 void Core::run(const unsigned int& window_width, const unsigned int& window_height, const std::string& window_title,\
 	const unsigned long& framerate_limit, const sf::State& state)
 {
-	if (this->isOpen())
+	if (this->game_window.isOpen())
 	{
 		printf("CORE ERROR: There is already an active window. You cannot start the Core again\n");
 	}
 
 	this->game_cycle_clock.start();
-	this->create(sf::VideoMode({ window_width,window_height }), window_title,state);
-	this->setFramerateLimit(framerate_limit);
-	while (this->isOpen())
+	this->game_window.create(sf::VideoMode({ window_width,window_height }), window_title,state);
+	this->game_window.setFramerateLimit(framerate_limit);
+	while (this->game_window.isOpen())
 	{
 
 		//scene
@@ -73,7 +77,7 @@ void Core::run(const unsigned int& window_width, const unsigned int& window_heig
 		if (actual_scene == nullptr) 
 		{
 			printf("CORE ERROR: No loaded scene\n");
-			this->close();
+			this->game_window.close();
 			return;
 		}
 
@@ -177,13 +181,13 @@ void Core::update()
 
 void Core::render()
 {
-	this->clear(sf::Color::Black);
+	this->game_window.clear(sf::Color::Black);
 
 	for (auto& view : views)
 	{
-		this->setView(view.second);
+		this->game_window.setView(view.second);
 		actual_scene->render(view.second);
 	}
 
-	this->display();
+	this->game_window.display();
 }

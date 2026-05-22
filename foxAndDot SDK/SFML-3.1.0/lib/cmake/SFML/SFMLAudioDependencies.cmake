@@ -1,0 +1,46 @@
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
+
+include(CMakeFindDependencyMacro)
+
+# detect the OS
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    set(FIND_SFML_OS_WINDOWS 1)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    set(FIND_SFML_OS_LINUX 1)
+
+    if()
+        set(FIND_SFML_USE_DRM 1)
+    endif()
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+    set(FIND_SFML_OS_FREEBSD 1)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "OpenBSD")
+    set(FIND_SFML_OS_OPENBSD 1)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Android")
+    set(FIND_SFML_OS_ANDROID 1)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "iOS")
+    set(FIND_SFML_OS_IOS 1)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(FIND_SFML_OS_MACOS 1)
+endif()
+
+# When installing, save whether SFML was built using system dependencies.
+set(SFML_BUILT_USING_SYSTEM_DEPS OFF)
+
+# start with an empty list
+set(FIND_SFML_DEPENDENCIES_NOTFOUND)
+
+if(SFML_BUILT_USING_SYSTEM_DEPS)
+    find_dependency(Vorbis)
+    find_dependency(FLAC)
+else()
+    set(Vorbis_DIR "${CMAKE_CURRENT_LIST_DIR}/../Vorbis")
+    set(Ogg_DIR "${CMAKE_CURRENT_LIST_DIR}/../Ogg")
+    find_dependency(Vorbis CONFIG REQUIRED NO_DEFAULT_PATH)
+    set(FLAC_DIR "${CMAKE_CURRENT_LIST_DIR}/../FLAC")
+    find_dependency(FLAC CONFIG REQUIRED NO_DEFAULT_PATH)
+endif()
+
+if(FIND_SFML_DEPENDENCIES_NOTFOUND)
+    set(FIND_SFML_ERROR "SFML found but some of its dependencies are missing (${FIND_SFML_DEPENDENCIES_NOTFOUND})")
+    set(SFML_FOUND OFF)
+endif()

@@ -5,7 +5,7 @@ void Scene::render(const sf::View& view)
 {
 	sf::FloatRect view_bounds(sf::Vector2f(view.getCenter().x - view.getSize().x / 2, view.getCenter().y - view.getSize().y / 2), view.getSize());
 
-	Core& window = *Core::the_core;
+	sf::RenderWindow& window = Core::the_core->get_window();
 	for (int i = 0; i < this->render_order.size(); ++i)
 	{
 		for (auto& comp : this->render_order[i])

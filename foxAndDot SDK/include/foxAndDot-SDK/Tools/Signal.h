@@ -68,7 +68,7 @@ public:
 		signal->next_c.emplace(slot, Connection_Types::Slot);
 	}
 	
-	friend static void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)
+	friend void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)
 	{
 		signal->next_c.emplace(signal_2, Connection_Types::Signal);
 	}

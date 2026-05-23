@@ -88,6 +88,17 @@ bool Scene::is_on_scene(const std::string& component_name)
 	return false;
 }
 
+void Scene::add_new_lay(const int& lay_count)
+{
+	int last_valid_lay = this->render_order.size();
+	
+	for (int i = 0; i < lay_count; ++i)
+	{
+		this->render_order[last_valid_lay] = std::unordered_map<std::string, Scene_Component*>();
+		++last_valid_lay;
+	}
+}
+
 Scene_Component* Scene::operator[](const std::string& component_name)
 {
 	if (is_on_scene(component_name))

@@ -32,6 +32,7 @@ void Collider::update()
 Collider::Collider()
 {
 	connect(&this->im_collider, &Core::handle_collider_slot);
+	intersection = true;
 }
 
 void Collider::set_colliding(const bool& arg)

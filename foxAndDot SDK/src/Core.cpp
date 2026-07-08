@@ -155,8 +155,10 @@ void Core::process_intersections_and_collisions()
 {
 	for (auto& elementA : actual_scene->scene_data)
 	{
+		if (!elementA.second.component->is_intersection()) { continue; }
 		for (auto& elementB : actual_scene->scene_data)
 		{
+			if (!elementB.second.component->is_intersection()) { continue; }
 			if (&elementA == &elementB) { continue; }
 			if (elementA.second.component->get_component_bounds().findIntersection(elementB.second.component->get_component_bounds()))
 			{

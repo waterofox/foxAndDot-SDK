@@ -27,6 +27,8 @@ protected:
 		
 		bool updatable = true;				  // When true => component will update every iteration of game cycle
 
+		bool intersection = false;			  // When true => Core will check intersections with other components
+
 		bool ready_to_update_resource = true; // True when you are changing the resource (Marker for Resource Manager)
 
 	//-------------------------------------------------------------------------------------------------------------------
@@ -58,6 +60,9 @@ public:
 
 		virtual sf::FloatRect get_component_bounds() = 0;         // Returns the bounds that are used to determine whether a component intersects with other components
 		
+		bool is_intersection();									  // Returns intersection
+		void set_intersection(const bool& arg);					  // When set_intersection(true) Core will check intersections with other components
+
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		virtual sf::Drawable* as_drawable() = 0;                 // What you need to draw?
@@ -74,12 +79,12 @@ public:
 	
 		void set_visble(const bool& arg);	 // When set_visible(true) component will be drawn by Core					
 		
-		const bool& is_visible();			 // Return visible						
+		const bool& is_visible();			 // Returns visible						
 
 
 		void set_updatable(const bool& arg); // When set_updateble(true) component will be updated by Core							
 		
-		const bool& is_updatable();			 // Return updateble
+		const bool& is_updatable();			 // Returns updateble
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 

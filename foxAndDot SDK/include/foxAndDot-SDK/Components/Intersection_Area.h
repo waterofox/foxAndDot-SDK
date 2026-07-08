@@ -25,6 +25,8 @@ class  Intersection_Area : public Scene_Component, public sf::RectangleShape
 
 public:
 
+	Intersection_Area();
+	Intersection_Area(const sf::Vector2f& size);
 	Intersection_Area(const sf::FloatRect& rect);
 	~Intersection_Area() = default;
 

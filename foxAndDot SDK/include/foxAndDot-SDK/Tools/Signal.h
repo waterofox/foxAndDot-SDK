@@ -1,6 +1,8 @@
 #pragma once
 #include "Slot.h"
 
+#include <unordered_map>
+
 enum class Connection_Types
 {
 	Undefined = -1,

@@ -8,6 +8,9 @@ Entity::Entity() : Collider(), sf::Sprite(empty_entity_s_texture)
 	this->collider_margin = sf::Vector2f(0, 0);
 
 	this->type_of_resource = Resource_Types::Texture;
+
+	this->set_colliding(false);
+	intersection = false;
 }
 
 Entity::Entity(const int& resource_id) : Entity()

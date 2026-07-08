@@ -39,8 +39,11 @@ public:
 
 	//------------------------------------------------------------------------------------------------------------------
 	
-		void play_music(const int index); //play music
-		void play_sound(const int index); //play sound
+		void play_music(const int index);  //play music
+		void play_sound(const int index);  //play sound
+
+		void continue_music(); //continue music
+		void pause_music();	   //pause music
 
 	//------------------------------------------------------------------------------------------------------------------
 	

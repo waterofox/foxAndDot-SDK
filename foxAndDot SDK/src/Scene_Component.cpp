@@ -5,6 +5,16 @@ void Scene_Component::on_intersection(Scene_Component* component){}
 
 void Scene_Component::on_intersection(Collider* component){}
 
+bool Scene_Component::is_intersection()
+{
+	return intersection;
+}
+
+void Scene_Component::set_intersection(const bool& arg)
+{
+	intersection = arg;
+}
+
 void Scene_Component::update(){}
 
 const std::string& Scene_Component::get_name()

@@ -1,17 +1,27 @@
 #include "../include/foxAndDot-SDK/Components/Intersection_Area.h"
 #include "../include/foxAndDot-SDK/Core.h"
 
-Intersection_Area::Intersection_Area(const sf::FloatRect& rect)
+Intersection_Area::Intersection_Area()
 {
-
-	this->setSize(rect.size);
-	this->setPosition(rect.position);
+	this->setSize(sf::Vector2f(100,100));
+	this->setPosition(sf::Vector2f(0,0));
 
 	this->setFillColor(sf::Color(209, 76, 64, 127));
 	this->setOutlineColor(sf::Color(209, 76, 64, 255));
 
 	this->setOutlineThickness(5);
+
+	intersection = true;
 }
+
+Intersection_Area::Intersection_Area(const sf::Vector2f& size) : Intersection_Area(sf::FloatRect(sf::Vector2f(0,0),size))
+{}
+
+Intersection_Area::Intersection_Area(const sf::FloatRect& rect) : Intersection_Area()
+{
+	this->setSize(rect.size);
+	this->setPosition(rect.position);
+}	
 
 void Intersection_Area::on_intersection(Scene_Component* component)
 {

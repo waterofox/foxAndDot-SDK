@@ -17,7 +17,7 @@ Entity::Entity(const int& resource_id) : Entity()
 {
 	this->set_resource(resource_id);
 }
-
+ 
 Entity::Entity(const sf::Vector2i& size) : Entity()
 {
 	this->setTextureRect(sf::IntRect(this->getTextureRect().position, size));

@@ -63,7 +63,7 @@ public:
 		return *this;
 	}
 
-	void reassign(void(Owner::* owner_function)(const args_package&), Owner* owner)
+	void reassign(void(Owner::* owner_function)(const args_package&), Owner* owner) //method for hand initialisation
 	{
 		this->owner_function = owner_function;
 		this->slot_owner = owner;

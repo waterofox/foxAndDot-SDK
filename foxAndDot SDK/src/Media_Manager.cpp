@@ -44,13 +44,30 @@ void Media_Manager::play_music(const int index)
 {
 	if (!music_player.openFromFile(music_lib[index]))
 	{
-		printf("MEDIA MANAGER ERROR: Music file <%d>  reading error", index);
+		printf("MEDIA MANAGER ERROR: Music file <%d>  reading error\n", index);
 		return;
 	}
 
 	music_player.play();
 	last_music_path = music_lib[index];
 
+}
+
+void Media_Manager::continue_music()
+{
+	if (music_player.getStatus() == sf::SoundSource::Status::Paused)
+	{
+		music_player.play();
+	}
+	else
+	{
+		printf("MEDIA MANAGER WARNING: No music is paused\n");
+	}
+}
+
+void Media_Manager::pause_music()
+{
+	music_player.pause();
 }
 
 void Media_Manager::play_sound(const int index)
@@ -62,7 +79,7 @@ void Media_Manager::play_sound(const int index)
 	}
 	else
 	{
-		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library", index);
+		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library\n", index);
 		return;
 	}
 }
@@ -72,7 +89,7 @@ void Media_Manager::delete_music(const int index)
 	if (last_music_path == music_lib[index] and
 		music_player.getStatus() == sf::SoundSource::Status::Playing)
 	{
-		printf("MEDIA MANAGER ERROR: You cannot delete a music file <%d> while it is playing", index);
+		printf("MEDIA MANAGER ERROR: You cannot delete a music file <%d> while it is playing\n", index);
 		return;
 	}
 
@@ -86,7 +103,7 @@ void Media_Manager::delete_sound(const int index)
 	{
 		if ((*iter_sound).second.sound.getStatus() == sf::SoundSource::Status::Playing)
 		{
-			printf("MEDIA MANAGER ERROR: You cannot delete a sound <%d> while it is playing", index);
+			printf("MEDIA MANAGER ERROR: You cannot delete a sound <%d> while it is playing\n", index);
 			return;
 		}
 		sound_lib.erase(index);
@@ -124,7 +141,7 @@ sf::SoundBuffer& Media_Manager::get_sound_buffer(const int& index)
 	}
 	else
 	{
-		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library", index);
+		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library\n", index);
 		return e_c.buffer;
 	}
 }
@@ -138,7 +155,7 @@ sf::Sound& Media_Manager::get_sound(const int& index)
 	}
 	else
 	{
-		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library", index);
+		printf("MEDIA MANAGER ERROR: Sound <%d>  doese not exist in library\n", index);
 		return e_c.sound;
 	}
 }

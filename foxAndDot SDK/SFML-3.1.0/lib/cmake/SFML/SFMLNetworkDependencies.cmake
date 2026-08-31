@@ -1,0 +1,24 @@
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
+
+include(CMakeFindDependencyMacro)
+
+# When installing, save whether SFML was built using system dependencies.
+set(SFML_BUILT_USING_SYSTEM_DEPS OFF)
+
+# start with an empty list
+set(FIND_SFML_DEPENDENCIES_NOTFOUND)
+
+if(SFML_BUILT_USING_SYSTEM_DEPS)
+    find_dependency(MbedTLS)
+    find_dependency(Libssh2)
+else()
+    set(MbedTLS_DIR "${CMAKE_CURRENT_LIST_DIR}/../MbedTLS")
+    find_dependency(MbedTLS CONFIG REQUIRED NO_DEFAULT_PATH)
+    set(libssh2_DIR "${CMAKE_CURRENT_LIST_DIR}/../libssh2")
+    find_dependency(libssh2 CONFIG REQUIRED NO_DEFAULT_PATH)
+endif()
+
+if(FIND_SFML_DEPENDENCIES_NOTFOUND)
+    set(FIND_SFML_ERROR "SFML found but some of its dependencies are missing (${FIND_SFML_DEPENDENCIES_NOTFOUND})")
+    set(SFML_FOUND OFF)
+endif()

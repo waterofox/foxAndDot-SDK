@@ -33,6 +33,7 @@ class Scene
 
 public:
 	
+	Scene() = default;
 	Scene(const int& lays_count);
 	virtual ~Scene() = default;
 
@@ -46,6 +47,8 @@ public:
 		void move_on_lay(const std::string& component_name, const int& lay); // Move component to another layer
 		
 		bool is_on_scene(const std::string& component_name);				 // Component on the stage?
+
+		void add_new_lay(const int& lay_count = 1);							 // add lays on scene
 
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 

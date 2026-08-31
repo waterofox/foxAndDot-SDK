@@ -18,6 +18,8 @@ Visualized_Collider::Visualized_Collider()
 	this->setOutlineColor(sf::Color(144, 238, 144, 255));
 	this->setOutlineThickness(-1);
 
+	this->intersection = true;
+
 	this->v_collider_slot.reassign(&Visualized_Collider::v_collider, this);
 	connect(&this->collision, &this->v_collider_slot);
 }

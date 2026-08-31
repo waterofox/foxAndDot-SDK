@@ -23,8 +23,10 @@
 
 //Any other questions? a3shirnin@gmail.com
 
-class  Core : public sf::RenderWindow
+class  Core
 {
+	//-------------------------------------------------------------------------------------------------------
+		sf::RenderWindow game_window;
 	//-------------------------------------------------------------------------------------------------------
 		sf::Time delta_time = sf::Time::Zero;
 		sf::Clock game_cycle_clock;
@@ -59,6 +61,9 @@ public:
 	Core();
 	virtual ~Core() = default;
 
+	Core(const Core&) = delete;
+	Core& operator=(const Core&) = delete;
+
 	//INTERFACE
 	//=================================================================================================================================
 	
@@ -71,7 +76,8 @@ public:
 
 		static inline Media_Manager    media_manager;		// Media manager for managing sounds and a music center
 
-		static inline Core*            the_core;            // A static Core pointer to itself. Provides access to core settings from anywhere
+
+		static inline Core* the_core;
 
 	//---------------------------------------------------------------------------------------------------------------------------------
 
@@ -85,6 +91,8 @@ public:
 
 
 	//---------------------------------------------------------------------------------------------------------------------------------
+
+		sf::RenderWindow& get_window();
 
 		void change_scene(Scene* new_Scene); // Change actual scene by other scene
 		

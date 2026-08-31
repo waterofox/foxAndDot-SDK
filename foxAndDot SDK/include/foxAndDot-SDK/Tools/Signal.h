@@ -65,17 +65,17 @@ public:
 	}
 
 	template<typename owner>
-	friend void connect(Signal<args_package>* signal,Slot<args_package,owner>* slot)
+	friend void connect(Signal<args_package>* signal,Slot<args_package,owner>* slot)  //initialisation of connection with slot
 	{
 		signal->next_c.emplace(slot, Connection_Types::Slot);
 	}
 	
-	friend void connect(Signal<args_package>* signal, Signal<args_package>* signal_2)
+	friend void connect(Signal<args_package>* signal, Signal<args_package>* signal_2) //initialisation of connection with signal
 	{
 		signal->next_c.emplace(signal_2, Connection_Types::Signal);
 	}
 
-	void disconnect(Connectable<args_package>* connected)
+	void disconnect(Connectable<args_package>* connected)                             //disconnect signal or slot from this signal
 	{
 		if (this->next_c.find(connected) != this->next_c.end())
 		{
@@ -90,7 +90,7 @@ public:
 
 	
 
-	void disconnect_all()
+	void disconnect_all() //disconnect all signals and slots from this signal
 	{
 		this->next_c.clear();
 	}

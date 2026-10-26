@@ -16,7 +16,6 @@ class Scene_Component;
 class  Resource_Manager
 {
 	friend class Core;
-private:
 	//--------------------------------------------------------------------------------------------------
 
 		std::unordered_map<int, sf::Texture> texture_library; // Library of uploaded textures
@@ -35,6 +34,12 @@ private:
 
 	//--------------------------------------------------------------------------------------------------
 public:
+		/*
+			This is an empty texture and font that are used to initialize sf::Sprite and sf::Texture, 
+			as if these classes have a default constructor.
+		*/
+		static inline sf::Texture adam;
+		static inline sf::Font eva;     
 
 		Resource_Manager() = default;
 		~Resource_Manager() = default;

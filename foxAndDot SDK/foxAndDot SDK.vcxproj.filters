@@ -60,6 +60,12 @@
     <ClCompile Include="src\Visualized_Collider.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Adapted_Sprite.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Core.h">
@@ -114,6 +120,9 @@
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Animated_Entity.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Adapted_Sprite.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
   </ItemGroup>

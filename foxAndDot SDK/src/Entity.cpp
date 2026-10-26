@@ -1,6 +1,6 @@
 #include "../include/foxAndDot-SDK/Components/Entity.h"
 
-Entity::Entity() : Collider(), sf::Sprite(empty_entity_s_texture)
+Entity::Entity() : Collider(), sf::Sprite(Resource_Manager::adam)
 {
 	this->handle_collision_slot.reassign(&Entity::handle_collision, this);
 	connect(&this->collision, &this->handle_collision_slot);

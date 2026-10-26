@@ -35,6 +35,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Adapted_Sprite.cpp" />
     <ClCompile Include="src\Animated_Entity.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\Core.cpp" />
@@ -48,6 +50,7 @@
     <ClCompile Include="src\Visualized_Collider.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Adapted_Sprite.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Animated_Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h" />
@@ -104,7 +107,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug with exe|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v145</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -224,13 +227,13 @@ xcopy /e /y "$(ProjectDir)include" "$(OutDir)include"</Command>
       </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>SFML-3.0.2\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SFML-3.1.0\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>SFML-3.0.2\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>SFML-3.1.0\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -247,7 +250,7 @@ xcopy /e /y "$(ProjectDir)include" "$(OutDir)include"</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>SFML-3.0.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>SFML-3.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

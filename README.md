@@ -14,7 +14,7 @@
 
 ## Перед началом работы
 
-Перед началом работы с библиотекой AndDot SDK вам также необходимо выполнить следующие действия:
+Перед началом работы с библиотекой foxAndDot SDK вам также необходимо выполнить следующие действия:
 
 - Подключить **SFML 3.1.0** (статически или динамически)
 - Убедиться в том, что в конфигурации проекта выбран стандарт **ISO C++17** (`/std:c++17`)
@@ -42,7 +42,7 @@ Meet the new and improved version of the SDK for developing 2D games based on **
 
 ## Before you begin
 
-Before you start working with the AndDot SDK library, you also need to perform the following actions:
+Before you start working with the foxAndDot SDK library, you also need to perform the following actions:
 
 - Include **SFML 3.1.0** (statically or dynamically)
 - Make sure that the **ISO C++17** standard (`/std:c++17`) is selected in the project configuration

@@ -35,6 +35,9 @@ private:
 
 	//--------------------------------------------------------------------------------------------------
 public:
+		
+	static inline sf::Texture adam; //empty texture for sf::Sprite initialisation
+	static inline sf::Font eva;		//empty font for sf::Text initialisation 
 
 		Resource_Manager() = default;
 		~Resource_Manager() = default;

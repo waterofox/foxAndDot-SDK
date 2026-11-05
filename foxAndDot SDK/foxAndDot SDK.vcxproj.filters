@@ -60,6 +60,12 @@
     <ClCompile Include="src\Visualized_Collider.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
+    <ClCompile Include="src\fAD_Sprite.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fAD_Text.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Core.h">
@@ -104,16 +110,22 @@
     <ClInclude Include="include\foxAndDot-SDK\Tools\Resource_Types.h">
       <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Tools\Collider.h">
-      <Filter>Файлы заголовков\TOOLS</Filter>
-    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Visualized_Collider.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Entity.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\fAD_Sprite.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Animated_Entity.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\fAD_Text.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Collider.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
   </ItemGroup>

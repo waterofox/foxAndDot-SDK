@@ -38,16 +38,16 @@ protected:
 		Resource_Types type_of_resource;      // Type of resource which component prefers
 	
 	//-------------------------------------------------------------------------------------------------------------------
-		
-		virtual void update();				                           // How does the component behave during Core operation
-		
-		virtual void update_resource(const std::variant<sf::Texture*,\
-								     sf::Font*>& resource) = 0;        // How component updates it's resource
-	
-	//-------------------------------------------------------------------------------------------------------------------
+
 
 
 public:
+
+	virtual void update();			// How does the component behave during Core operation
+
+	virtual void update_resource(const std::variant<sf::Texture*, \
+		sf::Font*>& resource) = 0;  // How component updates it's resource
+
 
 	virtual ~Scene_Component() = default;
 

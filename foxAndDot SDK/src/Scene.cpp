@@ -45,9 +45,7 @@ void Scene::remove(const std::string& component_name)
 {
 	if (this->scene_data.find(component_name) != this->scene_data.end())
 	{
-		//so all good man
-
-		this->render_order.erase(this->scene_data[component_name].actual_comp_lay);
+		this->render_order[this->scene_data[component_name].actual_comp_lay].erase(component_name);
 		this->scene_data.erase(component_name);
 	}
 	else
@@ -90,11 +88,11 @@ bool Scene::is_on_scene(const std::string& component_name)
 
 void Scene::add_new_lay(const int& lay_count)
 {
-	int last_valid_lay = this->render_order.size();
+	int last_valid_lay = int(this->render_order.size());
 	
 	for (int i = 0; i < lay_count; ++i)
 	{
-		this->render_order[last_valid_lay] = std::unordered_map<std::string, Scene_Component*>();
+		this->render_order[int(last_valid_lay)] = std::unordered_map<std::string, Scene_Component*>();
 		++last_valid_lay;
 	}
 }

@@ -16,11 +16,10 @@ private:
 
 	//---------------------------------------------------------------------------------------------------------------
 
-		void update() override;
-
-	//---------------------------------------------------------------------------------------------------------------
-
 public:
+
+	void update() override;
+
 	Animated_Entity();
 	Animated_Entity(const int& resource_id);
 	Animated_Entity(const sf::Vector2i& size);

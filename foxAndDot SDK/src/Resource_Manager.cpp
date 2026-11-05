@@ -54,6 +54,7 @@ void Resource_Manager::add_texture(const std::string& texture_url, const int& id
 	{
 		printf("RESOURCE MANAGER ERROR: texture <%d> does not exist,", id);
 		std::cout << texture_url << std::endl;
+		texture_library.erase(id);
 	}
 }
 void Resource_Manager::add_font(const std::string& font_url, const int& id)
@@ -62,6 +63,7 @@ void Resource_Manager::add_font(const std::string& font_url, const int& id)
 	{
 		printf("RESOURCE MANAGER ERROR: font <%d> does not exist,", id);
 		std::cout << font_url << std::endl;
+		font_library.erase(id);
 	}
 }
 

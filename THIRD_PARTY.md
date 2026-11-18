@@ -14,9 +14,8 @@ If SFML files (sources or DLLs) are shipped together with the SDK, include the o
 
 ## Зависимости SFML / SFML dependencies
 
-По данным сайта SFML (https://www.sfml-dev.org/license/) SFML использует следующие компоненты. Сверьте список с той сборкой SFML, которую вы действительно поставляете, и оставьте только реально входящие в неё.
-According to the SFML website (https://www.sfml-dev.org/license/), SFML uses the components below. Check the list against the SFML build you actually ship and keep only what is included.
-
+По данным сайта SFML (https://www.sfml-dev.org/license/) SFML использует следующие компоненты. 
+According to the SFML website (https://www.sfml-dev.org/license/), SFML uses the components below. 
 | Компонент / Component | Лицензия / License |
 | --- | --- |
 | stb_image, stb_image_write | Public domain |

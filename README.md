@@ -4,6 +4,11 @@
 
 # foxAndDot SDK V2.0.0
 
+![version](https://img.shields.io/badge/version-2.0.0-blue)
+![C++](https://img.shields.io/badge/C%2B%2B-17-blue)
+![platform](https://img.shields.io/badge/platform-Windows%20x64-lightgrey)
+![SFML](https://img.shields.io/badge/SFML-3.1.0-green)
+
 [Русский](#русский) | [English](#english)
 
 ---
@@ -38,8 +43,8 @@
 4. Подключите foxAndDot SDK в ваш проект.
 5. В Visual Studio щёлкните правой кнопкой мыши по проекту → **Свойства**, в верхней части установите для **Конфигурация** значение `Debug` или `Release`, для **Платформы** — `x64`.
 6. **C/C++ → Общие → Дополнительные каталоги включаемых файлов**: добавьте путь к папке `include` из распакованного foxAndDot SDK.
-7. **Компоновщик → Общие → Дополнительные каталоги библиотек**: добавьте путь к папке `lib` из распакованного foxAndDot SDK.
-8. **Компоновщик → Ввод → Дополнительные зависимости**: вручную добавьте имя библиотечного файла `foxAndDot-SDK.lib`. Если в папке `lib` присутствуют файлы с суффиксом отладки (например, `-d`), в конфигурации Debug следует указать соответствующую отладочную версию.
+7. **Компоновщик → Общие → Дополнительные каталоги библиотек**: добавьте путь к папке `lib/$(Configuration)` из распакованного foxAndDot SDK (то есть `lib/Debug` для конфигурации Debug и `lib/Release` для конфигурации Release). Макрос `$(Configuration)` автоматически подставит имя текущей конфигурации.
+8. **Компоновщик → Ввод → Дополнительные зависимости**: добавьте имя библиотечного файла `foxAndDot-SDK.lib`. Так как файлы в папках `Debug` и `Release` называются одинаково, конкретная версия выбирается автоматически благодаря пути из пункта 7 — отдельно прописывать отладочную версию не нужно.
 9. Нажмите **Применить** и **ОК**, затем выполните сборку проекта, чтобы завершить подключение.
 
 ### Вопросы
@@ -78,8 +83,8 @@ The description of the class interfaces is located in the header files.
 4. Connect foxAndDot SDK to your project.
 5. In Visual Studio, right-click on the project → **Properties**, at the top set **Configuration** to `Debug` or `Release`, and **Platform** to `x64`.
 6. **C/C++ → General → Additional Include Directories**: add the path to the `include` folder from the unpacked foxAndDot SDK.
-7. **Linker → General → Additional Library Directories**: add the path to the `lib` folder from the unpacked foxAndDot SDK.
-8. **Linker → Input → Additional Dependencies**: manually add the library file name `foxAndDot-SDK.lib`. If the `lib` folder contains files with a debug suffix (e.g., `-d`), the corresponding debug version should be specified in the Debug configuration.
+7. **Linker → General → Additional Library Directories**: add the path to the `lib/$(Configuration)` folder from the unpacked foxAndDot SDK (i.e. `lib/Debug` for the Debug configuration and `lib/Release` for the Release configuration). The `$(Configuration)` macro automatically substitutes the name of the current configuration.
+8. **Linker → Input → Additional Dependencies**: add the library file name `foxAndDot-SDK.lib`. Since the files in the `Debug` and `Release` folders have the same name, the correct version is selected automatically via the path from step 7 — there is no need to specify a separate debug version.
 9. Click **Apply** and **OK**, then build the project to complete the connection.
 
 ### Questions

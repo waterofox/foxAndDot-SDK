@@ -8,6 +8,7 @@
 ![C++](https://img.shields.io/badge/C%2B%2B-17-blue)
 ![platform](https://img.shields.io/badge/platform-Windows%20x64-lightgrey)
 ![SFML](https://img.shields.io/badge/SFML-3.1.0-green)
+![license](https://img.shields.io/badge/license-MPL%202.0-orange)
 
 [Русский](#русский) | [English](#english)
 
@@ -46,6 +47,25 @@
 7. **Компоновщик → Общие → Дополнительные каталоги библиотек**: добавьте путь к папке `lib/$(Configuration)` из распакованного foxAndDot SDK (то есть `lib/Debug` для конфигурации Debug и `lib/Release` для конфигурации Release). Макрос `$(Configuration)` автоматически подставит имя текущей конфигурации.
 8. **Компоновщик → Ввод → Дополнительные зависимости**: добавьте имя библиотечного файла `foxAndDot-SDK.lib`. Так как файлы в папках `Debug` и `Release` называются одинаково, конкретная версия выбирается автоматически благодаря пути из пункта 7 — отдельно прописывать отладочную версию не нужно.
 9. Нажмите **Применить** и **ОК**, затем выполните сборку проекта, чтобы завершить подключение.
+
+### Лицензия
+
+foxAndDot SDK распространяется под лицензией [Mozilla Public License 2.0](LICENSE).
+
+**Коротко:**
+
+- Библиотеку можно использовать бесплатно в любых проектах, в том числе в закрытых коммерческих играх.
+- Если вы **изменяете файлы SDK** и распространяете результат, изменённые файлы нужно опубликовать под MPL 2.0.
+- Свой код (игру, расширения, новые файлы) можно держать закрытым.
+- Сохраняйте уведомление об авторских правах в файлах и сообщайте, где взять исходный код SDK.
+
+**Просьба об упоминании.** Это не обязательно, но будет очень приятно: добавьте в титры или описание игры строку
+
+> Made with foxAndDot SDK by waterofox — https://github.com/waterofox/foxAndDot-SDK
+
+SDK построен на SFML (лицензия zlib/libpng, см. [`SFML-3.1.0/license.md`](<foxAndDot SDK/SFML-3.1.0/license.md>)). Подробности о сторонних компонентах: [THIRD_PARTY.md](THIRD_PARTY.md).
+
+*Это краткое описание, а не юридический текст. Действует полный текст лицензии в файле [LICENSE](LICENSE).*
 
 ### Вопросы
 
@@ -86,6 +106,25 @@ The description of the class interfaces is located in the header files.
 7. **Linker → General → Additional Library Directories**: add the path to the `lib/$(Configuration)` folder from the unpacked foxAndDot SDK (i.e. `lib/Debug` for the Debug configuration and `lib/Release` for the Release configuration). The `$(Configuration)` macro automatically substitutes the name of the current configuration.
 8. **Linker → Input → Additional Dependencies**: add the library file name `foxAndDot-SDK.lib`. Since the files in the `Debug` and `Release` folders have the same name, the correct version is selected automatically via the path from step 7 — there is no need to specify a separate debug version.
 9. Click **Apply** and **OK**, then build the project to complete the connection.
+
+### License
+
+foxAndDot SDK is distributed under the [Mozilla Public License 2.0](LICENSE).
+
+**In short:**
+
+- You may use the SDK for free in any project, including closed-source commercial games.
+- If you **modify the SDK's files** and distribute the result, the modified files must be published under MPL 2.0.
+- Your own code (your game, extensions, new files) can stay closed.
+- Keep the copyright notices in the files and tell recipients where to get the SDK's source code.
+
+**A request for credit.** Not required, but much appreciated: please add a line like this to your game's credits or description:
+
+> Made with foxAndDot SDK by waterofox — https://github.com/waterofox/foxAndDot-SDK
+
+The SDK is built on SFML (zlib/libpng license, see [`SFML-3.1.0/license.md`](<foxAndDot SDK/SFML-3.1.0/license.md>)). More about third-party components: [THIRD_PARTY.md](THIRD_PARTY.md).
+
+*This is a summary, not legal text. The full license in [LICENSE](LICENSE) applies.*
 
 ### Questions
 

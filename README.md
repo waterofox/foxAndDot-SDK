@@ -36,7 +36,7 @@
 
 Описание интерфейсов классов находится в файлах заголовков.
 
-### Инструкция по установке (Visual C++ 17 (2022))
+### Инструкция по установке (Visual Studio 2022, MSVC)
 
 1. Создайте пустой проект / консольное приложение.
 2. Скачайте и подключите в проект **SFML версии 3.1.0 Visual C++ 17 (2022) 64-bit**, следуя инструкции с официального сайта.
@@ -61,7 +61,7 @@ foxAndDot SDK распространяется под лицензией [Mozill
 
 **Просьба об упоминании.** Это не обязательно, но будет очень приятно: добавьте в титры или описание игры строку
 
-> Made with foxAndDot SDK by waterofox — https://github.com/waterofox/foxAndDot-SDK
+> Powered by foxAndDot SDK — https://github.com/waterofox/foxAndDot-SDK
 
 SDK построен на SFML (лицензия zlib/libpng, см. [`SFML-3.1.0/license.md`](<foxAndDot SDK/SFML-3.1.0/license.md>)). Подробности о сторонних компонентах: [THIRD_PARTY.md](THIRD_PARTY.md).
 
@@ -95,7 +95,7 @@ Meet the new and improved version of the SDK for developing 2D games based on **
 
 The description of the class interfaces is located in the header files.
 
-### Installation Guide (Visual C++ 17 (2022))
+### Installation Guide (Visual Studio 2022, MSVC)
 
 1. Create an empty project / console application.
 2. Download and connect **SFML version 3.1.0 Visual C++ 17 (2022) 64-bit** to the project, following the instructions on the official website.
@@ -120,7 +120,7 @@ foxAndDot SDK is distributed under the [Mozilla Public License 2.0](LICENSE).
 
 **A request for credit.** Not required, but much appreciated: please add a line like this to your game's credits or description:
 
-> Made with foxAndDot SDK by waterofox — https://github.com/waterofox/foxAndDot-SDK
+> Powered by foxAndDot SDK — https://github.com/waterofox/foxAndDot-SDK
 
 The SDK is built on SFML (zlib/libpng license, see [`SFML-3.1.0/license.md`](<foxAndDot SDK/SFML-3.1.0/license.md>)). More about third-party components: [THIRD_PARTY.md](THIRD_PARTY.md).
 

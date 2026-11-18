@@ -9,9 +9,6 @@ foxAndDot SDK uses SFML 3.1.0. Third-party libraries remain under their own lice
 - Лицензия / License: zlib/libpng
 - Copyright (c) Laurent Gomila
 
-Если вместе с SDK поставляются файлы SFML (исходники или DLL), положите рядом оригинальный файл лицензии SFML. Уведомление об авторских правах удалять и менять нельзя.
-If SFML files (sources or DLLs) are shipped together with the SDK, include the original SFML license file next to them. The copyright notice must not be removed or altered.
-
 ## Зависимости SFML / SFML dependencies
 
 По данным сайта SFML (https://www.sfml-dev.org/license/) SFML использует следующие компоненты. 

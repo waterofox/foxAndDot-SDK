@@ -20,12 +20,6 @@ class Collider : public Scene_Component
 		bool colliding = true;
 	//-----------------------------------------------------------------------------------------------------------------
 
-		void on_intersection(Scene_Component* comp)    override;
-		
-		void on_intersection(Collider* other_collider) override;
-
-	//-----------------------------------------------------------------------------------------------------------------
-
 protected:
 
 	//-----------------------------------------------------------------------------------------------------------------
@@ -36,10 +30,11 @@ protected:
 		
 	//-----------------------------------------------------------------------------------------------------------------
 		
-		void update() override;
-
-	//-----------------------------------------------------------------------------------------------------------------
 public:
+	void update() override;
+
+	void on_intersection(Scene_Component* comp)    override;
+	void on_intersection(Collider* other_collider) override;
 
 	Collider();
 	virtual ~Collider() = default;

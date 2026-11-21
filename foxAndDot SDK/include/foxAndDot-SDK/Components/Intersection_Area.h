@@ -17,13 +17,12 @@ class  Intersection_Area : public Scene_Component, public sf::RectangleShape
 
 	//----------------------------------------------------------------------------------------------------------------
 
-		void update() override;
-		void on_intersection(Scene_Component* component) override;
-		void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
-
-	//----------------------------------------------------------------------------------------------------------------
 
 public:
+	void update() override;
+	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
+	void on_intersection(Scene_Component* component) override;
+
 
 	Intersection_Area();
 	Intersection_Area(const sf::Vector2f& size);

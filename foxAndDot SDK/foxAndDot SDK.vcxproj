@@ -41,6 +41,7 @@
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\fAD_Event_Handler.cpp" />
     <ClCompile Include="src\Intersection_Area.cpp" />
     <ClCompile Include="src\Media_Manager.cpp" />
     <ClCompile Include="src\Resource_Manager.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="include\foxAndDot-SDK\Tools\Collider.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
+    <ClInclude Include="include\foxAndDot-SDK\tools\fAD_Event_Handler.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Resource_Types.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Scene.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Script.h" />

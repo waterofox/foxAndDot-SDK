@@ -60,11 +60,14 @@
     <ClCompile Include="src\Visualized_Collider.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="src\Adapted_Sprite.cpp">
       <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fAD_Event_Handler.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Adapted_Sprite.h">
       <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\tools\fAD_Event_Handler.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

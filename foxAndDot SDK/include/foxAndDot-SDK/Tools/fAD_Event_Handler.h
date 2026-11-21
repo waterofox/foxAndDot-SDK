@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Executable.h"
-#include "Signal.h"
+#include "connect.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 

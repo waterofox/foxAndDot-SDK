@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../Tools/Collider.h"
-#include "../Tools/Slot.h"
+#include "../Tools/connect.h"
 
 class Visualized_Collider : public Collider, public sf::RectangleShape
 {

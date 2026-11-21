@@ -5,7 +5,7 @@
 
 //sdk includes
 #include "Scene_Component.h"
-#include "../Tools/Signal.h"
+#include "../Tools/connect.h"
 
 
 class  Intersection_Area : public Scene_Component, public sf::RectangleShape

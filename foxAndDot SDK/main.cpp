@@ -36,11 +36,6 @@ public:
 		connect(&fAD_Event_Handler::key_released, &this->on_key_released_slot);
 		connect(&fAD_Event_Handler::render_window_event, &this->other_events_slot);
 	}
-	~Event_Listner()
-	{
-		fAD_Event_Handler::key_pressed.disconnect(&this->on_key_pressed_slot);
-		fAD_Event_Handler::key_released.disconnect(&this->on_key_released_slot);
-	}
 
 	Slot<std::optional<sf::Event>, Event_Listner> other_events_slot;
 	Slot<sf::Keyboard::Scancode, Event_Listner> on_key_pressed_slot;
@@ -54,11 +49,13 @@ int main()
 	Scene scene;
 	fAD_Event_Handler evnt_handler;
 
-	Event_Listner listener;
-	
+	Event_Listner * listener = new Event_Listner;
+	delete listener;
+
 	the_core.change_scene(&scene);
 	the_core.set_event_handler(&evnt_handler);
 	the_core.get_window().setVerticalSyncEnabled(true);
 	
+
 	the_core.run(600, 600, PROJECTNAME, 120, sf::State::Windowed);
 }

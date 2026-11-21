@@ -63,6 +63,7 @@
     <ClInclude Include="include\foxAndDot-SDK\Media_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Collider.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Tools\connect.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />
     <ClInclude Include="include\foxAndDot-SDK\tools\fAD_Event_Handler.h" />

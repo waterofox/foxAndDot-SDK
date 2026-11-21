@@ -3,17 +3,14 @@
 
 #include <unordered_map>
 
-enum class Connection_Types
-{
-	Undefined = -1,
-	Signal = 0,
-	Slot = 1,
-};
 
 template<typename args_package>
 class Signal : public Connectable<args_package>
 {
 	friend class Core;
+
+	std::unordered_map<Connectable<args_package>*, Connection_Types> next_c;
+
 
 	std::queue<Executable*>* core_queue = nullptr;
 
@@ -30,7 +27,19 @@ class Signal : public Connectable<args_package>
 		(*(next_connectable))();
 	}
 	
-	std::unordered_map<Connectable<args_package>*, Connection_Types> next_c;
+	void back_disconnect(Connectable<args_package>* connected) override
+	{
+		if (this->next_c.find(connected) != this->next_c.end())
+		{
+			this->next_c.erase(connected);
+		}
+		else
+		{
+			printf("SIGNAL WARNING: Attempting to disconnect an unconnected slot or signal\n");
+			return;
+		}
+	}
+	
 
 	void operator()() override 
 	{	
@@ -64,22 +73,23 @@ public:
 		return *this;
 	}
 
-	template<typename owner>
-	friend void connect(Signal<args_package>* signal,Slot<args_package,owner>* slot)  //initialisation of connection with slot
+	~Signal()
 	{
-		signal->next_c.emplace(slot, Connection_Types::Slot);
-	}
-	
-	friend void connect(Signal<args_package>* signal, Signal<args_package>* signal_2) //initialisation of connection with signal
-	{
-		signal->next_c.emplace(signal_2, Connection_Types::Signal);
+		disconnect_all();
 	}
 
-	void disconnect(Connectable<args_package>* connected)                             //disconnect signal or slot from this signal
+	template <typename args_p, typename owner>
+	friend void connect(Signal<args_p>* signal, Slot<args_p, owner>* slot);
+
+	template<typename args_p> 
+	friend void connect(Signal<args_p>* signal, Signal<args_p>* signal_2); //initialisation of connection with signal
+
+	void disconnect(Connectable<args_package>* connected)  override                          //disconnect signal or slot from this signal
 	{
 		if (this->next_c.find(connected) != this->next_c.end())
 		{
 			this->next_c.erase(connected);
+			connected->connected_to.erase(this);
 		}
 		else
 		{
@@ -88,11 +98,17 @@ public:
 		}
 	}
 
-	
-
 	void disconnect_all() //disconnect all signals and slots from this signal
 	{
-		this->next_c.clear();
+		if (next_c.size() != 0)
+		{
+			{
+				for (auto& connected : next_c)
+				{
+					disconnect(connected.first);
+				}
+			}
+		}
 	}
 	
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Components/Scene_Component.h"
-#include "../Tools/Signal.h"
+#include "../Tools/connect.h"
 
 struct Collider_Args_Package
 {

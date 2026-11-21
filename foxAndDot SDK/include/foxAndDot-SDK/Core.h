@@ -15,13 +15,10 @@
 #include "Media_Manager.h"
 #include "Resource_Manager.h"
 
-#include "Components/Collider.h"
-
-
 #include "Tools/Scene.h"
 #include "Tools/Executable.h"
-#include "Tools/Signal.h"
-#include "Tools/Slot.h"
+#include "Tools/Collider.h"
+#include "Tools/connect.h"
 
 //Any other questions? a3shirnin@gmail.com
 

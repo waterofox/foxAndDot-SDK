@@ -122,11 +122,8 @@
     <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Animated_Entity.h">
       <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\fAD_Text.h">
-      <Filter>Файлы заголовков\COMPS</Filter>
-    </ClInclude>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Collider.h">
-      <Filter>Файлы заголовков\COMPS</Filter>
+    <ClInclude Include="include\foxAndDot-SDK\tools\fAD_Event_Handler.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

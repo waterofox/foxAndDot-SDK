@@ -3,12 +3,13 @@
 //sdk includes
 #include "../Core.h"
 
-#include "Collider.h"
+#include "../Tools/Collider.h"
 #include "../Tools/Script.h"
 
 class  Entity : public Collider, public sf::Sprite
 {
-
+	static inline sf::Texture empty_entity_s_texture; // I don't like that sf::Sprite needs an sf::Texture. 
+													  //So... this is a field to supply a default constructor argument for sf::Sprite.
 	//----------------------------------------------------------------------------------------------------------------------------------
 
 		Slot<sf::Vector2f, Entity> handle_collision_slot; //This slot is triggered when the parent collider's 

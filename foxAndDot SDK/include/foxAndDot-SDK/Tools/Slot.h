@@ -1,10 +1,16 @@
 #pragma once
 #include "Connectable.h"
 #include <queue>
+#include <unordered_set>
+
 template <typename args_package, typename Owner>
 class Slot : public Connectable<args_package>
 {
 	friend class Core;
+
+	void disconnect(Connectable<args_package>* connected) override final {}
+	void back_disconnect(Connectable<args_package>* connected) override final {}
+
 
 	Owner* slot_owner = nullptr;
 	void(Owner::* owner_function)(const args_package&) = nullptr;
@@ -38,6 +44,7 @@ class Slot : public Connectable<args_package>
 	//------------------------------------------------------------------------------------
 
 public:
+
 
 	Slot() : Connectable<args_package>() {}
 
@@ -79,4 +86,7 @@ public:
 		this->owner_function = nullptr;
 		this->slot_owner = nullptr;
 	}
+
+	template <typename args_p, typename owner>
+	friend void connect(Signal<args_p>* signal, Slot<args_p, owner>* slot);
 };

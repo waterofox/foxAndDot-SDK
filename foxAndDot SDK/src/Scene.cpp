@@ -90,7 +90,7 @@ void Scene::add_new_lay(const int& lay_count)
 {
 	int last_valid_lay = int(this->render_order.size());
 	
-	for (int i = 0; i < lay_count; ++i)
+	for (size_t i = 0; i < lay_count; ++i)
 	{
 		this->render_order[int(last_valid_lay)] = std::unordered_map<std::string, Scene_Component*>();
 		++last_valid_lay;

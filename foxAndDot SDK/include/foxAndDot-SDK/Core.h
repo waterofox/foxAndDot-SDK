@@ -17,8 +17,10 @@
 
 #include "Tools/Scene.h"
 #include "Tools/Executable.h"
-#include "Tools/Collider.h"
 #include "Tools/connect.h"
+
+#include "Components/Collider.h"
+
 
 //Any other questions? a3shirnin@gmail.com
 

@@ -66,6 +66,9 @@
     <ClCompile Include="src\fAD_Text.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
+    <ClCompile Include="src\fAD_Event_Handler.cpp">
+      <Filter>Исходные файлы\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Core.h">
@@ -124,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\tools\fAD_Event_Handler.h">
       <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\fAD_Text.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Tools\connect.h">
+      <Filter>Файлы заголовков\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Collider.h">
+      <Filter>Файлы заголовков\COMPS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

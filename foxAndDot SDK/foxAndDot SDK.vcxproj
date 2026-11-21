@@ -51,7 +51,6 @@
     <ClCompile Include="src\Visualized_Collider.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\foxAndDot-SDK\Components\Adapted_Sprite.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Animated_Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Advanced_Entity.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Animated_Entity.h" />
@@ -65,7 +64,6 @@
     <ClInclude Include="include\foxAndDot-SDK\Core.h" />
     <ClInclude Include="include\foxAndDot-SDK\Media_Manager.h" />
     <ClInclude Include="include\foxAndDot-SDK\Resource_Manager.h" />
-    <ClInclude Include="include\foxAndDot-SDK\Tools\Collider.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\connect.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Connectable.h" />
     <ClInclude Include="include\foxAndDot-SDK\Tools\Executable.h" />

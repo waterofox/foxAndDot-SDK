@@ -12,7 +12,7 @@ void Visualized_Collider::update()
 
 Visualized_Collider::Visualized_Collider()
 {
-	this->type_of_resource = Resource_Types::Undefined;
+	set_resource_and_type(-1, Resource_Types::Undefined);
 
 	this->setFillColor(sf::Color(144, 238, 144, 100));
 	this->setOutlineColor(sf::Color(144, 238, 144, 255));

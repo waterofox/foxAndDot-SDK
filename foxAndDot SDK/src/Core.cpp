@@ -174,7 +174,6 @@ void Core::update()
 	{
 		Scene_Component*& comp = element.second.component;
 		if (comp->is_updatable()) { comp->update(); }
-		resource_manager.update_resource(comp);
 	}
 	process_intersections_and_collisions();
 

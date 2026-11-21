@@ -11,7 +11,7 @@ Intersection_Area::Intersection_Area()
 
 	this->setOutlineThickness(5);
 
-	type_of_resource = Resource_Types::Undefined;
+	set_resource_and_type(-1, Resource_Types::Undefined);
 
 	intersection = true;
 }

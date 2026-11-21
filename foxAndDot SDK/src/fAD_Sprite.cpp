@@ -25,7 +25,7 @@ sf::FloatRect fAD_Sprite::get_component_render_bounds()
 
 fAD_Sprite::fAD_Sprite() : sf::Sprite(Resource_Manager::adam)
 {
-	type_of_resource = Resource_Types::Texture;
+	set_resource_and_type(0, Resource_Types::Texture);
 	set_updatable(false);
 	set_intersection(false);
 }

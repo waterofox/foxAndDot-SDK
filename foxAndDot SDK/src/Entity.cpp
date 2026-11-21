@@ -7,7 +7,7 @@ Entity::Entity() : Collider(), sf::Sprite(Resource_Manager::adam)
 
 	this->collider_margin = sf::Vector2f(0, 0);
 
-	this->type_of_resource = Resource_Types::Texture;
+	set_resource_and_type(-1, Resource_Types::Texture);
 
 	this->set_colliding(false);
 	intersection = false;

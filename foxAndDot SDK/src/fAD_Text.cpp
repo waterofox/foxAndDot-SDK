@@ -24,7 +24,7 @@ sf::FloatRect fAD_Text::get_component_render_bounds()
 
 fAD_Text::fAD_Text() : sf::Text(Resource_Manager::eva)
 {
-	type_of_resource = Resource_Types::Font;
+	set_resource_and_type(-1, Resource_Types::Font);
 	set_updatable(false);
 	set_intersection(false);
 }

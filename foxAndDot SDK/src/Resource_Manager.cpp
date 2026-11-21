@@ -4,15 +4,8 @@
 #define ERESMAN std::string("RESOURCE MANAGER ERROR: ")
 #define ERROR(error_location,error_message) error_location + error_message
 
-void Resource_Manager::update_resource(Scene_Component*& component)
+void Resource_Manager::update_resource(Scene_Component* const& component)
 {
-	if (!component->ready_to_update_resource) 
-	{ 
-		return; 
-	} 
-
-	component->ready_to_update_resource = false; 
-
 	switch (component->type_of_resource)
 	{
 	case Resource_Types::Undefined: { return; } break;
@@ -46,6 +39,11 @@ void Resource_Manager::update_resource(Scene_Component*& component)
 	default:
 		break;
 	}
+}
+
+Resource_Manager::Resource_Manager()
+{
+	update_resource_slot.reassign(&Resource_Manager::update_resource, this);
 }
 
 void Resource_Manager::add_texture(const std::string& texture_url, const int& id)

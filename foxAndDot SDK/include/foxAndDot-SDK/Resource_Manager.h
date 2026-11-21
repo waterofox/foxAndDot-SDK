@@ -10,6 +10,8 @@
 
 //sdk  inludes
 #include "Tools/Resource_Types.h"
+#include "Tools/Slot.h"
+
 
 class Scene_Component;
 
@@ -30,7 +32,7 @@ class  Resource_Manager
 
 	//--------------------------------------------------------------------------------------------------
 
-		void update_resource(Scene_Component*& component);
+		void update_resource(Scene_Component * const& component);
 
 	//--------------------------------------------------------------------------------------------------
 public:
@@ -41,7 +43,9 @@ public:
 		static inline sf::Texture adam;
 		static inline sf::Font eva;     
 
-		Resource_Manager() = default;
+		static inline Slot<Scene_Component*, Resource_Manager> update_resource_slot;
+
+		Resource_Manager();
 		~Resource_Manager() = default;
 
 	//INTERFACE

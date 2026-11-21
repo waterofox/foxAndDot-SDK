@@ -9,6 +9,7 @@
 
 //sdk  includes
 #include "../Tools/Resource_Types.h"
+#include "../Tools/connect.h"
 
 class Collider;
 
@@ -17,6 +18,10 @@ class Scene_Component
 	friend class Core;
 	friend class Resource_Manager;
 
+	int resource;						  // Resource's identifi
+	Resource_Types type_of_resource;      // Type of resource which component prefers
+
+	Signal<Scene_Component*> ready_for_update_resource;
 
 protected:
 	//-------------------------------------------------------------------------------------------------------------------
@@ -28,15 +33,7 @@ protected:
 		bool updatable = true;				  // When true => component will update every iteration of game cycle
 
 		bool intersection = false;			  // When true => Core will check intersections with other components
-
-		bool ready_to_update_resource = true; // True when you are changing the resource (Marker for Resource Manager)
-
 	//-------------------------------------------------------------------------------------------------------------------
-
-		int resource;						  // Resource's identifi
-
-		Resource_Types type_of_resource;      // Type of resource which component prefers
-	
 	//-------------------------------------------------------------------------------------------------------------------
 
 
@@ -48,7 +45,7 @@ public:
 	virtual void update_resource(const std::variant<sf::Texture*, \
 		sf::Font*>& resource) = 0;  // How component updates it's resource
 
-
+	Scene_Component();
 	virtual ~Scene_Component() = default;
 
 	//INTERFACE

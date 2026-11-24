@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Slot.h"
 
 #include <unordered_map>
@@ -100,14 +100,9 @@ public:
 
 	void disconnect_all() //disconnect all signals and slots from this signal
 	{
-		if (next_c.size() != 0)
+		for (auto& connected : next_c)
 		{
-			{
-				for (auto& connected : next_c)
-				{
-					disconnect(connected.first);
-				}
-			}
+			disconnect(connected.first);
 		}
 	}
 	

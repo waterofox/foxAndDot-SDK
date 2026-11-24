@@ -1,6 +1,6 @@
 ﻿#include "../include/foxAndDot-SDK/Components/Group.h"
 
-sf::Drawable* Group::as_drawable()
+const sf::Drawable* const Group::as_drawable() const
 {
     return nullptr;
 }
@@ -9,12 +9,12 @@ void Group::update_resource(const std::variant<sf::Texture*, sf::Font*>&)
 {
 }
 
-sf::FloatRect Group::get_component_bounds()
+sf::FloatRect Group::get_component_bounds() const
 {
     return sf::FloatRect();
 }
 
-sf::FloatRect Group::get_component_render_bounds()
+sf::FloatRect Group::get_component_render_bounds() const
 {
     return sf::FloatRect();
 }

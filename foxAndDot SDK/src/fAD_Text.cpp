@@ -1,8 +1,8 @@
-#include "../../include/foxAndDot-SDK/Components/fAD_Text.h"
+﻿#include "../../include/foxAndDot-SDK/Components/fAD_Text.h"
 
 #include "../../include/foxAndDot-SDK/Resource_Manager.h"
 
-sf::Drawable* fAD_Text::as_drawable()
+const sf::Drawable* const fAD_Text::as_drawable() const
 {
 	return this;
 }
@@ -12,12 +12,12 @@ void fAD_Text::update_resource(const std::variant<sf::Texture*, sf::Font*>& res)
 	setFont(*std::get<sf::Font*>(res));
 }
 
-sf::FloatRect fAD_Text::get_component_bounds()
+sf::FloatRect fAD_Text::get_component_bounds() const
 {
 	return getGlobalBounds();
 }
 
-sf::FloatRect fAD_Text::get_component_render_bounds()
+sf::FloatRect fAD_Text::get_component_render_bounds() const
 {
 	return get_component_bounds();
 }

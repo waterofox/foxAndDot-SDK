@@ -1,4 +1,4 @@
-#include "../include/foxAndDot-SDK/Components/Entity.h"
+﻿#include "../include/foxAndDot-SDK/Components/Entity.h"
 
 Entity::Entity() : Collider(), sf::Sprite(Resource_Manager::adam)
 {
@@ -10,7 +10,7 @@ Entity::Entity() : Collider(), sf::Sprite(Resource_Manager::adam)
 	set_resource_and_type(-1, Resource_Types::Texture);
 
 	this->set_colliding(false);
-	intersection = false;
+	set_intersection(false);
 }
 
 Entity::Entity(const int& resource_id) : Entity()
@@ -74,14 +74,9 @@ void Entity::set_collider_margin(const sf::Vector2f& arg)
 	this->collider_margin = arg;
 }
 
-void Entity::set_collision_size(const sf::Vector2f& arg)
+const sf::Drawable* const Entity::as_drawable() const
 {
-	this->collision_bounds.size = arg;
-}
-
-sf::Drawable* Entity::as_drawable()
-{
-	return static_cast<sf::Sprite*>(this);
+	return static_cast<const sf::Sprite*>(this);
 }
 
 
@@ -106,12 +101,12 @@ void Entity::update()
 	collision_bounds.position += collider_margin;
 }
 
-sf::FloatRect Entity::get_component_render_bounds()
+sf::FloatRect Entity::get_component_render_bounds() const
 {
 	return this->getGlobalBounds();
 }
 
-sf::FloatRect Entity::get_component_bounds()
+sf::FloatRect Entity::get_component_bounds() const
 {
 	return this->collision_bounds;
 }

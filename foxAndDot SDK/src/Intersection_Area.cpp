@@ -1,4 +1,4 @@
-#include "../include/foxAndDot-SDK/Components/Intersection_Area.h"
+﻿#include "../include/foxAndDot-SDK/Components/Intersection_Area.h"
 #include "../include/foxAndDot-SDK/Core.h"
 
 Intersection_Area::Intersection_Area()
@@ -13,7 +13,7 @@ Intersection_Area::Intersection_Area()
 
 	set_resource_and_type(-1, Resource_Types::Undefined);
 
-	intersection = true;
+	set_intersection(true);
 }
 
 Intersection_Area::Intersection_Area(const sf::Vector2f& size) : Intersection_Area(sf::FloatRect(sf::Vector2f(0,0),size))
@@ -36,7 +36,10 @@ void Intersection_Area::on_intersection(Scene_Component* component)
 		Core::the_core->emit(&component_in);
 	}
 }
-sf::Drawable* Intersection_Area::as_drawable() { return static_cast<sf::RectangleShape*>(this); }
+const sf::Drawable*  const Intersection_Area::as_drawable() const
+{
+	return static_cast<const sf::RectangleShape*>(this); 
+}
 void Intersection_Area::update()
 {
 	if (!erase_buffer.empty()) { erase_buffer.clear(); }
@@ -55,13 +58,13 @@ void Intersection_Area::update()
 	}
 };
 
-sf::FloatRect Intersection_Area::get_component_bounds()
+sf::FloatRect Intersection_Area::get_component_bounds() const
 {
 	sf::FloatRect b; b.size = this->getSize();
 	b.position = this->getPosition();
 	return b;
 }
-sf::FloatRect Intersection_Area::get_component_render_bounds()
+sf::FloatRect Intersection_Area::get_component_render_bounds() const
 {
 	return get_component_bounds();
 }

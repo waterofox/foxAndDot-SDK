@@ -49,8 +49,7 @@ int main()
 	Scene scene;
 	fAD_Event_Handler evnt_handler;
 
-	Event_Listner * listener = new Event_Listner;
-	delete listener;
+	
 
 	the_core.change_scene(&scene);
 	the_core.set_event_handler(&evnt_handler);

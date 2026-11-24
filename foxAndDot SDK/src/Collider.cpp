@@ -1,4 +1,4 @@
-#include "../include/foxAndDot-SDK/Components/Collider.h"
+﻿#include "../include/foxAndDot-SDK/Components/Collider.h"
 #include "../include/foxAndDot-SDK/Core.h"
 
 void Collider::on_intersection(Scene_Component* comp)
@@ -19,10 +19,22 @@ void Collider::on_intersection(Collider* other_collider)
 	}
 }
 
-sf::FloatRect Collider::get_component_bounds()
+sf::FloatRect Collider::get_component_bounds() const
 {
 	return this->collision_bounds;
 }
+
+void Collider::set_collision_size(const sf::Vector2f& size)
+{
+	collision_bounds.size = size;
+
+}
+
+sf::Vector2f Collider::get_collision_size() const
+{
+	return collision_bounds.size;
+}
+
 
 void Collider::update()
 {
@@ -32,7 +44,7 @@ void Collider::update()
 Collider::Collider()
 {
 	connect(&this->im_collider, &Core::handle_collider_slot);
-	intersection = true;
+	set_intersection(true);
 }
 
 void Collider::set_colliding(const bool& arg)
@@ -40,7 +52,8 @@ void Collider::set_colliding(const bool& arg)
 	colliding = arg;
 }
 
-bool Collider::is_colliding()
+bool Collider::is_colliding() const
 {
-	return this->colliding;
+	return colliding;
 }
+

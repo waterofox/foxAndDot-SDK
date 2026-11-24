@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
+/*
 
 class fAD_RectangleShape : public Scene_Component, public sf::RectangleShape
 {
@@ -15,4 +16,4 @@ public:
 	fAD_RectangleShape(const sf::RectangleShape&);
 	fAD_RectangleShape(const sf::Vector2f&);
 };
-
+*/

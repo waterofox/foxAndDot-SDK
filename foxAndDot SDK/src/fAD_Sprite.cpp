@@ -1,8 +1,8 @@
-#include "../include/foxAndDot-SDK/Components/fAD_Sprite.h"
+﻿#include "../include/foxAndDot-SDK/Components/fAD_Sprite.h"
 
 #include "../include/foxAndDot-SDK/Resource_Manager.h"
 
-sf::Drawable* fAD_Sprite::as_drawable()
+const sf::Drawable* const fAD_Sprite::as_drawable() const
 {
 	return this;
 }
@@ -13,12 +13,12 @@ void fAD_Sprite::update_resource(const std::variant<sf::Texture*, sf::Font*>& re
 }
 
 
-sf::FloatRect fAD_Sprite::get_component_bounds()
+sf::FloatRect fAD_Sprite::get_component_bounds() const
 {
 	return getGlobalBounds();
 }
 
-sf::FloatRect fAD_Sprite::get_component_render_bounds()
+sf::FloatRect fAD_Sprite::get_component_render_bounds() const
 {
 	return get_component_render_bounds();
 }

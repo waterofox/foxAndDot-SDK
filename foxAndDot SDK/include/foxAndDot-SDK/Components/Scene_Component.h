@@ -21,8 +21,8 @@ class Scene_Component
 	friend class Resource_Manager;
 
 //--------------------------------------------------------------------------------------------------------------------------------------
-	int resource;
-	Resource_Types type_of_resource;      
+	int resource = 1;
+	Resource_Types type_of_resource = Resource_Types::Undefined;      
 	Signal<Scene_Component*> ready_for_update_resource;
 //--------------------------------------------------------------------------------------------------------------------------------------
 	std::string component_name;  // Name of component
@@ -41,6 +41,7 @@ protected:
 
 public:
 	Scene_Component();
+
 	virtual ~Scene_Component() = default;
 
 	//INTERFACE
@@ -52,7 +53,7 @@ public:
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 		virtual sf::FloatRect get_component_render_bounds() const = 0;  // Returns the bounds that are used to determine whether the component intersects with the camera (sf::View)
 
-		virtual const sf::Drawable* as_drawable() const = 0;  // What you need to draw?
+		virtual const sf::Drawable* const as_drawable() const = 0;  // What you need to draw?
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 		const std::string& get_name() const;        // Get name of component
 		void set_name(const std::string& new_name); // Set name of Component

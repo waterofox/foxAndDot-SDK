@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -12,12 +12,11 @@ class Visualized_Collider : public Collider, public sf::RectangleShape
 		void v_collider(const sf::Vector2f&);
 	//----------------------------------------------------------------------------------------------------------------------
 
-public:
-
-	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override;
+protected:
+	void update_resource(const std::variant<sf::Texture*, sf::Font*>& resource) override final;
 	void update() override;
 
-
+public:
 	Visualized_Collider();
 	Visualized_Collider(const sf::Vector2f& size);
 	Visualized_Collider(const sf::FloatRect& rect);
@@ -27,11 +26,8 @@ public:
 
 		//INTERFACE
 	//======================================================================================================================
-		
-		sf::FloatRect get_component_render_bounds() override;
-		
-		sf::Drawable* as_drawable() override;
-
+		sf::FloatRect get_component_render_bounds() const override;	
+		const sf::Drawable*  const as_drawable() const override;
 	//======================================================================================================================
 };
 

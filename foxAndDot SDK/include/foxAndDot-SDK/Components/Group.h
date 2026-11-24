@@ -7,11 +7,11 @@ class Group : protected Scene_Component, public sf::Transformable
 {
 	std::unordered_map<sf::Transformable*, sf::Vector2f> data;
 
-	sf::Drawable* as_drawable() override;
+	const sf::Drawable* const as_drawable() const override;
 	void update_resource(const std::variant<sf::Texture*, sf::Font*>&) override;
 
-	sf::FloatRect get_component_bounds() override;
-	sf::FloatRect get_component_render_bounds() override;
+	sf::FloatRect get_component_bounds() const override;
+	sf::FloatRect get_component_render_bounds() const override;
 
 public:
 	Group();

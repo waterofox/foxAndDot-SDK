@@ -1,10 +1,10 @@
-#include "../include/foxAndDot-SDK/Components/Scene_Component.h"
+﻿#include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 #include "../include/foxAndDot-SDK/Core.h"
 void Scene_Component::on_intersection(Scene_Component* component){}
 
 void Scene_Component::on_intersection(Collider* component){}
 
-bool Scene_Component::is_intersection()
+bool Scene_Component::is_intersection() const
 {
 	return intersection;
 }
@@ -21,7 +21,7 @@ Scene_Component::Scene_Component()
 	connect(&this->ready_for_update_resource, &Resource_Manager::update_resource_slot);
 }
 
-const std::string& Scene_Component::get_name()
+const std::string& Scene_Component::get_name() const
 {
 	return this->component_name;
 }
@@ -36,7 +36,7 @@ void Scene_Component::set_visble(const bool& arg)
 	visible = arg; 
 }
 
-const bool& Scene_Component::is_visible() 
+bool Scene_Component::is_visible() const
 { 
 	return visible; 
 }
@@ -46,7 +46,7 @@ void Scene_Component::set_updatable(const bool& arg)
 	updatable = arg; 
 } 	
 
-const bool& Scene_Component::is_updatable() 
+bool Scene_Component::is_updatable() const
 { 
 	return updatable; 
 }		
@@ -64,12 +64,12 @@ void Scene_Component::set_resource_and_type(const int& arg, const Resource_Types
 	this->type_of_resource = arg_type; 
 } 
 
-const int& Scene_Component::get_resource() 
+int Scene_Component::get_resource() const
 { 
 	return resource; 
 } 
 
-const Resource_Types& Scene_Component::get_type_of_resource() 
+Resource_Types Scene_Component::get_type_of_resource() const
 { 
 	return type_of_resource; 
 } 

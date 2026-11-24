@@ -1,4 +1,4 @@
-#include "include/foxAndDot-SDK/Core.h"
+﻿#include "include/foxAndDot-SDK/Core.h"
 #include "include/foxAndDot-SDK/Tools/fAD_Event_Handler.h"
 
 #define PROJECTNAME "$(ProjectName)"

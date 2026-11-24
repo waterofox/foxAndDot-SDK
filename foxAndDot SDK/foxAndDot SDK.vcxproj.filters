@@ -69,6 +69,15 @@
     <ClCompile Include="src\fAD_Event_Handler.cpp">
       <Filter>Исходные файлы\SDK</Filter>
     </ClCompile>
+    <ClCompile Include="src\Group.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fAD_RectangleShape.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Core.h">
@@ -136,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\Collider.h">
       <Filter>Файлы заголовков\COMPS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Group.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\fAD_RectangleShape.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

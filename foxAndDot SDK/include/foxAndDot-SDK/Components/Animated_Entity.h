@@ -17,6 +17,17 @@ protected:
 	//---------------------------------------------------------------------------------------------------------------
 
 public:
+	Animated_Entity();
+	Animated_Entity(const int& resource_id);
+	Animated_Entity(const sf::Vector2i& size);
+	Animated_Entity(const sf::Vector2i& size, const int& resource_id);
+	Animated_Entity(const sf::IntRect& rect);
+	Animated_Entity(const sf::IntRect& rect, const int& resource_id);
+	
+	Animated_Entity(const Animated_Entity& other);
+	Animated_Entity& operator=(const Animated_Entity& other);
+
+
 	//INTERFACE
 	//===============================================================================================================
 		int frame_count = 1;		// The number of frames in the current resource

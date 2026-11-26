@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Executable.h"
 #include <unordered_set>
 
@@ -30,8 +30,7 @@ public:
 	virtual void back_disconnect(Connectable<args_package>* connected) = 0;
 	virtual void disconnect(Connectable<args_package>* connected) = 0;
 
-
-	Connectable() = default;
+    Connectable() = default;
 	virtual ~Connectable()
 	{
 		if (connected_to.size() !=0)

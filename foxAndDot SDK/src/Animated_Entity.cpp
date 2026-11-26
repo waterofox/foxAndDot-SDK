@@ -24,3 +24,51 @@ void Animated_Entity::pause_animation()
 {
 	animation_enabled = false;
 }
+
+Animated_Entity::Animated_Entity() : Entity() {}
+
+Animated_Entity::Animated_Entity(const int& resource_id) : Entity(resource_id)
+{
+}
+
+Animated_Entity::Animated_Entity(const sf::Vector2i& size) : Entity(size)
+{
+}
+
+Animated_Entity::Animated_Entity(const sf::Vector2i& size, const int& resource_id) : Entity(size, resource_id)
+{
+}
+
+Animated_Entity::Animated_Entity(const sf::IntRect& rect) : Entity(rect)
+{
+}
+
+Animated_Entity::Animated_Entity(const sf::IntRect& rect, const int& resource_id) : Entity(rect, resource_id)
+{
+}
+
+Animated_Entity::Animated_Entity(const Animated_Entity& other) : Entity(other)
+{
+	animation_enabled = other.animation_enabled;
+	animation_timer = other.animation_timer;
+
+	frame_count = other.frame_count;
+	frame_per_seconds = other.frame_per_seconds;
+	current_frame = other.current_frame;
+}
+
+Animated_Entity& Animated_Entity::operator=(const Animated_Entity& other)
+{
+	if (this == &other) return *this;
+
+	Entity::operator=(other);
+
+	animation_enabled = other.animation_enabled;
+	animation_timer = other.animation_timer;
+
+	frame_count = other.frame_count;
+	frame_per_seconds = other.frame_per_seconds;
+	current_frame = other.current_frame;
+
+	return *this;
+}

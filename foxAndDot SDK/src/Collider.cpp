@@ -47,6 +47,18 @@ Collider::Collider()
 	set_intersection(true);
 }
 
+Collider::Collider(const Collider& other) : Scene_Component(other)
+{
+	connect(&this->im_collider, &Core::handle_collider_slot);
+	set_intersection(true);
+
+	last_valid_position = other.last_valid_position;
+	colliding = other.colliding;
+
+	collision = other.collision;
+	collision_bounds = other.collision_bounds;
+}
+
 void Collider::set_colliding(const bool& arg)
 {
 	colliding = arg;

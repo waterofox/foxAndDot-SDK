@@ -32,7 +32,7 @@ public:
 	Entity(const sf::IntRect& rect, const int& resource_id);
 
 	Entity(const Entity& other);
-	Entity& operator=(const Entity& other);
+	virtual Entity& operator=(const Entity& other);
 
 	virtual ~Entity() = default;
 

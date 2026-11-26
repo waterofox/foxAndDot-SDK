@@ -21,6 +21,17 @@ Scene_Component::Scene_Component()
 	connect(&this->ready_for_update_resource, &Resource_Manager::update_resource_slot);
 }
 
+Scene_Component::Scene_Component(const Scene_Component& other) : Scene_Component()
+{
+	set_resource_and_type(other.resource, other.type_of_resource);
+
+	component_name = other.component_name;
+
+	visible = other.visible;
+	updatable = other.updatable;
+	intersection = other.intersection;
+}
+
 const std::string& Scene_Component::get_name() const
 {
 	return this->component_name;

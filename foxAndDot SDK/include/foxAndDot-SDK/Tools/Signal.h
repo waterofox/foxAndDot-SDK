@@ -100,9 +100,9 @@ public:
 
 	void disconnect_all() //disconnect all signals and slots from this signal
 	{
-		for (auto& connected : next_c)
+		while (!next_c.empty())
 		{
-			disconnect(connected.first);
+			disconnect((*next_c.begin()).first);
 		}
 	}
 	

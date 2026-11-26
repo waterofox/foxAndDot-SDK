@@ -30,6 +30,8 @@ protected:
 
 public:
 	Collider();
+	Collider(const Collider& other);
+
 	virtual ~Collider() = default;
 
 	//INTERFACE

@@ -1,4 +1,5 @@
 ﻿#include "include/foxAndDot-SDK/Core.h"
+#include "include/foxAndDot-SDK/Components/Animated_Entity.h"
 #include "include/foxAndDot-SDK/Tools/fAD_Event_Handler.h"
 
 #define PROJECTNAME "$(ProjectName)"
@@ -49,7 +50,23 @@ int main()
 	Scene scene;
 	fAD_Event_Handler evnt_handler;
 
+	Core::resource_manager.add_texture("C:\\Users\\foxsh\\Downloads\\dragon.png", 0);
+
+	Animated_Entity ent = Animated_Entity(sf::Vector2i(32, 32), 0);
+	ent.frame_count = 3;
+	ent.frame_per_seconds = 24;
+	ent.current_frame = 0;
+	ent.play_animation();
+
+	Animated_Entity ent_2 = Animated_Entity(ent);
 	
+	ent_2.frame_per_seconds = 2;
+	ent = ent_2;
+
+	scene.add_new_lay();
+	scene.add(&ent, 0);
+
+	the_core.add_view("main", sf::View(ent.getGlobalBounds().getCenter(), sf::Vector2f(600, 600)));
 
 	the_core.change_scene(&scene);
 	the_core.set_event_handler(&evnt_handler);

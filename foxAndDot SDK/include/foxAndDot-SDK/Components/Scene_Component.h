@@ -21,7 +21,7 @@ class Scene_Component
 	friend class Resource_Manager;
 
 //--------------------------------------------------------------------------------------------------------------------------------------
-	int resource = 1;
+	int resource = -1;
 	Resource_Types type_of_resource = Resource_Types::Undefined;      
 	Signal<Scene_Component*> ready_for_update_resource;
 //--------------------------------------------------------------------------------------------------------------------------------------
@@ -41,6 +41,7 @@ protected:
 
 public:
 	Scene_Component();
+	Scene_Component(const Scene_Component& other);
 
 	virtual ~Scene_Component() = default;
 

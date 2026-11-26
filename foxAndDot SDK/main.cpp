@@ -1,5 +1,7 @@
 ﻿#include "include/foxAndDot-SDK/Core.h"
 #include "include/foxAndDot-SDK/Components/Animated_Entity.h"
+#include "include/foxAndDot-SDK/Components/fAD_Sprite.h"
+#include "include/foxAndDot-SDK/Components/fAD_RectangleShape.h"
 #include "include/foxAndDot-SDK/Tools/fAD_Event_Handler.h"
 
 #define PROJECTNAME "$(ProjectName)"
@@ -63,10 +65,25 @@ int main()
 	ent_2.frame_per_seconds = 2;
 	ent = ent_2;
 
-	scene.add_new_lay();
-	scene.add(&ent, 0);
+	fAD_Sprite spr;
+	fAD_Sprite srp_2 = fAD_Sprite(sf::Vector2i(32, 32));
+	
+	spr = srp_2;
+	
+	spr.set_resource(0);
 
-	the_core.add_view("main", sf::View(ent.getGlobalBounds().getCenter(), sf::Vector2f(600, 600)));
+	fAD_RectangleShape sh = fAD_RectangleShape(sf::Vector2f(300,300));
+	sh.setFillColor(sf::Color::Red);
+
+	fAD_RectangleShape rect2;
+	sh.setFillColor(sf::Color::Green);
+	rect2 = sh;
+	
+
+	scene.add_new_lay();
+	scene.add(&rect2, 0);
+
+	the_core.add_view("main", sf::View(rect2.getGlobalBounds().getCenter(), sf::Vector2f(600, 600)));
 
 	the_core.change_scene(&scene);
 	the_core.set_event_handler(&evnt_handler);

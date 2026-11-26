@@ -20,7 +20,7 @@ sf::FloatRect fAD_Sprite::get_component_bounds() const
 
 sf::FloatRect fAD_Sprite::get_component_render_bounds() const
 {
-	return get_component_render_bounds();
+	return get_component_bounds();
 }
 
 fAD_Sprite::fAD_Sprite() : sf::Sprite(Resource_Manager::adam)

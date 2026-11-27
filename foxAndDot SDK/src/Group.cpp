@@ -11,12 +11,12 @@ void Group::update_resource(const std::variant<sf::Texture*, sf::Font*>&)
 
 sf::FloatRect Group::get_component_bounds() const
 {
-    return sf::FloatRect();
+    return sf::FloatRect(sf::Vector2f(0,0),sf::Vector2f(0,0));
 }
 
 sf::FloatRect Group::get_component_render_bounds() const
 {
-    return sf::FloatRect();
+    return get_component_bounds();
 }
 
 void Group::set_name(const std::string& group_name)
@@ -42,10 +42,6 @@ void Group::update()
     }
 }
 
-const Scene_Component* const Group::as_component() const 
-{
-    return static_cast<const Scene_Component*>(this);
-}
 
 void Group::add(sf::Transformable* trbl, const sf::Vector2f& margin)
 {

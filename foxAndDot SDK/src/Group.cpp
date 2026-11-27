@@ -19,6 +19,12 @@ sf::FloatRect Group::get_component_render_bounds() const
     return sf::FloatRect();
 }
 
+void Group::set_name(const std::string& group_name)
+{
+    Scene_Component::set_name(group_name);
+}
+
+
 Group::Group()
 {
     set_visble(false);

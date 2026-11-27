@@ -21,7 +21,8 @@ public:
 	~Group() = default;
 
 	const Scene_Component* const as_component() const;
-
+	
+	void set_name(const std::string& group_name);
 	void add(sf::Transformable*, const sf::Vector2f& margin);
 	void remove(sf::Transformable*);
 };

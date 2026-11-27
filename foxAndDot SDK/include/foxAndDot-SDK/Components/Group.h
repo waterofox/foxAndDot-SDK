@@ -13,13 +13,14 @@ class Group : protected Scene_Component, public sf::Transformable
 	sf::FloatRect get_component_bounds() const override;
 	sf::FloatRect get_component_render_bounds() const override;
 
+protected:
+	void update() override;
+
 public:
 	Group();
 	~Group() = default;
 
-	void update() override;
-	
-	const Scene_Component* as_component();
+	const Scene_Component* const as_component() const;
 
 	void add(sf::Transformable*, const sf::Vector2f& margin);
 	void remove(sf::Transformable*);

@@ -47,6 +47,7 @@
     <ClCompile Include="src\Group.cpp" />
     <ClCompile Include="src\Intersection_Area.cpp" />
     <ClCompile Include="src\Media_Manager.cpp" />
+    <ClCompile Include="src\Multy_Component.cpp" />
     <ClCompile Include="src\Resource_Manager.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Scene_Component.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="include\foxAndDot-SDK\Components\fAD_Text.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Group.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Intersection_Area.h" />
+    <ClInclude Include="include\foxAndDot-SDK\Components\Multy_Component.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Scene_Component.h" />
     <ClInclude Include="include\foxAndDot-SDK\Components\Visualized_Collider.h" />
     <ClInclude Include="include\foxAndDot-SDK\Core.h" />

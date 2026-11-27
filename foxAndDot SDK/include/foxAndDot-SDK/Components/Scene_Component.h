@@ -20,6 +20,8 @@ class Scene_Component
 	friend class Core;
 	friend class Resource_Manager;
 
+	friend class Multy_Component;
+
 //--------------------------------------------------------------------------------------------------------------------------------------
 	int resource = -1;
 	Resource_Types type_of_resource = Resource_Types::Undefined;      

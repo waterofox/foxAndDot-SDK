@@ -36,9 +36,9 @@ void Group::update()
     }
 }
 
-const Scene_Component* Group::as_component()
+const Scene_Component* const Group::as_component() const 
 {
-    return static_cast<Scene_Component*>(this);
+    return static_cast<const Scene_Component*>(this);
 }
 
 void Group::add(sf::Transformable* trbl, const sf::Vector2f& margin)

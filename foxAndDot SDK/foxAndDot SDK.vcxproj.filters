@@ -78,6 +78,9 @@
     <ClCompile Include="src\fAD_RectangleShape.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\Multy_Component.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\foxAndDot-SDK\Core.h">
@@ -150,6 +153,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="include\foxAndDot-SDK\Components\fAD_RectangleShape.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\foxAndDot-SDK\Components\Multy_Component.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

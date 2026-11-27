@@ -1,4 +1,4 @@
-#include "../include/foxAndDot-SDK/Tools/Scene.h"
+﻿#include "../include/foxAndDot-SDK/Tools/Scene.h"
 #include "../include/foxAndDot-SDK/Core.h"
 
 void Scene::render(const sf::View& view)

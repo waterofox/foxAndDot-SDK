@@ -19,12 +19,6 @@ sf::FloatRect Group::get_component_render_bounds() const
     return get_component_bounds();
 }
 
-void Group::set_name(const std::string& group_name)
-{
-    Scene_Component::set_name(group_name);
-}
-
-
 Group::Group()
 {
     set_visble(false);
@@ -43,6 +37,19 @@ void Group::update()
 }
 
 
+void Group::set_margin(sf::Transformable* comp, const sf::Vector2f& margin)
+{
+    auto tr_comp = data.find(comp);
+    if (tr_comp != data.end())
+    {
+        tr_comp->second = margin;
+    }
+    else
+    {
+        printf("Group WARNING: Group <%s> doesn't have the requested transformable component.\n",get_name().data());
+    }
+}
+
 void Group::add(sf::Transformable* trbl, const sf::Vector2f& margin)
 {
     data[trbl] = margin;
@@ -53,6 +60,10 @@ void Group::remove(sf::Transformable* trbl)
     if (data.find(trbl) != data.end())
     {
         data.erase(trbl);
+    }
+    else
+    {
+        printf("Group WARNING: Group <%s> doesn't have the requested transformable component.\n",get_name().data());
     }
 }
 

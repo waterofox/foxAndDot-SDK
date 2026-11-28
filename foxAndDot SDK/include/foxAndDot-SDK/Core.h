@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 //sfml 3.0.0 includes 
 #include "SFML/System.hpp"
@@ -46,7 +46,6 @@ class  Core
 
 		void handle_collider(const Collider_Args_Package& args);
 
-
 		void update();
 		void render();
 	//-------------------------------------------------------------------------------------------------------
@@ -57,7 +56,6 @@ public:
 		Scene* new_scene = nullptr;
 		Scene* old_scene = nullptr;
 	};
-
 
 	Core();
 	virtual ~Core() = default;
@@ -97,7 +95,7 @@ public:
 
 		void change_scene(Scene* new_Scene); // Change actual scene by other scene
 		
-		Scene* get_actual_scene();			 // Get actual scene
+		Scene* const get_actual_scene();     // Get actual scene
 		
 		const sf::Time& get_delta_time();    // Get actual delta time (elapsed time since last frame)
 
@@ -107,7 +105,7 @@ public:
 	
 		void      remove_view(const std::string& view_name);					// Remove view
 		
-		sf::View* get_view(const std::string& view_name);					    // Get View
+		sf::View* const get_view(const std::string& view_name);					    // Get View
 
 	//---------------------------------------------------------------------------------------------------------------------------------
 

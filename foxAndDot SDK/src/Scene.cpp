@@ -97,7 +97,7 @@ void Scene::add_new_lay(const int& lay_count)
 	}
 }
 
-Scene_Component* Scene::operator[](const std::string& component_name)
+Scene_Component* const Scene::operator[](const std::string& component_name)
 {
 	if (is_on_scene(component_name))
 	{
@@ -110,7 +110,7 @@ Scene_Component* Scene::operator[](const std::string& component_name)
 	}
 }
 
-Scene_Component* Scene::operator[](const char* component_name)
+Scene_Component* const Scene::operator[](const char* component_name)
 {
 	return (*this)[std::string(component_name)];
 }

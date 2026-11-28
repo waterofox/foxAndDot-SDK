@@ -1,4 +1,4 @@
-#include "../include/foxAndDot-SDK/Core.h"
+﻿#include "../include/foxAndDot-SDK/Core.h"
 #include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 
 #define ERESMAN std::string("RESOURCE MANAGER ERROR: ")
@@ -111,7 +111,7 @@ sf::Texture& Resource_Manager::get_texture(const int& id)
 	else 
 	{ 
 		printf("RESOURCE MANAGER WARNING: texture <%d> does not exist in library. An empty texture is returned\n", id);
-		return b_t;
+		return adam;
 	}
 }
 sf::Font& Resource_Manager::get_font(const int& id)
@@ -124,7 +124,7 @@ sf::Font& Resource_Manager::get_font(const int& id)
 	else
 	{
 		printf("RESOURCE MANAGER WARNING: font <%d> does not exist in library. An empty font is returned\n", id);
-		return b_f;
+		return eva;
 	}
 }
 

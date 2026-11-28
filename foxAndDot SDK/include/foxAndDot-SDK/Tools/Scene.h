@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 
 //std includes
@@ -52,9 +52,9 @@ public:
 
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 
-		Scene_Component* operator[](const std::string& component_name); // Get component pointer
+		Scene_Component* const operator[](const std::string& component_name); // Get component pointer
 		
-		Scene_Component* operator[](const char* component_name);		// Get component pointer
+		Scene_Component* const operator[](const char* component_name);		// Get component pointer
 
 	//=============================================================================================================================================
 

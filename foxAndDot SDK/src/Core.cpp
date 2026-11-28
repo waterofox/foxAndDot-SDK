@@ -1,4 +1,4 @@
-#include "../include/foxAndDot-SDK/Core.h"
+﻿#include "../include/foxAndDot-SDK/Core.h"
 #include "../include/foxAndDot-SDK/Components/Scene_Component.h"
 
 sf::RenderWindow& Core::get_window()
@@ -21,7 +21,7 @@ void Core::change_scene(Scene* new_Scene)
 	}
 }
 
-Scene* Core::get_actual_scene()
+Scene* const Core::get_actual_scene()
 {
 	if (actual_scene == nullptr)
 	{
@@ -124,7 +124,7 @@ void Core::remove_view(const std::string& view_name)
 	}
 }
 
-sf::View* Core::get_view(const std::string& view_name)
+sf::View* const Core::get_view(const std::string& view_name)
 {
 	if (this->views.find(view_name) == this->views.end())
 	{

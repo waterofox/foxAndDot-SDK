@@ -2,6 +2,16 @@
 
 void Multy_Component::update_resource(const Type_Res&){}
 
+void Multy_Component::on_intersection(Scene_Component* other)
+{
+	for (auto& comp : components)
+	{
+		if (comp.second.first->intersection)
+		{
+			comp.second.first->on_intersection(other);
+		}
+	}
+}
 
 
 void Multy_Component::update()

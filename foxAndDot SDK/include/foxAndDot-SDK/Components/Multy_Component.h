@@ -11,6 +11,7 @@ class Multy_Component : public Scene_Component
 
 protected:
 	void update() override;
+	void on_intersection(Scene_Component*);
 
 	void add(Scene_Component* comp,const int& update_order = -1);
 	void set_update_order(const std::string& comp_name, const int& update_order);
